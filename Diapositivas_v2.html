@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defensa de Tesis - Fábrica de Harina de Quinua</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2D6A4F;
+            --primary-light: #40916C;
+            --primary-dark: #1B4332;
+            --accent: #C68B00;
+            --accent-light: #E8C547;
+            --bg-dark: #F5F0E8;
+            --bg-card: #FFFFFF;
+            --bg-surface: #EDE8DF;
+            --text-main: #2D3319;
+            --text-muted: #5C6346;
+            --text-dark: #1A1F0E;
+            --border: rgba(45, 106, 79, 0.12);
+            --glass: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #F5F0E8;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            padding: 50px 20px;
+        }
+
+        /* ===== SLIDE ===== */
+        .slide {
+            width: 100%;
+            max-width: 1200px;
+            min-height: 680px;
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 45px 55px 35px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(45, 106, 79, 0.06), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ===== HEADER ===== */
+        .s-title {
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 1;
+        }
+
+        .s-title .num {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .s-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        /* ===== CONTENT ===== */
+        .s-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            z-index: 1;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .row {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .row-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .row-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .row-4 {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: #FFFFFF;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(45, 106, 79, 0.1);
+            border-radius: 12px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-accent {
+            border-left: 3px solid var(--primary);
+        }
+
+        .card-gold {
+            border-left: 3px solid var(--accent);
+        }
+
+        .card-red {
+            border-left: 3px solid #DC2626;
+        }
+
+        .card-purple {
+            border-left: 3px solid #7C3AED;
+        }
+
+        .card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-light);
+            font-size: 16px;
+        }
+
+        .card p,
+        .card li {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* ===== KPI ===== */
+        .kpi-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .kpi {
+            flex: 1;
+            min-width: 170px;
+            padding: 22px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi.green {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .kpi.gold {
+            background: linear-gradient(135deg, #8B6914, var(--accent));
+        }
+
+        .kpi.dark {
+            background: linear-gradient(135deg, #3D4228, #5C6346);
+        }
+
+        .kpi .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .kpi .val {
+            font-size: 34px;
+            font-weight: 900;
+            color: white;
+            margin-top: 4px;
+        }
+
+        .kpi .val span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ===== TABLE ===== */
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tbl th {
+            background: var(--primary-dark);
+            color: white;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .tbl td {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tbl tr:nth-child(even) {
+            background: rgba(51, 65, 85, 0.3);
+        }
+
+        /* ===== TAGS ===== */
+        .tag {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag-high {
+            background: rgba(220, 38, 38, 0.1);
+            color: #DC2626;
+        }
+
+        .tag-med {
+            background: rgba(198, 139, 0, 0.1);
+            color: #8B6914;
+        }
+
+        .tag-low {
+            background: rgba(45, 106, 79, 0.1);
+            color: var(--primary);
+        }
+
+        /* ===== MATRIX ===== */
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .m-cell {
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .m-cell h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .m-cell ul {
+            padding-left: 16px;
+            font-size: 13px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .m-cell.str {
+            background: rgba(45, 106, 79, 0.08);
+            border: 1px solid rgba(45, 106, 79, 0.2);
+        }
+
+        .m-cell.str h4 {
+            color: var(--primary);
+        }
+
+        .m-cell.wk {
+            background: rgba(198, 139, 0, 0.08);
+            border: 1px solid rgba(198, 139, 0, 0.2);
+        }
+
+        .m-cell.wk h4 {
+            color: #8B6914;
+        }
+
+        .m-cell.op {
+            background: rgba(37, 99, 235, 0.06);
+            border: 1px solid rgba(37, 99, 235, 0.15);
+        }
+
+        .m-cell.op h4 {
+            color: #2563EB;
+        }
+
+        .m-cell.th {
+            background: rgba(220, 38, 38, 0.06);
+            border: 1px solid rgba(220, 38, 38, 0.15);
+        }
+
+        .m-cell.th h4 {
+            color: #DC2626;
+        }
+
+        .m-cell li {
+            color: var(--text-muted);
+        }
+
+        /* ===== PROCESS ===== */
+        .proc {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .proc-step {
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            padding: 20px;
+            background: #FAFAF5;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .proc-step .ico {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(13, 107, 79, 0.3);
+        }
+
+        .proc-step h4 {
+            font-size: 14px;
+            color: var(--primary-light);
+            margin-bottom: 6px;
+        }
+
+        .proc-step p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* ===== ORG ===== */
+        .org {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .org-n {
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .org-n.top {
+            background: linear-gradient(135deg, var(--accent), #92600A);
+            color: white;
+            font-size: 16px;
+        }
+
+        .org-n.mid {
+            background: #F5F0E8;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .org-n.bot {
+            background: #FAFAF5;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .org-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .org-line {
+            width: 2px;
+            height: 20px;
+            background: var(--primary-light);
+            margin: 0 auto;
+        }
+
+        .org-hline {
+            height: 2px;
+            background: var(--primary-light);
+            margin: 0 auto;
+            width: 70%;
+        }
+
+        .org-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .org-branch .org-line {
+            height: 14px;
+        }
+
+        /* ===== BARS ===== */
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bar-lbl {
+            width: 200px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .bar-track {
+            flex: 1;
+            height: 24px;
+            background: #EDE8DF;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            border-radius: 6px;
+        }
+
+        .bar-neg {
+            background: linear-gradient(90deg, #991B1B, #DC2626);
+        }
+
+        /* ===== FOOTER ===== */
+        .s-foot {
+            display: none;
+        }
+
+        /* ===== ALERT ===== */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .alert-red {
+            background: rgba(220, 38, 38, 0.06);
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            color: #991B1B;
+        }
+
+        .alert-gold {
+            background: rgba(198, 139, 0, 0.06);
+            border: 1px solid rgba(198, 139, 0, 0.15);
+            color: #8B6914;
+        }
+
+        .alert i {
+            margin-top: 2px;
+        }
+
+        /* ===== HIGHLIGHT ===== */
+        .big-num {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .big-num.gold {
+            color: var(--accent);
+        }
+
+        strong {
+            color: var(--text-dark);
+        }
+
+        /* ===== PROGRESS BAR VISUAL ===== */
+        .pbar {
+            display: flex;
+            height: 35px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .pbar-seg {
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* ===== TITLE SLIDE ===== */
+        .title-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 10px;
+        }
+
+        .title-center h1 {
+            font-size: 42px;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .title-center h2 {
+            font-size: 22px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .title-center .meta {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 25px 40px;
+            border-radius: 12px;
+            max-width: 550px;
+        }
+
+        /* ===== PRESENTATION MODE ===== */
+        body.pres {
+            padding: 0;
+            gap: 0;
+            overflow: hidden;
+            background: #F5F0E8;
+        }
+
+        body.pres .slide {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            min-height: 100vh;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            padding: 50px 80px;
+            background: white;
+        }
+
+        body.pres .slide.active {
+            display: flex;
+        }
+
+        body.pres .s-body {
+            justify-content: center;
+        }
+
+        body.pres .s-foot {
+            display: none !important;
+        }
+
+        body.pres .card {
+            height: auto;
+        }
+
+        /* Presentation font sizes - bigger for projection */
+        body.pres .s-title { font-size: 32px; }
+        body.pres .card h3 { font-size: 20px; }
+        body.pres .card p, body.pres .card li { font-size: 18px; }
+        body.pres .kpi .label { font-size: 14px; }
+        body.pres .kpi .val { font-size: 46px; }
+        body.pres .big-num { font-size: 42px; }
+        body.pres .m-cell h4 { font-size: 18px; }
+        body.pres .m-cell li { font-size: 16px; }
+        body.pres .tbl th, body.pres .tbl td { font-size: 16px; padding: 12px 16px; }
+        body.pres .proc-step h4 { font-size: 18px; }
+        body.pres .proc-step p { font-size: 15px; }
+        body.pres .alert { font-size: 16px; }
+        body.pres .org-n { font-size: 18px; }
+        body.pres .org-n.top { font-size: 20px; }
+        body.pres .tag { font-size: 12px; }
+        body.pres .bar-lbl { font-size: 15px; }
+        body.pres .bar-fill { font-size: 13px; }
+
+        /* ===== NAV ===== */
+        #nav {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 9999;
+            background: rgba(29, 53, 37, 0.92);
+            backdrop-filter: blur(15px);
+            padding: 10px 22px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #nav button {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        #nav button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        #nav span {
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 55px;
+            text-align: center;
+        }
+
+        #pbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 10000;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <!-- S1: PORTADA -->
+    <div class="slide" id="s1"
+        style="background: linear-gradient(135deg, rgba(27,67,50,0.85), rgba(45,106,79,0.8)), url('img/quinua-en-mano_nota.webp') center/cover;">
+        <div class="s-body">
+            <div class="title-center">
+                <h1 style="font-size: 42px; color: white;">Estudio de Factibilidad para la Implementación de una Fábrica
+                    de Harina de Quinua</h1>
+                <h2 style="font-size: 22px; color: var(--accent-light);">Santa Cruz de la Sierra</h2>
+                <div class="meta" style="background: rgba(255,255,255,0.15); border-left-color: var(--accent);">
+                    <p style="font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px;">Alejandro Fabian
+                        Torrico Rojas</p>
+                    <p style="font-size: 15px; font-weight: 600; color: var(--accent-light); margin-bottom: 4px;">
+                        Ingeniería Industrial y de Sistemas</p>
+                    <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Universidad Privada de Santa Cruz de la
+                        Sierra (UPSA) | 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: PROBLEMA Y OBJETIVO -->
+    <div class="slide" id="s2">
+        <h2 class="s-title"><span class="num">01</span> Planteamiento del Problema y Objetivo General</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    <div class="card card-red">
+                        <h3><i class="fa-solid fa-circle-exclamation" style="color:#EF4444;"></i> El Problema Central
+                        </h3>
+                        <p>Bolivia es líder mundial en quinua, pero en <strong>Santa Cruz existe ausencia de
+                                infraestructura industrial</strong> para transformar el grano local en harina. Esto
+                            genera:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Dependencia productiva de otras regiones (Oruro, La Paz).</li>
+                            <li>Altos costos logísticos por transporte interdepartamental.</li>
+                            <li>Pérdida de valor agregado para el productor cruceño.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-accent" style="background: rgba(13,107,79,0.15);">
+                        <h3><i class="fa-solid fa-bullseye"></i> Objetivo General</h3>
+                        <p style="font-weight: 600; color: var(--primary-light); font-size: 15px;">"Evaluar la
+                            factibilidad técnica, económica y financiera para la implementación de una fábrica de harina
+                            de quinua en Santa Cruz de la Sierra."</p>
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; border-radius: 12px; min-height: 280px;">
+                    <img src="img/LA-QUINUA-Y-SUS-PROPIEDADES-NUTRICIONALES.jpg" alt="Quinua en grano"
+                        style="width:100%; height: 220px; object-fit: contain; background:#f5f0e8;">
+                    <div style="padding: 12px 15px; text-align: center; background: #FAFAF5;">
+                        <p style="font-size: 15px; color: var(--text-dark); margin: 0;"><strong>Quinua: Grano de
+                                Oro</strong><br><span
+                                style="font-size:13px; color: var(--text-muted);">Industrialización local en el oriente
+                                boliviano</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo I: Introducción</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 3: OBJETIVOS ESPECÍFICOS -->
+    <div class="slide" id="s3">
+        <h2 class="s-title"><span class="num">02</span> Objetivos Específicos</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-magnifying-glass-chart"></i> 1. Mercado y Comercialización</h3>
+                    <ul>
+                        <li>Analizar el mercado objetivo identificando segmentos, hábitos de consumo, rangos de precios y canales de comercialización.</li>
+                        <li>Evaluar la factibilidad comercial del proyecto mediante el análisis de la oferta y la demanda, tanto actual como proyectada.</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-industry" style="color: var(--accent);"></i> 2. Ingeniería y Localización
+                    </h3>
+                    <ul>
+                        <li>Evaluar el abastecimiento de quinua e insumos considerando disponibilidad, calidad, costos y condiciones de suministro.</li>
+                        <li>Realizar el relevamiento y análisis de la localización idónea y el tamaño del proyecto.</li>
+                        <li>Diseñar y evaluar la factibilidad técnica: tecnología, procesos, distribución de planta e impactos ambientales.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-left: 3px solid var(--text-muted);">
+                    <h3><i class="fa-solid fa-scale-balanced" style="color: var(--text-muted);"></i> 3. Legal, Ambiental
+                        y Organizacional</h3>
+                    <ul>
+                        <li>Evaluar la factibilidad legal y administrativa, definiendo la personería jurídica, permisos y la estructura organizativa.</li>
+                        <li>Evaluar los impactos ambientales potenciales del proyecto y proponer medidas de mitigación.</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-left: 3px solid #64748B;">
+                    <h3><i class="fa-solid fa-chart-pie" style="color: #64748B;"></i> 4. Evaluación Económico-Financiera
+                    </h3>
+                    <ul>
+                        <li>Estimar la inversión, los costos operativos y el capital de trabajo mínimos necesarios.
+                        </li>
+                        <li>Determinar la factibilidad financiera mediante flujos de caja, VAN, TIR y análisis de sensibilidad.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo I: Introducción</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 4: JUSTIFICACIÓN Y ALCANCE -->
+    <div class="slide" id="s4">
+        <h2 class="s-title"><span class="num">03</span> Justificación y Alcance del Proyecto</h2>
+        <div class="s-body">
+            <div class="row row-3">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-chart-line"></i> Justificación Económica</h3>
+                    <p>La ausencia de infraestructura para procesar quinua localmente obliga a los productores a comercializar el grano en estado natural o enviarlo a otros departamentos, lo cual incrementa costos y reduce márgenes de ganancia.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-heart-pulse" style="color: var(--accent);"></i> Justificación Social</h3>
+                    <p>Existe una creciente demanda de productos saludables y sin gluten tanto en el mercado nacional como internacional. La ejecución del proyecto contribuiría a crear empleos y nuevas oportunidades para productores y emprendedores.</p>
+                </div>
+                <div class="card card-purple">
+                    <h3><i class="fa-solid fa-seedling" style="color: #8B5CF6;"></i> Justificación Productiva</h3>
+                    <p>Aprovecha el cultivo de <strong>quinua tropicalizada</strong> que ha comenzado a adaptarse en el oriente boliviano (5 toneladas en 2024), representando una oportunidad para diversificar la producción agrícola regional.</p>
+                </div>
+            </div>
+            <div class="card" style="background: rgba(212,160,23,0.08); border: 1px solid rgba(212,160,23,0.2);">
+                <h3 style="margin-bottom: 5px;"><i class="fa-solid fa-map" style="color: var(--accent);"></i> Alcance
+                    (Límites)</h3>
+                <p style="margin: 0;"><strong>Geográfico:</strong> Ciudad de Santa Cruz de la Sierra. |
+                    <strong>Temporal:</strong> Proyecciones planteadas a cinco años.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo I: Introducción</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+
+    <!-- SLIDE 18: PESTAL -->
+    <div class="slide" id="s5">
+        <h2 class="s-title"><span class="num">17</span> Análisis del Entorno (PESTAL)</h2>
+        <div class="s-body">
+            <div class="row row-3">
+                <div class="card card-red">
+                    <h3>Político <span class="tag tag-high">ALTO</span></h3>
+                    <p>Inestabilidad y bloqueos afectan logística. Incentivos tributarios (Tasa Cero IVA maquinaria).
+                    </p>
+                </div>
+                <div class="card card-red">
+                    <h3>Económico <span class="tag tag-high">ALTO</span></h3>
+                    <p>Inflación 15.53%. Tipo cambio paralelo volátil. Créditos productivos a 11.5%.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3>Social <span class="tag tag-med">MEDIO</span></h3>
+                    <p>46% priorizan naturalidad. Tendencia saludable creciente en jóvenes (18-35).</p>
+                </div>
+                <div class="card card-gold">
+                    <h3>Tecnológico <span class="tag tag-med">MEDIO</span></h3>
+                    <p>Maquinaria importada costosa. Oportunidad en automatización y e-commerce.</p>
+                </div>
+                <div class="card card-red">
+                    <h3>Ambiental <span class="tag tag-high">ALTO</span></h3>
+                    <p>Ley 1333 exige EIA. Sequías afectan quinua. Tendencia envases sostenibles.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3>Legal <span class="tag tag-med">MEDIO</span></h3>
+                    <p>SENASAG, BPM, registro sanitario, licencia ambiental. Ley General del Trabajo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 19: FODA -->
+    <div class="slide" id="s6">
+        <h2 class="s-title"><span class="num">18</span> Análisis FODA del Proyecto</h2>
+        <div class="s-body">
+            <div class="matrix">
+                <div class="m-cell str">
+                    <h4><i class="fa-solid fa-shield-halved"></i> Fortalezas</h4>
+                    <ul>
+                        <li>Producto 100% natural, libre de gluten</li>
+                        <li>Ubicación estratégica en Santa Cruz</li>
+                        <li>Procesos diseñados con BPM y SENASAG</li>
+                        <li>Estructura S.R.L. eficiente</li>
+                    </ul>
+                </div>
+                <div class="m-cell th">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Amenazas</h4>
+                    <ul>
+                        <li>Inflación y volatilidad cambiaria</li>
+                        <li>Bloqueos que interrumpen suministro</li>
+                        <li>Competencia de harinas más baratas</li>
+                        <li>Variabilidad climática en quinua</li>
+                    </ul>
+                </div>
+                <div class="m-cell op">
+                    <h4><i class="fa-solid fa-arrow-trend-up"></i> Oportunidades</h4>
+                    <ul>
+                        <li>Demanda creciente de productos saludables</li>
+                        <li>Escasa competencia industrial en SCZ</li>
+                        <li>Incentivos tributarios agroindustriales</li>
+                        <li>Potencial de exportación</li>
+                    </ul>
+                </div>
+                <div class="m-cell wk">
+                    <h4><i class="fa-solid fa-circle-exclamation"></i> Debilidades</h4>
+                    <ul>
+                        <li>Dependencia de maquinaria importada</li>
+                        <li>Quinua tropicalizada aún limitada</li>
+                        <li>Marca nueva sin posicionamiento</li>
+                        <li>Alta inversión inicial requerida</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 8: MATERIA PRIMA -->
+    <div class="slide" id="s7">
+        <h2 class="s-title"><span class="num">07</span> Materia Prima e Insumos</h2>
+        <div class="s-body">
+            <div class="row row-3">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-wheat-awn"></i> Quinua Real Orgánica</h3>
+                    <img src="img/La-quinua-8-beneficios-del-alimento-de-moda-Mar-25-2021-11-04-33-65-PM.jpg"
+                        alt="Quinua en grano"
+                        style="width:100%; height:100px; object-fit:contain; border-radius:6px; margin-bottom:8px; background:#f5f0e8;">
+                    <ul>
+                        <li><strong>Proveedor:</strong> Quinoabol S.R.L.</li>
+                        <li><strong>Costo:</strong> Bs. 900 / saco (25 kg)</li>
+                        <li><strong>Reposición:</strong> Quincenal</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-bag-shopping" style="color:var(--accent);"></i> Bolsas Laminadas</h3>
+                    <img src="img/image3.jpeg" alt="Bolsa Embolpack"
+                        style="width:100%; height:80px; object-fit:contain; border-radius:6px; margin-bottom:8px; background:#f5f5f5;">
+                    <ul>
+                        <li><strong>Proveedor:</strong> Embolpack S.R.L.</li>
+                        <li><strong>Costo:</strong> Bs. 2.80 / unidad</li>
+                        <li><strong>Reposición:</strong> Mensual</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-left:3px solid #64748B;">
+                    <h3><i class="fa-solid fa-scissors" style="color:#64748B;"></i> Hilos de Costura</h3>
+                    <img src="img/image4.jpeg" alt="Hilos de costura"
+                        style="width:100%; height:100px; object-fit:contain; border-radius:6px; margin-bottom:8px; background:#f5f0e8;">
+                    <ul>
+                        <li><strong>Material:</strong> Fibra sintética de alta resistencia</li>
+                        <li><strong>Proveedor:</strong> Embolpack S.R.L.</li>
+                        <li><strong>Costo:</strong> Bs. 135 / cono (2 kg)</li>
+                        <li><strong>Rendimiento:</strong> 0.46g por bolsa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Materia Prima e Insumos</span><span>Alejandro F. Torrico Rojas</span>
+        </div>
+    </div>
+
+    <!-- SLIDE 20: CONSUMIDOR FINAL -->
+    <div class="slide" id="s8">
+        <h2 class="s-title"><span class="num">19</span> Perfil del Consumidor Final</h2>
+        <div class="s-body">
+            <div class="kpi-row">
+                <div class="kpi green">
+                    <div class="label">Disposición a Sustituir</div>
+                    <div class="val">48.9%</div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">Recomendaría</div>
+                    <div class="val">87.6%</div>
+                </div>
+                <div class="kpi dark">
+                    <div class="label">Consumo Regular</div>
+                    <div class="val">61.3%</div>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-user-check"></i> Perfil Demográfico</h3>
+                    <ul>
+                        <li><strong>Edad:</strong> 18-35 años (64% de la muestra)</li>
+                        <li><strong>Género:</strong> 52.4% femenino, 45.3% masculino</li>
+                        <li><strong>Ocupación:</strong> Empleados (41.8%) y estudiantes (28.4%)</li>
+                        <li><strong>Motivación #1:</strong> Beneficios para la salud (26.9%)</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-cart-shopping" style="color:var(--accent);"></i> Hábitos de Consumo</h3>
+                    <ul>
+                        <li><strong>Productos:</strong> Panes (24.3%), cereales (21.9%), galletas (20.6%)</li>
+                        <li><strong>Canal:</strong> Supermercados (25.5%) y panaderías (24.8%)</li>
+                        <li><strong>Frecuencia:</strong> Ocasional a frecuente (61.3%)</li>
+                        <li><strong>Rechazo total:</strong> Solo 0.13% no consume quinua</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 5: ESTUDIO DE MERCADO B2B -->
+    <div class="slide" id="s9">
+        <h2 class="s-title"><span class="num">04</span> Estudio de Mercado: Sector B2B</h2>
+        <div class="s-body">
+            <div class="kpi-row">
+                <div class="kpi green">
+                    <div class="label">Adopción Efectiva</div>
+                    <div class="val">84%</div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">Demanda Mensual</div>
+                    <div class="val">3,175 <span>sacos</span></div>
+                </div>
+                <div class="kpi dark">
+                    <div class="label">Demanda Total</div>
+                    <div class="val">79,373 <span>kg/mes</span></div>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-chart-bar"></i> Segmentación B2B</h3>
+                    <ul style="list-style:none; padding:0;">
+                        <li
+                            style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border);">
+                            <span><i class="fa-solid fa-bread-slice"
+                                    style="color:var(--primary-light); width:18px;"></i>
+                                Panaderías</span><strong>32.1%</strong></li>
+                        <li
+                            style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border);">
+                            <span><i class="fa-solid fa-mug-hot" style="color:var(--accent); width:18px;"></i>
+                                Cafeterías</span><strong>21.4%</strong></li>
+                        <li
+                            style="display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border);">
+                            <span><i class="fa-solid fa-cake-candles" style="color:#60A5FA; width:18px;"></i>
+                                Pastelerías</span><strong>19.6%</strong></li>
+                        <li style="display:flex; justify-content:space-between; padding:6px 0;"><span><i
+                                    class="fa-solid fa-industry" style="color:var(--text-muted); width:18px;"></i> Ind.
+                                Alimentos</span><strong>16.1%</strong></li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-clipboard-check" style="color:var(--accent);"></i> Resultados Clave
+                        (Encuestas)</h3>
+                    <ul>
+                        <li>El <strong>96.4%</strong> manifiesta interés en adquirir harina nacional.</li>
+                        <li>Atributos valorados: <strong>Nutrición (35.8%)</strong> y Precio (23.3%).</li>
+                        <li>Formato preferido: Bolsas de <strong>5 kg y 25 kg</strong>.</li>
+                        <li>Disposición a pagar: <strong>Bs. 40 – Bs. 50 por kg</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 6: PORTER -->
+    <div class="slide" id="s10">
+        <h2 class="s-title"><span class="num">05</span> Análisis Competitivo (5 Fuerzas de Porter)</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card">
+                    <h3>Amenaza de Sustitutos <span class="tag tag-high">ALTA</span></h3>
+                    <p>Las harinas tradicionales (trigo, maíz, arroz) son más baratas y de consumo arraigado. La quinua
+                        debe competir destacando su valor funcional y estar libre de gluten.</p>
+                </div>
+                <div class="card">
+                    <h3>Poder Neg. Clientes <span class="tag tag-med">MEDIO-ALTO</span></h3>
+                    <p>Clientes B2B (panaderías, industrias) compran en volumen y presionan precios. Se requiere
+                        fidelización mediante calidad y certificación constante.</p>
+                </div>
+                <div class="card">
+                    <h3>Poder Neg. Proveedores <span class="tag tag-med">MEDIO</span></h3>
+                    <p>Pese a ser Bolivia un gran productor, el suministro de quinua fluctúa por factores climáticos.
+                        Los repuestos de maquinaria importada generan dependencia.</p>
+                </div>
+                <div class="card">
+                    <h3>Rivalidad Competitiva <span class="tag tag-med">MODERADA</span></h3>
+                    <p>Mercado compuesto por microempresas de alcance regional. Pocas marcas consolidadas en
+                        supermercados cruceños, lo que deja espacio para un producto nuevo.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 7: MARKETING MIX -->
+    <div class="slide" id="s11">
+        <h2 class="s-title"><span class="num">06</span> Estrategia Comercial (Marketing Mix)</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-box-open"></i> Producto y Precio</h3>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <div><span class="tag tag-low">PRODUCTO</span>
+                            <p style="margin-top:5px;">Harina 100% natural, sin gluten. Empaque industrial en bolsas
+                                laminadas de 25kg, operando bajo normativas SENASAG y BPM.</p>
+                        </div>
+                        <div><span class="tag tag-low">PRECIO</span>
+                            <p style="margin-top:5px;">Estrategia de penetración: <strong>Bs. 56 por kg</strong> (Bs.
+                                1,400 el saco de 25kg). Precio ajustado a disposición de pago validada.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-truck-fast" style="color:var(--accent);"></i> Plaza y Promoción</h3>
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        <div><span class="tag tag-low">PLAZA</span>
+                            <p style="margin-top:5px;">Distribución orientada al canal <strong>B2B directo</strong>
+                                (institucional) y supermercados selectos para asegurar rotación.</p>
+                        </div>
+                        <div><span class="tag tag-low">PROMOCIÓN</span>
+                            <p style="margin-top:5px;">Ferias agroindustriales, promotores con asesoría técnica a
+                                panaderías, degustaciones y Marketing Digital.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 9: LOCALIZACIÓN -->
+    <div class="slide" id="s12">
+        <h2 class="s-title"><span class="num">08</span> Tamaño y Localización</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Micro-Localización Óptima</h3>
+                    <p>Evaluada mediante el <strong>Método Dimensional</strong> considerando Costo, Tamaño, Seguridad y
+                        Transporte.</p>
+                    <p style="font-weight:700; color:var(--primary-light); font-size:16px; margin: 8px 0 4px;">Opción C:
+                        Distrito Municipal 5</p>
+                    <p>Av. Beni entre 6to y 7mo anillo. Galpón en alquiler de 750 m² con luz trifásica (Bs. 12,500/mes).
+                    </p>
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <span class="tag tag-low">Seguridad Alta</span>
+                        <span class="tag tag-low">Acceso Logístico</span>
+                    </div>
+                </div>
+                <div class="card" style="padding: 0; overflow: hidden; border-radius: 12px;">
+                    <img src="img/image35.jpeg" alt="Galpón Elegido - Distrito 5"
+                        style="width:100%; height: 220px; object-fit: contain; background:#1a1f0e;">
+                    <div style="padding: 10px 15px; background: #FAFAF5;">
+                        <p style="font-size: 14px; color: var(--text-dark); margin:0; text-align:center;"><strong>Galpón
+                                Elegido — Opción C</strong></p>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-align:center;">750 m²
+                            | Luz Trifásica | Bs. 12,500/mes</p>
+                    </div>
+                    <img src="img/image37.png" alt="Ubicación en Google Maps"
+                        style="width:100%; height: 140px; object-fit: contain; border-top: 1px solid var(--border); background:#f5f0e8;">
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo V: Localización y Tamaño</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 10: PRODUCCIÓN Y TECNOLOGÍA -->
+    <div class="slide" id="s13">
+        <h2 class="s-title"><span class="num">09</span> Plan de Producción y Tecnología</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-chart-simple"></i> Proyección de Producción (5 años)</h3>
+                    <p style="font-size:12px; margin-bottom:10px;">Expresado en Sacos de 25 kg</p>
+                    <table class="tbl">
+                        <tr>
+                            <th>Año</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                        <tr>
+                            <td>Producción</td>
+                            <td>9,711</td>
+                            <td>10,605</td>
+                            <td>11,563</td>
+                            <td>12,591</td>
+                            <td>13,692</td>
+                        </tr>
+                        <tr>
+                            <td>Stock (7d)</td>
+                            <td>186</td>
+                            <td>203</td>
+                            <td>221</td>
+                            <td>241</td>
+                            <td>262</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-microchip" style="color:var(--accent);"></i> Tecnología Seleccionada</h3>
+                    <p style="font-size:12px; margin-bottom:8px;">Evaluación multicriterio (80% Técnico, 20% Económico)
+                    </p>
+                    <ul>
+                        <li><strong>Escarificadora:</strong> Alnicolsa (Perú). Limpieza de saponina.</li>
+                        <li><strong>Molino Industrial:</strong> DZUP. Alta eficiencia (500 kg/h).</li>
+                        <li><strong>Secador:</strong> Modelo T50. Control preciso de temperatura.</li>
+                    </ul>
+                    <div style="display:flex; gap:10px; margin-top:12px;">
+                        <img src="img/image42.jpeg" alt="Escarificadora"
+                            style="width:48%; height:110px; object-fit:contain; border-radius:8px; background:#f5f0e8;">
+                        <img src="img/image44.jpeg" alt="Secador Industrial"
+                            style="width:48%; height:110px; object-fit:contain; border-radius:8px; background:#f5f0e8;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VI: Ingeniería</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE: EQUIPOS COMPLEMENTARIOS -->
+    <div class="slide" id="s13b">
+        <h2 class="s-title"><span class="num">13</span> Equipos Complementarios del Proceso</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-filter"></i> Zaranda Vibratoria</h3>
+                    <p>Clasifica el grano seco y separa impurezas por tamaño antes de la molienda. Se utiliza en la etapa de limpieza del proceso productivo.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-circle-nodes" style="color:var(--accent);"></i> Tamiz Rotatorio</h3>
+                    <p>Clasificación de doble cubierta para eliminar impurezas finas. Se emplea después del lavado para asegurar que la materia prima ingrese uniforme al secado.</p>
+                </div>
+                <div class="card" style="border-left:3px solid #64748B;">
+                    <h3><i class="fa-solid fa-arrow-down-wide-short" style="color:#64748B;"></i> Tolva de Alimentación
+                    </h3>
+                    <p>Dosifica el grano hacia las etapas de limpieza y molienda. Acero inoxidable, con vibración para evitar obstrucciones en el flujo.</p>
+                </div>
+                <div class="card card-purple">
+                    <h3><i class="fa-solid fa-sieve" style="color:#8B5CF6;"></i> Tamizador Vibratorio</h3>
+                    <p>Filtra la harina molida para separar grumos y partículas mayores. Se utiliza posterior a la molienda y previo al envasado.</p>
+                </div>
+            </div>
+            <div class="card" style="background:rgba(45,106,79,0.06); border:1px solid rgba(45,106,79,0.15);">
+                <h3><i class="fa-solid fa-box-open"></i> Envasadora Semiautomática (Costura de Sacos)</h3>
+                <p>Llena y cierra los sacos de 25 kg mediante costura. Inversión total en maquinaria y equipos: <strong>Bs. 348,094</strong>.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VI: Ingeniería</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 11: PROCESO PRODUCTIVO (FLUJOGRAMA) -->
+    <div class="slide" id="s14">
+        <h2 class="s-title"><span class="num">10</span> Proceso Productivo — Flujograma</h2>
+        <div class="s-body" style="display:flex; justify-content:center; align-items:center;">
+            <svg viewBox="0 0 720 480" style="max-width:720px; width:100%; height:auto; font-family:'Segoe UI',sans-serif;">
+                <defs>
+                    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#2D6A4F"/></marker>
+                    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#C68B00"/></marker>
+                    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#DC2626"/></marker>
+                    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#7C3AED"/></marker>
+                </defs>
+
+                <!-- ===== COLUMNA IZQUIERDA (x=160) ===== -->
+                <ellipse cx="160" cy="18" rx="52" ry="16" fill="#E8F5E9" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#2D6A4F">Inicio</text>
+                <line x1="160" y1="34" x2="160" y2="50" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <rect x="60" y="50" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Recepción de materia prima</text>
+                <line x1="160" y1="82" x2="160" y2="98" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <rect x="60" y="98" width="200" height="36" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#333">Limpieza y acondicionamiento</text>
+                <text x="160" y="124" text-anchor="middle" font-size="11" font-weight="600" fill="#333">del grano</text>
+                <line x1="160" y1="134" x2="160" y2="150" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <rect x="60" y="150" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="170" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Lavado de saponina</text>
+                <line x1="160" y1="182" x2="160" y2="198" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <rect x="60" y="198" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="218" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Escurrido</text>
+                <line x1="160" y1="230" x2="160" y2="248" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
+
+                <rect x="60" y="248" width="200" height="32" rx="6" fill="#FFF8E7" stroke="#C68B00" stroke-width="1.5"/>
+                <text x="160" y="268" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Secado</text>
+                <line x1="160" y1="280" x2="160" y2="298" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
+
+                <!-- Diamond: Humedad (center y=338) -->
+                <polygon points="160,298 225,338 160,378 95,338" fill="#FFF8E7" stroke="#C68B00" stroke-width="1.5"/>
+                <text x="160" y="334" text-anchor="middle" font-size="10" font-weight="600" fill="#333">¿Cumple %</text>
+                <text x="160" y="346" text-anchor="middle" font-size="10" font-weight="600" fill="#333">humedad?</text>
+
+                <!-- No → Ajuste -->
+                <line x1="225" y1="338" x2="272" y2="338" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+                <text x="244" y="332" font-size="10" font-weight="700" fill="#DC2626">No</text>
+                <rect x="280" y="324" width="120" height="28" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <text x="340" y="342" text-anchor="middle" font-size="11" font-weight="600" fill="#333">Ajuste a máquina</text>
+                <!-- Feedback: Ajuste → sube → conecta linea Escurrido-Secado -->
+                <polyline points="340,324 340,239 160,239" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+
+                <!-- Sí → abajo -->
+                <line x1="160" y1="378" x2="160" y2="396" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+                <text x="172" y="392" font-size="10" font-weight="700" fill="#2D6A4F">Sí</text>
+
+                <rect x="60" y="396" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="416" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Enfriamiento</text>
+                <line x1="160" y1="428" x2="160" y2="444" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <circle cx="160" cy="456" r="14" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="160" y="460" text-anchor="middle" font-size="12" font-weight="800" fill="#2D6A4F">A</text>
+
+                <!-- ===== COLUMNA DERECHA (x=530) ===== -->
+                <circle cx="530" cy="18" r="14" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="530" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#2D6A4F">A</text>
+                <line x1="530" y1="32" x2="530" y2="50" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+
+                <rect x="430" y="50" width="200" height="32" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <text x="530" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Molienda</text>
+                <line x1="530" y1="82" x2="530" y2="100" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+
+                <rect x="430" y="100" width="200" height="32" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <text x="530" y="120" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Tamizado</text>
+                <line x1="530" y1="132" x2="530" y2="152" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#ap)"/>
+
+                <!-- Diamond: Calidad (center y=192) -->
+                <polygon points="530,152 595,192 530,232 465,192" fill="#F5F0FF" stroke="#7C3AED" stroke-width="1.5"/>
+                <text x="530" y="188" text-anchor="middle" font-size="10" font-weight="600" fill="#333">¿Cumple</text>
+                <text x="530" y="200" text-anchor="middle" font-size="10" font-weight="600" fill="#333">estándares?</text>
+
+                <!-- No → Se desecha -->
+                <line x1="595" y1="192" x2="640" y2="192" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+                <text x="614" y="186" font-size="10" font-weight="700" fill="#DC2626">No</text>
+                <rect x="648" y="178" width="68" height="28" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <text x="682" y="196" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Se desecha</text>
+                <!-- Se desecha → baja → conecta a linea Almacén-Fin -->
+                <polyline points="682,206 682,343 530,343" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+
+                <!-- Sí → abajo -->
+                <line x1="530" y1="232" x2="530" y2="252" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#ap)"/>
+                <text x="542" y="246" font-size="10" font-weight="700" fill="#2D6A4F">Sí</text>
+
+                <rect x="430" y="252" width="200" height="32" rx="6" fill="#F5F0FF" stroke="#7C3AED" stroke-width="1.5"/>
+                <text x="530" y="272" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Envasado</text>
+                <line x1="530" y1="284" x2="530" y2="302" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <rect x="430" y="302" width="200" height="32" rx="6" fill="#E8F5E9" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="530" y="322" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Almacén</text>
+                <line x1="530" y1="334" x2="530" y2="352" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
+
+                <ellipse cx="530" cy="366" rx="52" ry="16" fill="#E8F5E9" stroke="#2D6A4F" stroke-width="1.5"/>
+                <text x="530" y="370" text-anchor="middle" font-size="12" font-weight="700" fill="#2D6A4F">Fin</text>
+            </svg>
+        </div>
+        <div class="s-foot"><span>Capítulo VI: Ingeniería</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 12: MEDIO AMBIENTE -->
+    <div class="slide" id="s15">
+        <h2 class="s-title"><span class="num">11</span> Gestión Ambiental y Seguridad</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-seedling"></i> Mitigación Ambiental</h3>
+                    <p style="font-size:12px; margin-bottom:8px;">Cumplimiento de la Ley N.º 1333:</p>
+                    <ul>
+                        <li><strong>Aire:</strong> Extractores con filtros de mangas en zona de molienda.</li>
+                        <li><strong>Agua:</strong> Sistema cerrado de decantación para el agua de lavado.</li>
+                        <li><strong>Residuos:</strong> Venta de mermas orgánicas como alimento animal.</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-hard-hat" style="color:var(--accent);"></i> Seguridad e Higiene</h3>
+                    <p style="font-size:12px; margin-bottom:8px;">Cumplimiento SENASAG y BPM:</p>
+                    <ul>
+                        <li><strong>Personal:</strong> EPP obligatorio (cofias, guantes, mandiles, botines).</li>
+                        <li><strong>Instalaciones:</strong> Layout en línea para evitar contaminación cruzada.</li>
+                        <li><strong>Emergencias:</strong> Extintores ABC y señalética de evacuación.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VI: Ingeniería</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 13: ORGANIZACIÓN -->
+    <div class="slide" id="s16">
+        <h2 class="s-title"><span class="num">12</span> Estructura Legal y Organizacional</h2>
+        <div class="s-body">
+            <div class="card"
+                style="text-align:center; background:rgba(45,106,79,0.06); border:1px solid rgba(45,106,79,0.15); margin-bottom:15px;">
+                <h3 style="justify-content:center; font-size:16px;"><i class="fa-solid fa-building-shield"></i> S.R.L. —
+                    Sociedad de Responsabilidad Limitada</h3>
+                <p>Protege el patrimonio personal. Administración ante SEPREC y Min. de Trabajo.</p>
+            </div>
+            <div class="org">
+                <div class="org-n top">Gerente General</div>
+                <div class="org-line"></div>
+                <div class="org-hline"></div>
+                <div class="org-row">
+                    <div class="org-branch">
+                        <div class="org-line"></div>
+                        <div class="org-n mid">Enc. Prod. y Calidad</div>
+                        <div class="org-line"></div>
+                        <div class="org-n bot">Operarios (3-4)</div>
+                    </div>
+                    <div class="org-branch">
+                        <div class="org-line"></div>
+                        <div class="org-n mid">Enc. Adm. y Finanzas</div>
+                        <div class="org-line"></div>
+                        <div class="org-n bot">Seguridad (Tercerizado)</div>
+                    </div>
+                    <div class="org-branch">
+                        <div class="org-line"></div>
+                        <div class="org-n mid">Enc. Mkt. y Ventas</div>
+                    </div>
+                    <div class="org-branch">
+                        <div class="org-line"></div>
+                        <div class="org-n mid">Enc. Logística</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IX: Organización</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 14: INVERSIÓN -->
+    <div class="slide" id="s17">
+        <h2 class="s-title"><span class="num">13</span> Inversiones y Presupuesto</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-wallet"></i> Inversión Inicial (Año 0)</h3>
+                    <div style="text-align:center; margin:10px 0;">
+                        <div class="big-num">Bs. 615,436</div>
+                    </div>
+                    <table class="tbl">
+                        <tr>
+                            <th>Componente</th>
+                            <th>Monto (Bs.)</th>
+                            <th>%</th>
+                        </tr>
+                        <tr>
+                            <td>Activos Fijos</td>
+                            <td>398,131</td>
+                            <td>64.7%</td>
+                        </tr>
+                        <tr>
+                            <td>Capital de Trabajo</td>
+                            <td>131,256</td>
+                            <td>21.3%</td>
+                        </tr>
+                        <tr>
+                            <td>Activos Diferidos</td>
+                            <td>86,050</td>
+                            <td>14.0%</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-coins" style="color:var(--accent);"></i> Estructura de Costos (Año 1)</h3>
+                    <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
+                        <div class="alert alert-red" style="flex-direction:column;">
+                            <strong style="color:#FCA5A5;">Costos Variables: Bs. 4,105,788</strong>
+                            <p style="margin:0; font-size:12px;">MP quinua, bolsas e hilos. Crecen con volumen.</p>
+                        </div>
+                        <div class="alert"
+                            style="background:rgba(13,107,79,0.1); border:1px solid rgba(13,107,79,0.3); color:#6EE7B7; flex-direction:column;">
+                            <strong>Costos Fijos: Bs. 887,421</strong>
+                            <p style="margin:0; font-size:12px;">Sueldos, alquiler, servicios, depreciación. Estables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VII: Presupuesto</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 15: FINANCIAMIENTO -->
+    <div class="slide" id="s18">
+        <h2 class="s-title"><span class="num">14</span> Estructura de Financiamiento</h2>
+        <div class="s-body">
+            <div class="card" style="margin-bottom:15px;">
+                <h3><i class="fa-solid fa-building-columns"></i> Origen de los Fondos</h3>
+                <div
+                    style="display:flex; justify-content:space-between; margin:8px 0 5px; font-size:13px; font-weight:600;">
+                    <span style="color:var(--primary-light);">Préstamo Bancario (81.24%)</span>
+                    <span style="color:var(--accent);">Aporte Propio (18.76%)</span>
+                </div>
+                <div class="pbar">
+                    <div class="pbar-seg"
+                        style="width:81.24%; background:linear-gradient(90deg, var(--primary-dark), var(--primary));">
+                        Bs. 500,000</div>
+                    <div class="pbar-seg"
+                        style="width:18.76%; background:linear-gradient(90deg, #92600A, var(--accent)); justify-content:flex-end;">
+                        Bs. 115,436</div>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-file-contract"></i> Condiciones del Crédito</h3>
+                    <ul style="list-style:none; padding:0; gap:10px;">
+                        <li><i class="fa-solid fa-check"
+                                style="color:var(--primary-light); margin-right:8px;"></i><strong>Entidad:</strong>
+                            Banco FIE (Crédito Productivo)</li>
+                        <li><i class="fa-solid fa-check"
+                                style="color:var(--primary-light); margin-right:8px;"></i><strong>Tasa:</strong> 11.5%
+                            Anual Fija</li>
+                        <li><i class="fa-solid fa-check"
+                                style="color:var(--primary-light); margin-right:8px;"></i><strong>Plazo:</strong> 5 años
+                            (60 meses)</li>
+                        <li><i class="fa-solid fa-check"
+                                style="color:var(--primary-light); margin-right:8px;"></i><strong>Método:</strong>
+                            Francés (Cuota constante)</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-chart-area" style="color:var(--accent);"></i> Impacto en el Flujo</h3>
+                    <p>La combinación de capital propio con financiamiento externo permite sostener la rentabilidad y reducir el riesgo asociado a un endeudamiento total. La cuota constante facilita la planificación del flujo de caja.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VIII: Financiamiento</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 16: EVALUACIÓN FINANCIERA -->
+    <div class="slide" id="s19">
+        <h2 class="s-title"><span class="num">15</span> Evaluación Financiera</h2>
+        <div class="s-body">
+            <div class="kpi-row">
+                <div class="kpi green">
+                    <div class="label">VAN</div>
+                    <div class="val">1.21M <span>Bs.</span></div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">TIR</div>
+                    <div class="val">150.5%</div>
+                </div>
+                <div class="kpi dark">
+                    <div class="label">Recuperación</div>
+                    <div class="val">1.6 <span>Años</span></div>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-calculator"></i> Costo de Capital (Ke)</h3>
+                    <p>Modelo <strong>CAPM ajustado</strong> para Bolivia (Riesgo País 10.90%, Beta 2.37).</p>
+                    <div style="text-align:center; margin:8px 0;">
+                        <div class="big-num">Ke = 27.42%</div>
+                    </div>
+                    <p style="text-align:center; font-size:12px;">La TIR (150.5%) supera holgadamente el riesgo exigido.
+                    </p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-scale-balanced" style="color:var(--accent);"></i> Punto de Equilibrio (Año
+                        1)</h3>
+                    <p>Cantidad mínima de sacos para no generar pérdidas:</p>
+                    <div style="text-align:center; margin:8px 0;">
+                        <div class="big-num gold">6,323 Sacos</div>
+                    </div>
+                    <p style="text-align:center; font-size:12px;">65% de la producción del Año 1 (9,711). Margen de
+                        seguridad del 35%.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo X: Evaluación Financiera</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 17: SENSIBILIDAD -->
+    <div class="slide" id="s20">
+        <h2 class="s-title"><span class="num">16</span> Análisis de Sensibilidad</h2>
+        <div class="s-body">
+            <div class="card">
+                <h3><i class="fa-solid fa-scale-unbalanced"></i> Impacto en la TIR ante variaciones negativas</h3>
+                <p style="margin-bottom:15px;">Simulación de escenarios pesimistas (con financiamiento):</p>
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar-lbl">Caída Precio Venta</div>
+                        <div class="bar-track">
+                            <div class="bar-fill bar-neg" style="width:85%;">-11.5%</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-lbl">Pérdida Cuota Mercado</div>
+                        <div class="bar-track">
+                            <div class="bar-fill bar-neg" style="width:45%;">-6.1%</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-lbl">Incremento Costos Fijos</div>
+                        <div class="bar-track">
+                            <div class="bar-fill bar-neg" style="width:27%;">-3.6%</div>
+                        </div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar-lbl">Aumento Costo Variable</div>
+                        <div class="bar-track">
+                            <div class="bar-fill bar-neg" style="width:28%;">-3.7%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-red"><i class="fa-solid fa-triangle-exclamation"></i><span><strong>Riesgo
+                        Crítico:</strong> El proyecto es altamente sensible al precio de venta. Es vital mantener la
+                    estrategia comercial y contratos de materia prima firmes.</span></div>
+        </div>
+        <div class="s-foot"><span>Capítulo X: Evaluación Financiera</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 21: CONCLUSIONES -->
+    <div class="slide" id="s21">
+        <h2 class="s-title"><span class="num">20</span> Conclusiones</h2>
+        <div class="s-body">
+            <div class="card"
+                style="background:rgba(13,107,79,0.15); border:1px solid rgba(13,107,79,0.3); margin-bottom:10px;">
+                <p style="font-weight:700; font-size:15px; color:var(--primary-light); margin:0;">La implementación de
+                    una fábrica de harina de quinua en Santa Cruz de la Sierra es <strong style="color:white;">viable en
+                        los aspectos técnico, comercial, económico y financiero</strong>.</p>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3 style="font-size:14px;"><i class="fa-solid fa-shop"></i> Comercial</h3>
+                    <ul style="font-size:13px;">
+                        <li>84% adopción efectiva B2B</li>
+                        <li>96.4% interesados en harina nacional</li>
+                        <li>Escasa competencia local</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3 style="font-size:14px;"><i class="fa-solid fa-gears" style="color:var(--accent);"></i> Técnica
+                    </h3>
+                    <ul style="font-size:13px;">
+                        <li>Proceso productivo viable</li>
+                        <li>Localización óptima (Distrito 5)</li>
+                        <li>Impactos ambientales manejables</li>
+                    </ul>
+                </div>
+                <div class="card" style="border-left:3px solid #64748B;">
+                    <h3 style="font-size:14px;"><i class="fa-solid fa-chart-line" style="color:#64748B;"></i> Financiera
+                    </h3>
+                    <ul style="font-size:13px;">
+                        <li>VAN: Bs. 1,211,326 | TIR: 150.54%</li>
+                        <li>Recuperación en 1.6 años</li>
+                        <li>Margen de seguridad del 35%</li>
+                    </ul>
+                </div>
+                <div class="card card-purple">
+                    <h3 style="font-size:14px;"><i class="fa-solid fa-scale-balanced" style="color:#8B5CF6;"></i> Legal
+                    </h3>
+                    <ul style="font-size:13px;">
+                        <li>S.R.L. como forma jurídica óptima</li>
+                        <li>Estructura organizativa funcional</li>
+                        <li>Normativa SENASAG y BPM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo XI: Conclusiones</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 22: RECOMENDACIONES -->
+    <div class="slide" id="s22">
+        <h2 class="s-title"><span class="num">21</span> Recomendaciones</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-handshake"></i> Abastecimiento</h3>
+                    <p>Asegurar el abastecimiento de quinua en la región mediante convenios con productores locales, para reducir la dependencia de otras zonas del país.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-chart-bar" style="color:var(--accent);"></i> Mercado</h3>
+                    <p>Realizar un estudio de mercado más detallado que incluya segmentación por niveles socioeconómicos y un análisis comparativo de precios y marcas competidoras.</p>
+                </div>
+                <div class="card card-purple">
+                    <h3><i class="fa-solid fa-screwdriver-wrench" style="color:#8B5CF6;"></i> Tecnología</h3>
+                    <p>Revisar las opciones tecnológicas y analizar la posibilidad de adquirir maquinaria nacional o regional, para facilitar el mantenimiento técnico a largo plazo.</p>
+                </div>
+                <div class="card" style="border-left:3px solid #64748B;">
+                    <h3><i class="fa-solid fa-calculator" style="color:#64748B;"></i> Financiero</h3>
+                    <p>Monitorear de manera continua los indicadores financieros y realizar un análisis de sensibilidad actualizado cada año.</p>
+                </div>
+            </div>
+            <div class="alert alert-gold"><i class="fa-solid fa-lightbulb"></i><span>Dado el contexto económico y social de Bolivia, se recomienda avanzar de manera progresiva, priorizando una <strong>etapa piloto</strong> que permita validar la respuesta del mercado y ajustar los costos operativos antes de realizar inversiones mayores.</span></div>
+        </div>
+        <div class="s-foot"><span>Capítulo XI: Recomendaciones</span><span>Alejandro F. Torrico Rojas</span></div>
+    </div>
+
+    <!-- SLIDE 23: CIERRE -->
+    <div class="slide" id="s23"
+        style="background: linear-gradient(135deg, rgba(27,67,50,0.85), rgba(45,106,79,0.8)), url('img/quinua-en-mano_nota.webp') center/cover;">
+        <div class="s-body">
+            <div class="title-center">
+                <h1 style="font-size: 38px; color: white;">¡Gracias por su atención!</h1>
+                <h2 style="font-size: 18px; letter-spacing: 1px; color: var(--accent-light);">Estudio de Factibilidad —
+                    Fábrica de Harina de Quinua</h2>
+                <div class="meta" style="border-left-color: var(--accent); background: rgba(255,255,255,0.15);">
+                    <p style="font-size: 20px; font-weight: 700; color: white; margin-bottom: 6px;">Alejandro Fabian
+                        Torrico Rojas</p>
+                    <p style="font-size: 14px; font-weight: 600; color: var(--accent-light); margin-bottom: 4px;">
+                        Ingeniería Industrial y de Sistemas</p>
+                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 3px;">Docente Guía: Mgs.
+                        Damir Eterovic Biggemann</p>
+                    <p style="font-size: 12px; color: rgba(255,255,255,0.7);">UPSA | 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div id="nav">
+        <button onclick="go(-1)" title="← Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <span id="cnt">1 / 23</span>
+        <button onclick="go(1)" title="→ Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        <button onclick="toggleP()" id="bf" title="F5 Presentación"><i class="fa-solid fa-expand"></i></button>
+    </div>
+    <div id="pbar" style="width:0%;"></div>
+
+    <script>
+        let c = 0, p = false; const s = document.querySelectorAll('.slide'), t = s.length;
+        function u() { document.getElementById('cnt').textContent = (c + 1) + ' / ' + t; document.getElementById('pbar').style.width = ((c + 1) / t * 100) + '%'; }
+        function go(d) { const n = c + d; if (n < 0 || n >= t) return; if (p) { s[c].classList.remove('active'); s[n].classList.add('active'); } else { s[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); } c = n; u(); }
+        function toggleP() { p = !p; document.body.classList.toggle('pres', p); if (p) { s.forEach(x => x.classList.remove('active')); s[c].classList.add('active'); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-compress"></i>'; if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else { s.forEach(x => x.classList.remove('active')); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-expand"></i>'; if (document.fullscreenElement) document.exitFullscreen(); s[c].scrollIntoView({ behavior: 'smooth', block: 'center' }); } u(); }
+        document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(1); } if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(-1); } if (e.key === 'F5') { e.preventDefault(); toggleP(); } if (e.key === 'Escape' && p) { e.preventDefault(); toggleP(); } });
+        document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && p) toggleP(); });
+        u();
+    </script>
+
+</body>
+
+</html>
