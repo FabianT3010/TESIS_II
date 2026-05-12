@@ -1006,7 +1006,7 @@
         <div class="s-body">
             <div class="kpi-row">
                 <div class="kpi green">
-                    <div class="label">Disposición a Sustituir</div>
+                    <div class="label">Dispuesto + Muy Dispuesto a Sustituir</div>
                     <div class="val">48.9%</div>
                 </div>
                 <div class="kpi gold">
@@ -1014,7 +1014,7 @@
                     <div class="val">87.6%</div>
                 </div>
                 <div class="kpi dark">
-                    <div class="label">Consumo Regular</div>
+                    <div class="label">Consumo Ocasional + Frecuente</div>
                     <div class="val">61.3%</div>
                 </div>
             </div>
@@ -1088,7 +1088,7 @@
                     <ul>
                         <li>El <strong>96.4%</strong> manifiesta interés en adquirir harina nacional.</li>
                         <li>Atributos valorados: <strong>Nutrición (35.8%)</strong> y Precio (23.3%).</li>
-                        <li>Formato preferido: Bolsas de <strong>5 kg y 25 kg</strong>.</li>
+                        <li>Formato más demandado: <strong>5 kg</strong> (42.9%). Formato comercial elegido: <strong>25 kg</strong> (industrial).</li>
                         <li>Disposición a pagar: <strong>Bs. 40 – Bs. 50 por kg</strong>.</li>
                     </ul>
                 </div>
@@ -1293,12 +1293,12 @@
                 <defs>
                     <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#2D6A4F"/></marker>
                     <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#C68B00"/></marker>
-                    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#DC2626"/></marker>
-                    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#7C3AED"/></marker>
+                    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#C68B00"/></marker>
+                    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,1 L9,5 L0,9z" fill="#2D6A4F"/></marker>
                 </defs>
 
                 <!-- ===== COLUMNA IZQUIERDA (x=160) ===== -->
-                <ellipse cx="160" cy="18" rx="52" ry="16" fill="#E8F5E9" stroke="#2D6A4F" stroke-width="1.5"/>
+                <ellipse cx="160" cy="18" rx="52" ry="16" fill="rgba(45,106,79,0.10)" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="160" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#2D6A4F">Inicio</text>
                 <line x1="160" y1="34" x2="160" y2="50" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
 
@@ -1319,22 +1319,22 @@
                 <text x="160" y="218" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Escurrido</text>
                 <line x1="160" y1="230" x2="160" y2="248" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
 
-                <rect x="60" y="248" width="200" height="32" rx="6" fill="#FFF8E7" stroke="#C68B00" stroke-width="1.5"/>
+                <rect x="60" y="248" width="200" height="32" rx="6" fill="rgba(198,139,0,0.10)" stroke="#C68B00" stroke-width="1.5"/>
                 <text x="160" y="268" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Secado</text>
                 <line x1="160" y1="280" x2="160" y2="298" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
 
                 <!-- Diamond: Humedad (center y=338) -->
-                <polygon points="160,298 225,338 160,378 95,338" fill="#FFF8E7" stroke="#C68B00" stroke-width="1.5"/>
+                <polygon points="160,298 225,338 160,378 95,338" fill="rgba(198,139,0,0.10)" stroke="#C68B00" stroke-width="1.5"/>
                 <text x="160" y="334" text-anchor="middle" font-size="10" font-weight="600" fill="#333">¿Cumple %</text>
                 <text x="160" y="346" text-anchor="middle" font-size="10" font-weight="600" fill="#333">humedad?</text>
 
                 <!-- No → Ajuste -->
-                <line x1="225" y1="338" x2="272" y2="338" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
-                <text x="244" y="332" font-size="10" font-weight="700" fill="#DC2626">No</text>
-                <rect x="280" y="324" width="120" height="28" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <line x1="225" y1="338" x2="272" y2="338" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
+                <text x="244" y="332" font-size="10" font-weight="700" fill="#C68B00">No</text>
+                <rect x="280" y="324" width="120" height="28" rx="6" fill="rgba(198,139,0,0.10)" stroke="#C68B00" stroke-width="1.5"/>
                 <text x="340" y="342" text-anchor="middle" font-size="11" font-weight="600" fill="#333">Ajuste a máquina</text>
                 <!-- Feedback: Ajuste → sube → conecta linea Escurrido-Secado -->
-                <polyline points="340,324 340,239 160,239" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+                <polyline points="340,324 340,239 160,239" fill="none" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
 
                 <!-- Sí → abajo -->
                 <line x1="160" y1="378" x2="160" y2="396" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
@@ -1350,42 +1350,42 @@
                 <!-- ===== COLUMNA DERECHA (x=530) ===== -->
                 <circle cx="530" cy="18" r="14" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="530" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#2D6A4F">A</text>
-                <line x1="530" y1="32" x2="530" y2="50" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+                <line x1="530" y1="32" x2="530" y2="50" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
 
-                <rect x="430" y="50" width="200" height="32" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <rect x="430" y="50" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="530" y="70" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Molienda</text>
-                <line x1="530" y1="82" x2="530" y2="100" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+                <line x1="530" y1="82" x2="530" y2="100" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
 
-                <rect x="430" y="100" width="200" height="32" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <rect x="430" y="100" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="530" y="120" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Tamizado</text>
-                <line x1="530" y1="132" x2="530" y2="152" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#ap)"/>
+                <line x1="530" y1="132" x2="530" y2="152" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
 
                 <!-- Diamond: Calidad (center y=192) -->
-                <polygon points="530,152 595,192 530,232 465,192" fill="#F5F0FF" stroke="#7C3AED" stroke-width="1.5"/>
+                <polygon points="530,152 595,192 530,232 465,192" fill="rgba(198,139,0,0.10)" stroke="#C68B00" stroke-width="1.5"/>
                 <text x="530" y="188" text-anchor="middle" font-size="10" font-weight="600" fill="#333">¿Cumple</text>
                 <text x="530" y="200" text-anchor="middle" font-size="10" font-weight="600" fill="#333">estándares?</text>
 
                 <!-- No → Se desecha -->
-                <line x1="595" y1="192" x2="640" y2="192" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
-                <text x="614" y="186" font-size="10" font-weight="700" fill="#DC2626">No</text>
-                <rect x="648" y="178" width="68" height="28" rx="6" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+                <line x1="595" y1="192" x2="640" y2="192" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
+                <text x="614" y="186" font-size="10" font-weight="700" fill="#C68B00">No</text>
+                <rect x="648" y="178" width="68" height="28" rx="6" fill="rgba(198,139,0,0.10)" stroke="#C68B00" stroke-width="1.5"/>
                 <text x="682" y="196" text-anchor="middle" font-size="10" font-weight="600" fill="#333">Se desecha</text>
                 <!-- Se desecha → baja → conecta a linea Almacén-Fin -->
-                <polyline points="682,206 682,343 530,343" fill="none" stroke="#DC2626" stroke-width="1.5" marker-end="url(#ar)"/>
+                <polyline points="682,206 682,343 530,343" fill="none" stroke="#C68B00" stroke-width="1.5" marker-end="url(#ao)"/>
 
                 <!-- Sí → abajo -->
-                <line x1="530" y1="232" x2="530" y2="252" stroke="#7C3AED" stroke-width="1.5" marker-end="url(#ap)"/>
+                <line x1="530" y1="232" x2="530" y2="252" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
                 <text x="542" y="246" font-size="10" font-weight="700" fill="#2D6A4F">Sí</text>
 
-                <rect x="430" y="252" width="200" height="32" rx="6" fill="#F5F0FF" stroke="#7C3AED" stroke-width="1.5"/>
+                <rect x="430" y="252" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="530" y="272" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Envasado</text>
                 <line x1="530" y1="284" x2="530" y2="302" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
 
-                <rect x="430" y="302" width="200" height="32" rx="6" fill="#E8F5E9" stroke="#2D6A4F" stroke-width="1.5"/>
+                <rect x="430" y="302" width="200" height="32" rx="6" fill="white" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="530" y="322" text-anchor="middle" font-size="12" font-weight="600" fill="#333">Almacén</text>
                 <line x1="530" y1="334" x2="530" y2="352" stroke="#2D6A4F" stroke-width="1.5" marker-end="url(#ag)"/>
 
-                <ellipse cx="530" cy="366" rx="52" ry="16" fill="#E8F5E9" stroke="#2D6A4F" stroke-width="1.5"/>
+                <ellipse cx="530" cy="366" rx="52" ry="16" fill="rgba(45,106,79,0.10)" stroke="#2D6A4F" stroke-width="1.5"/>
                 <text x="530" y="370" text-anchor="middle" font-size="12" font-weight="700" fill="#2D6A4F">Fin</text>
             </svg>
         </div>
