@@ -683,6 +683,113 @@
         body.pres .bar-lbl { font-size: 15px; }
         body.pres .bar-fill { font-size: 13px; }
 
+        /* Slide s12 (Tamaño y Localización) — escalar imágenes en presentación */
+        body.pres #s12 img[alt="Galpón Elegido - Distrito 5"] {
+            height: 36vh !important;
+            object-fit: cover !important;
+            background: transparent !important;
+        }
+        body.pres #s12 img[alt="Ubicación en Google Maps"] {
+            height: 32vh !important;
+        }
+        /* Evita que la card de texto se estire al alto de las imágenes */
+        #s12 .row {
+            align-items: start;
+        }
+
+        /* Slide s14 (Flujograma) — agrandar SVG en presentación */
+        body.pres #s14 svg {
+            max-width: none !important;
+            max-height: 82vh !important;
+            width: auto !important;
+            height: 82vh !important;
+        }
+
+        /* Slide s16 (Organización) — escalar nodos del organigrama */
+        body.pres #s16 .org-n.top { font-size: 28px !important; padding: 18px 32px !important; }
+        body.pres #s16 .org-n.mid { font-size: 22px !important; padding: 16px 28px !important; }
+        body.pres #s16 .org-n.bot { font-size: 18px !important; padding: 14px 22px !important; }
+        body.pres #s16 .org-line { height: 28px !important; width: 3px !important; }
+        body.pres #s16 .org-branch .org-line { height: 22px !important; }
+        body.pres #s16 .org-hline { height: 3px !important; }
+
+        /* Slide s23 (Cierre) — escalar título y meta */
+        body.pres #s23 h1 { font-size: 60px !important; }
+        body.pres #s23 h2 { font-size: 28px !important; }
+        body.pres #s23 .meta p:nth-child(1) { font-size: 28px !important; }
+        body.pres #s23 .meta p:nth-child(2) { font-size: 20px !important; }
+        body.pres #s23 .meta p:nth-child(3) { font-size: 17px !important; }
+        body.pres #s23 .meta p:nth-child(4) { font-size: 17px !important; }
+
+        /* Slide s21 (Conclusiones) — escalar intro y cuadrantes */
+        body.pres #s21 > .s-body > .card p { font-size: 22px !important; line-height: 1.4; }
+        body.pres #s21 .row .card h3 { font-size: 22px !important; }
+        body.pres #s21 .row .card ul { font-size: 18px !important; }
+        body.pres #s21 .row .card ul li { font-size: 18px !important; }
+
+        /* Slide s19 (Evaluación Financiera) — escalar pies de notas */
+        body.pres #s19 .card p[style*="font-size:12px"] { font-size: 17px !important; }
+        body.pres #s19 .kpi .val span { font-size: 22px !important; }
+
+        /* Slide s18 (Financiamiento) — escalar labels y barra */
+        body.pres #s18 .card > div[style*="justify-content:space-between"] { font-size: 18px !important; }
+        body.pres #s18 .pbar { height: 50px !important; }
+        body.pres #s18 .pbar-seg { font-size: 20px !important; }
+
+        /* Slide s17 (Inversión) — escalar descripciones dentro de alerts */
+        body.pres #s17 .alert p { font-size: 16px !important; }
+        body.pres #s17 .alert strong { font-size: 19px !important; }
+
+        /* Slide s15 (Gestión Ambiental) — escalar captions */
+        body.pres #s15 .card > p { font-size: 17px !important; }
+
+        /* Slide s13 (Producción y Tecnología) — escalar imágenes y captions */
+        body.pres #s13 .card > p { font-size: 17px !important; }
+        body.pres #s13 img[alt="Escarificadora"],
+        body.pres #s13 img[alt="Secador Industrial"] {
+            height: 22vh !important;
+        }
+
+        /* Slide s7 (Materia Prima) — escalar 3 imágenes */
+        body.pres #s7 .row-3 .card img {
+            height: 28vh !important;
+        }
+
+        /* Slide s2 (Problema y Objetivo) — escalar imagen y caption */
+        body.pres #s2 img[alt="Quinua en grano"] {
+            height: 40vh !important;
+        }
+        body.pres #s2 .card p strong { font-size: 22px !important; }
+        body.pres #s2 .card p span { font-size: 17px !important; }
+
+        /* Slide s1 (Portada) — escalar título y meta */
+        body.pres #s1 h1 { font-size: 64px !important; line-height: 1.15; }
+        body.pres #s1 h2 { font-size: 32px !important; }
+        body.pres #s1 .meta p:nth-child(1) { font-size: 30px !important; }
+        body.pres #s1 .meta p:nth-child(2) { font-size: 22px !important; }
+        body.pres #s1 .meta p:nth-child(3) { font-size: 18px !important; }
+
+        /* Slide s13b (Equipos Complementarios) — escalar imágenes y texto en presentación */
+        body.pres #s13b .row-4 .card img {
+            height: 24vh !important;
+        }
+        body.pres #s13b .row-4 .card h3 {
+            font-size: 22px !important;
+        }
+        body.pres #s13b .row-4 .card p {
+            font-size: 17px !important;
+        }
+        body.pres #s13b .card:last-child img {
+            width: 140px !important;
+            height: 22vh !important;
+        }
+        body.pres #s13b .card:last-child h3 {
+            font-size: 24px !important;
+        }
+        body.pres #s13b .card:last-child p {
+            font-size: 18px !important;
+        }
+
         /* ===== NAV ===== */
         #nav {
             position: fixed;
