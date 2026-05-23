@@ -463,10 +463,7 @@
         }
 
         .org-hline {
-            height: 2px;
-            background: var(--primary-light);
-            margin: 0 auto;
-            width: 70%;
+            display: none;
         }
 
         .org-branch {
@@ -474,10 +471,35 @@
             flex-direction: column;
             align-items: center;
             gap: 0;
+            position: relative;
+        }
+
+        /* Línea horizontal: conecta del centro del 1er cargo al centro del último */
+        .org-branch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -7.5px;
+            right: -7.5px;
+            height: 2px;
+            background: var(--primary-light);
+        }
+
+        .org-branch:first-child::before {
+            left: 50%;
+        }
+
+        .org-branch:last-child::before {
+            right: 50%;
         }
 
         .org-branch .org-line {
             height: 14px;
+        }
+
+        /* Línea punteada para vínculos tercerizados (ej. Seguridad) */
+        .org-line.dashed {
+            background: repeating-linear-gradient(to bottom, var(--primary-light) 0 3px, transparent 3px 6px);
         }
 
         /* ===== BARS ===== */
@@ -664,38 +686,42 @@
             height: auto;
         }
 
-        /* Presentation font sizes - bigger for projection */
+        /* Presentation font sizes - escala UNIFORME y más grande para proyección */
         body.pres .s-title { font-size: 32px; }
-        body.pres .card h3 { font-size: 20px; }
-        body.pres .card p, body.pres .card li { font-size: 18px; }
-        body.pres .kpi .label { font-size: 14px; }
+        body.pres .card h3 { font-size: 23px !important; }
+        body.pres .card p, body.pres .card li, body.pres .card ul { font-size: 19px !important; }
+        body.pres .kpi .label { font-size: 15px; }
         body.pres .kpi .val { font-size: 46px; }
         body.pres .big-num { font-size: 42px; }
-        body.pres .m-cell h4 { font-size: 18px; }
-        body.pres .m-cell li { font-size: 16px; }
-        body.pres .tbl th, body.pres .tbl td { font-size: 16px; padding: 12px 16px; }
-        body.pres .proc-step h4 { font-size: 18px; }
-        body.pres .proc-step p { font-size: 15px; }
-        body.pres .alert { font-size: 16px; }
+        body.pres .m-cell h4 { font-size: 22px; }
+        body.pres .m-cell li { font-size: 19px; }
+        body.pres .tbl th, body.pres .tbl td { font-size: 18px; padding: 12px 16px; }
+        body.pres .proc-step h4 { font-size: 19px; }
+        body.pres .proc-step p { font-size: 19px; }
+        body.pres .alert, body.pres .alert p { font-size: 19px; }
         body.pres .org-n { font-size: 18px; }
         body.pres .org-n.top { font-size: 20px; }
-        body.pres .tag { font-size: 12px; }
-        body.pres .bar-lbl { font-size: 15px; }
-        body.pres .bar-fill { font-size: 13px; }
+        body.pres .tag { font-size: 13px; }
+        body.pres .bar-lbl { font-size: 18px; }
+        body.pres .bar-fill { font-size: 15px; }
 
-        /* Slide s12 (Tamaño y Localización) — escalar imágenes en presentación */
+        /* Slide s12 (Tamaño y Localización) — escalar galpón en presentación */
         body.pres #s12 img[alt="Galpón Elegido - Distrito 5"] {
-            height: 36vh !important;
+            height: 48vh !important;
             object-fit: cover !important;
             background: transparent !important;
         }
-        body.pres #s12 img[alt="Ubicación en Google Maps"] {
-            height: 32vh !important;
-        }
-        /* Evita que la card de texto se estire al alto de las imágenes */
+        /* Centra verticalmente la card de texto junto a la imagen (sin estirarse) */
         #s12 .row {
-            align-items: start;
+            align-items: center;
         }
+        /* Tipografía más grande en la card de texto en presentación */
+        body.pres #s12 .card-accent h3 { font-size: 23px !important; }
+        body.pres #s12 .card-accent p { font-size: 19px !important; }
+        body.pres #s12 .card-accent .tag { font-size: 13px !important; padding: 5px 14px !important; }
+        /* Leyenda bajo la foto del galpón */
+        body.pres #s12 .row > .card:last-child p { font-size: 19px !important; }
+        body.pres #s12 .row > .card:last-child p strong { font-size: 20px !important; }
 
         /* Slide s14 (Flujograma) — agrandar SVG en presentación */
         body.pres #s14 svg {
@@ -711,41 +737,39 @@
         body.pres #s16 .org-n.bot { font-size: 18px !important; padding: 14px 22px !important; }
         body.pres #s16 .org-line { height: 28px !important; width: 3px !important; }
         body.pres #s16 .org-branch .org-line { height: 22px !important; }
-        body.pres #s16 .org-hline { height: 3px !important; }
+        body.pres #s16 .org-branch::before { height: 3px !important; }
 
-        /* Slide s23 (Cierre) — escalar título y meta */
-        body.pres #s23 h1 { font-size: 60px !important; }
-        body.pres #s23 h2 { font-size: 28px !important; }
-        body.pres #s23 .meta p:nth-child(1) { font-size: 28px !important; }
-        body.pres #s23 .meta p:nth-child(2) { font-size: 20px !important; }
-        body.pres #s23 .meta p:nth-child(3) { font-size: 17px !important; }
-        body.pres #s23 .meta p:nth-child(4) { font-size: 17px !important; }
+        /* Slide s23 (Cierre) — escalar título y firma */
+        body.pres #s23 h1 { font-size: 64px !important; }
+        body.pres #s23 .title-center p:nth-of-type(1) { font-size: 30px !important; }
+        body.pres #s23 .title-center p:nth-of-type(2) { font-size: 20px !important; }
 
         /* Slide s21 (Conclusiones) — escalar intro y cuadrantes */
         body.pres #s21 > .s-body > .card p { font-size: 22px !important; line-height: 1.4; }
-        body.pres #s21 .row .card h3 { font-size: 22px !important; }
-        body.pres #s21 .row .card ul { font-size: 18px !important; }
-        body.pres #s21 .row .card ul li { font-size: 18px !important; }
+        body.pres #s21 .row .card h3 { font-size: 23px !important; }
+        body.pres #s21 .row .card ul { font-size: 19px !important; }
+        body.pres #s21 .row .card ul li { font-size: 19px !important; }
 
         /* Slide s19 (Evaluación Financiera) — escalar pies de notas */
-        body.pres #s19 .card p[style*="font-size:12px"] { font-size: 17px !important; }
+        body.pres #s19 .card p[style*="font-size:12px"] { font-size: 19px !important; }
         body.pres #s19 .kpi .val span { font-size: 22px !important; }
 
         /* Slide s18 (Financiamiento) — escalar labels y barra */
-        body.pres #s18 .card > div[style*="justify-content:space-between"] { font-size: 18px !important; }
+        body.pres #s18 .card > div[style*="justify-content:space-between"] { font-size: 19px !important; }
         body.pres #s18 .pbar { height: 50px !important; }
         body.pres #s18 .pbar-seg { font-size: 20px !important; }
 
         /* Slide s17 (Inversión) — escalar descripciones dentro de alerts */
-        body.pres #s17 .alert p { font-size: 16px !important; }
-        body.pres #s17 .alert strong { font-size: 19px !important; }
+        body.pres #s17 .alert p { font-size: 19px !important; }
+        body.pres #s17 .alert strong { font-size: 20px !important; }
 
         /* Slide s15 (Gestión Ambiental) — escalar captions */
-        body.pres #s15 .card > p { font-size: 17px !important; }
+        body.pres #s15 .card > p { font-size: 19px !important; }
 
         /* Slide s13 (Producción y Tecnología) — escalar imágenes y captions */
-        body.pres #s13 .card > p { font-size: 17px !important; }
+        body.pres #s13 .card > p { font-size: 19px !important; }
         body.pres #s13 img[alt="Escarificadora"],
+        body.pres #s13 img[alt="Molino Industrial"],
         body.pres #s13 img[alt="Secador Industrial"] {
             height: 22vh !important;
         }
@@ -759,8 +783,8 @@
         body.pres #s2 img[alt="Quinua en grano"] {
             height: 40vh !important;
         }
-        body.pres #s2 .card p strong { font-size: 22px !important; }
-        body.pres #s2 .card p span { font-size: 17px !important; }
+        body.pres #s2 .card p strong { font-size: 20px !important; }
+        body.pres #s2 .card p span { font-size: 19px !important; }
 
         /* Slide s1 (Portada) — escalar título y meta */
         body.pres #s1 h1 { font-size: 64px !important; line-height: 1.15; }
@@ -774,20 +798,117 @@
             height: 24vh !important;
         }
         body.pres #s13b .row-4 .card h3 {
-            font-size: 22px !important;
+            font-size: 23px !important;
         }
         body.pres #s13b .row-4 .card p {
-            font-size: 17px !important;
+            font-size: 19px !important;
         }
-        body.pres #s13b .card:last-child img {
+        body.pres #s13b > .s-body > .card:last-child img {
             width: 140px !important;
             height: 22vh !important;
         }
-        body.pres #s13b .card:last-child h3 {
-            font-size: 24px !important;
+        body.pres #s13b > .s-body > .card:last-child h3 {
+            font-size: 23px !important;
         }
-        body.pres #s13b .card:last-child p {
-            font-size: 18px !important;
+        body.pres #s13b > .s-body > .card:last-child p {
+            font-size: 19px !important;
+        }
+
+        /* ===== ANIMACIONES Y TRANSICIONES ===== */
+        @keyframes slideFade {
+            from { opacity: 0; transform: translateY(24px) scale(0.99); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes enterRight { from { opacity: 0; transform: translateX(70px);  } to { opacity: 1; transform: translateX(0); } }
+        @keyframes enterLeft  { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes zoomFade   { from { opacity: 0; transform: scale(1.06); }       to { opacity: 1; transform: scale(1); } }
+        @keyframes popIn      { from { opacity: 0; transform: translateY(28px); }   to { opacity: 1; transform: translateY(0); } }
+        @keyframes titleIn    { from { opacity: 0; transform: translateX(-40px); }  to { opacity: 1; transform: translateX(0); } }
+        @keyframes kpiPop     { from { opacity: 0; transform: scale(0.6); }         to { opacity: 1; transform: scale(1); } }
+        @keyframes cornerTL   { from { opacity: 0; transform: translate(-45px,-30px); } to { opacity: 1; transform: none; } }
+        @keyframes cornerTR   { from { opacity: 0; transform: translate(45px,-30px);  } to { opacity: 1; transform: none; } }
+        @keyframes cornerBL   { from { opacity: 0; transform: translate(-45px,30px);  } to { opacity: 1; transform: none; } }
+        @keyframes cornerBR   { from { opacity: 0; transform: translate(45px,30px);   } to { opacity: 1; transform: none; } }
+        @keyframes barSlide   { from { opacity: 0; transform: translateX(-55px); }  to { opacity: 1; transform: none; } }
+
+        /* Transición de slide: direccional según navegación */
+        body.pres .slide.active            { animation: slideFade 0.5s cubic-bezier(0.22,1,0.36,1); }
+        body.pres .slide.active.from-right { animation: enterRight 0.5s cubic-bezier(0.22,1,0.36,1); }
+        body.pres .slide.active.from-left  { animation: enterLeft 0.5s cubic-bezier(0.22,1,0.36,1); }
+        /* Portada y cierre: zoom del fondo (gana por especificidad de ID) */
+        body.pres #s1.active, body.pres #s23.active { animation: zoomFade 0.7s ease; }
+
+        /* Título: entra desde la izquierda */
+        body.pres .slide.active .s-title { animation: titleIn 0.5s ease backwards 0.1s; }
+
+        /* Tarjetas en fila + tarjetas full-width: suben escalonadas */
+        body.pres .slide.active .row > *,
+        body.pres .slide.active > .s-body > .card {
+            animation: popIn 0.55s ease backwards;
+        }
+        /* KPIs: pop con rebote */
+        body.pres .slide.active .kpi-row > * {
+            animation: kpiPop 0.5s cubic-bezier(0.34,1.56,0.64,1) backwards;
+        }
+        /* FODA: cada cuadrante entra desde su esquina */
+        body.pres .slide.active .matrix > *:nth-child(1) { animation: cornerTL 0.55s ease backwards 0.2s; }
+        body.pres .slide.active .matrix > *:nth-child(2) { animation: cornerTR 0.55s ease backwards 0.32s; }
+        body.pres .slide.active .matrix > *:nth-child(3) { animation: cornerBL 0.55s ease backwards 0.44s; }
+        body.pres .slide.active .matrix > *:nth-child(4) { animation: cornerBR 0.55s ease backwards 0.56s; }
+        /* Barras de sensibilidad: entran desde la izquierda */
+        body.pres .slide.active .bar-item { animation: barSlide 0.5s ease backwards; }
+
+        /* Delays escalonados (filas, KPIs y barras) */
+        body.pres .slide.active .row > *:nth-child(1),
+        body.pres .slide.active .kpi-row > *:nth-child(1),
+        body.pres .slide.active .bar-item:nth-child(1) { animation-delay: 0.22s; }
+        body.pres .slide.active .row > *:nth-child(2),
+        body.pres .slide.active .kpi-row > *:nth-child(2),
+        body.pres .slide.active .bar-item:nth-child(2) { animation-delay: 0.34s; }
+        body.pres .slide.active .row > *:nth-child(3),
+        body.pres .slide.active .kpi-row > *:nth-child(3),
+        body.pres .slide.active .bar-item:nth-child(3) { animation-delay: 0.46s; }
+        body.pres .slide.active .row > *:nth-child(4),
+        body.pres .slide.active .kpi-row > *:nth-child(4),
+        body.pres .slide.active .bar-item:nth-child(4) { animation-delay: 0.58s; }
+        body.pres .slide.active .row > *:nth-child(5),
+        body.pres .slide.active .bar-item:nth-child(5) { animation-delay: 0.70s; }
+        body.pres .slide.active .row > *:nth-child(6) { animation-delay: 0.82s; }
+
+        /* Revelado al hacer scroll (modo normal) */
+        body:not(.pres) .slide {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        body:not(.pres) .slide.seen {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover lift en tarjetas y KPIs */
+        .card, .kpi, .m-cell, .proc-step {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .card:hover, .m-cell:hover, .proc-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.13);
+        }
+        .kpi:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        /* Botones de navegación */
+        #nav button { transition: transform 0.2s ease, background 0.2s ease; }
+        #nav button:hover { transform: scale(1.12); }
+
+        /* Respeta usuarios con movimiento reducido */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            body:not(.pres) .slide { opacity: 1; transform: none; }
         }
 
         /* ===== NAV ===== */
@@ -859,7 +980,7 @@
                 <h1 style="font-size: 42px; color: white;">Estudio de Factibilidad para la Implementación de una Fábrica
                     de Harina de Quinua</h1>
                 <h2 style="font-size: 22px; color: var(--accent-light);">Santa Cruz de la Sierra</h2>
-                <div class="meta" style="background: rgba(255,255,255,0.15); border-left-color: var(--accent);">
+                <div class="meta" style="background: rgba(255,255,255,0.15); border: none;">
                     <p style="font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px;">Alejandro Fabian
                         Torrico Rojas</p>
                     <p style="font-size: 15px; font-weight: 600; color: var(--accent-light); margin-bottom: 4px;">
@@ -985,7 +1106,7 @@
 
     <!-- SLIDE 18: PESTAL -->
     <div class="slide" id="s5">
-        <h2 class="s-title"><span class="num">17</span> Análisis del Entorno (PESTAL)</h2>
+        <h2 class="s-title"><span class="num">04</span> Análisis del Entorno (PESTAL)</h2>
         <div class="s-body">
             <div class="row row-3">
                 <div class="card card-red">
@@ -1020,7 +1141,7 @@
 
     <!-- SLIDE 19: FODA -->
     <div class="slide" id="s6">
-        <h2 class="s-title"><span class="num">18</span> Análisis FODA del Proyecto</h2>
+        <h2 class="s-title"><span class="num">05</span> Análisis FODA del Proyecto</h2>
         <div class="s-body">
             <div class="matrix">
                 <div class="m-cell str">
@@ -1066,7 +1187,7 @@
 
     <!-- SLIDE 8: MATERIA PRIMA -->
     <div class="slide" id="s7">
-        <h2 class="s-title"><span class="num">07</span> Materia Prima e Insumos</h2>
+        <h2 class="s-title"><span class="num">06</span> Materia Prima e Insumos</h2>
         <div class="s-body">
             <div class="row row-3">
                 <div class="card card-accent">
@@ -1109,7 +1230,7 @@
 
     <!-- SLIDE 20: CONSUMIDOR FINAL -->
     <div class="slide" id="s8">
-        <h2 class="s-title"><span class="num">19</span> Perfil del Consumidor Final</h2>
+        <h2 class="s-title"><span class="num">07</span> Perfil del Consumidor Final</h2>
         <div class="s-body">
             <div class="kpi-row">
                 <div class="kpi green">
@@ -1151,7 +1272,7 @@
 
     <!-- SLIDE 5: ESTUDIO DE MERCADO B2B -->
     <div class="slide" id="s9">
-        <h2 class="s-title"><span class="num">04</span> Estudio de Mercado: Sector B2B</h2>
+        <h2 class="s-title"><span class="num">08</span> Estudio de Mercado: Sector B2B</h2>
         <div class="s-body">
             <div class="kpi-row">
                 <div class="kpi green">
@@ -1206,7 +1327,7 @@
 
     <!-- SLIDE 6: PORTER -->
     <div class="slide" id="s10">
-        <h2 class="s-title"><span class="num">05</span> Análisis Competitivo (5 Fuerzas de Porter)</h2>
+        <h2 class="s-title"><span class="num">09</span> Análisis Competitivo (5 Fuerzas de Porter)</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card">
@@ -1236,34 +1357,24 @@
 
     <!-- SLIDE 7: MARKETING MIX -->
     <div class="slide" id="s11">
-        <h2 class="s-title"><span class="num">06</span> Estrategia Comercial (Marketing Mix)</h2>
+        <h2 class="s-title"><span class="num">10</span> Estrategia Comercial (Marketing Mix)</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
-                    <h3><i class="fa-solid fa-box-open"></i> Producto y Precio</h3>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <div><span class="tag tag-low">PRODUCTO</span>
-                            <p style="margin-top:5px;">Harina 100% natural, sin gluten. Empaque industrial en bolsas
-                                laminadas de 25kg, operando bajo normativas SENASAG y BPM.</p>
-                        </div>
-                        <div><span class="tag tag-low">PRECIO</span>
-                            <p style="margin-top:5px;">Estrategia de penetración: <strong>Bs. 56 por kg</strong> (Bs.
-                                1,400 el saco de 25kg). Precio ajustado a disposición de pago validada.</p>
-                        </div>
-                    </div>
+                    <h3><i class="fa-solid fa-box-open"></i> Producto</h3>
+                    <p>Harina 100% natural, sin gluten. Empaque industrial en bolsas laminadas de 25kg, operando bajo normativas SENASAG y BPM.</p>
                 </div>
                 <div class="card card-gold">
-                    <h3><i class="fa-solid fa-truck-fast" style="color:var(--accent);"></i> Plaza y Promoción</h3>
-                    <div style="display:flex; flex-direction:column; gap:12px;">
-                        <div><span class="tag tag-low">PLAZA</span>
-                            <p style="margin-top:5px;">Distribución orientada al canal <strong>B2B directo</strong>
-                                (institucional) y supermercados selectos para asegurar rotación.</p>
-                        </div>
-                        <div><span class="tag tag-low">PROMOCIÓN</span>
-                            <p style="margin-top:5px;">Ferias agroindustriales, promotores con asesoría técnica a
-                                panaderías, degustaciones y Marketing Digital.</p>
-                        </div>
-                    </div>
+                    <h3><i class="fa-solid fa-tag" style="color:var(--accent);"></i> Precio</h3>
+                    <p>Estrategia de penetración: <strong>Bs. 56 por kg</strong> (Bs. 1,400 el saco de 25kg). Precio ajustado a disposición de pago validada.</p>
+                </div>
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-truck-fast"></i> Plaza</h3>
+                    <p>Distribución orientada al canal <strong>B2B directo</strong> (institucional) y supermercados selectos para asegurar rotación.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-bullhorn" style="color:var(--accent);"></i> Promoción</h3>
+                    <p>Ferias agroindustriales, promotores con asesoría técnica a panaderías, degustaciones y Marketing Digital.</p>
                 </div>
             </div>
         </div>
@@ -1272,7 +1383,7 @@
 
     <!-- SLIDE 9: LOCALIZACIÓN -->
     <div class="slide" id="s12">
-        <h2 class="s-title"><span class="num">08</span> Tamaño y Localización</h2>
+        <h2 class="s-title"><span class="num">11</span> Tamaño y Localización</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1291,16 +1402,10 @@
                 <div class="card" style="padding: 0; overflow: hidden; border-radius: 12px;">
                     <img src="img/image35.jpeg" alt="Galpón Elegido - Distrito 5"
                         style="width:100%; height: 220px; object-fit: contain; background:#1a1f0e;">
-                    <div style="padding: 10px 15px; background: #FAFAF5;">
+                    <div style="padding: 12px 15px; background: #FAFAF5;">
                         <p style="font-size: 14px; color: var(--text-dark); margin:0; text-align:center;"><strong>Galpón
                                 Elegido — Opción C</strong></p>
-                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-align:center;">750 m²
-                            | Luz Trifásica | Bs. 12,500/mes</p>
-                    </div>
-                    <div style="border-top: 1px solid var(--border); background:#FFFFFF; padding: 12px; display:flex; flex-direction:column; align-items:center;">
-                        <img src="img/image37.png" alt="Ubicación en Google Maps"
-                            style="width:auto; max-width:100%; height: 200px; object-fit: contain; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.08);">
-                        <p style="font-size:11px; color:var(--text-muted); margin-top:6px; text-align:center;"><i class="fa-solid fa-location-dot" style="color:var(--accent);"></i> Av. Beni · Distrito 5 · Santa Cruz</p>
+                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-align:center;"><i class="fa-solid fa-location-dot" style="color:var(--accent);"></i> Av. Beni · Distrito 5 · 750 m² | Luz Trifásica | Bs. 12,500/mes</p>
                     </div>
                 </div>
             </div>
@@ -1310,7 +1415,7 @@
 
     <!-- SLIDE 10: PRODUCCIÓN Y TECNOLOGÍA -->
     <div class="slide" id="s13">
-        <h2 class="s-title"><span class="num">09</span> Plan de Producción y Tecnología</h2>
+        <h2 class="s-title"><span class="num">12</span> Plan de Producción y Tecnología</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1352,11 +1457,13 @@
                         <li><strong>Molino Industrial:</strong> DZUP. Alta eficiencia (500 kg/h).</li>
                         <li><strong>Secador:</strong> Modelo T50. Control preciso de temperatura.</li>
                     </ul>
-                    <div style="display:flex; gap:10px; margin-top:12px;">
+                    <div style="display:flex; gap:8px; margin-top:12px;">
                         <img src="img/image42.jpeg" alt="Escarificadora"
-                            style="width:48%; height:110px; object-fit:contain; border-radius:8px; background:#f5f0e8;">
+                            style="width:33%; height:110px; object-fit:cover; border-radius:8px; background:#f5f0e8;">
+                        <img src="img/image43.jpeg" alt="Molino Industrial"
+                            style="width:33%; height:110px; object-fit:cover; border-radius:8px; background:#f5f0e8;">
                         <img src="img/image44.jpeg" alt="Secador Industrial"
-                            style="width:48%; height:110px; object-fit:contain; border-radius:8px; background:#f5f0e8;">
+                            style="width:33%; height:110px; object-fit:cover; border-radius:8px; background:#f5f0e8;">
                     </div>
                 </div>
             </div>
@@ -1403,7 +1510,7 @@
 
     <!-- SLIDE 11: PROCESO PRODUCTIVO (FLUJOGRAMA) -->
     <div class="slide" id="s14">
-        <h2 class="s-title"><span class="num">10</span> Proceso Productivo — Flujograma</h2>
+        <h2 class="s-title"><span class="num">14</span> Proceso Productivo — Flujograma</h2>
         <div class="s-body" style="display:flex; justify-content:center; align-items:center;">
             <svg viewBox="0 0 720 480" style="max-width:720px; width:100%; height:auto; font-family:'Segoe UI',sans-serif;">
                 <defs>
@@ -1510,7 +1617,7 @@
 
     <!-- SLIDE 12: MEDIO AMBIENTE -->
     <div class="slide" id="s15">
-        <h2 class="s-title"><span class="num">11</span> Gestión Ambiental y Seguridad</h2>
+        <h2 class="s-title"><span class="num">15</span> Gestión Ambiental y Seguridad</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1538,7 +1645,7 @@
 
     <!-- SLIDE 13: ORGANIZACIÓN -->
     <div class="slide" id="s16">
-        <h2 class="s-title"><span class="num">12</span> Estructura Legal y Organizacional</h2>
+        <h2 class="s-title"><span class="num">16</span> Estructura Legal y Organizacional</h2>
         <div class="s-body">
             <div class="card"
                 style="text-align:center; background:rgba(45,106,79,0.06); border:1px solid rgba(45,106,79,0.15); margin-bottom:15px;">
@@ -1560,7 +1667,7 @@
                     <div class="org-branch">
                         <div class="org-line"></div>
                         <div class="org-n mid">Enc. Adm. y Finanzas</div>
-                        <div class="org-line"></div>
+                        <div class="org-line dashed"></div>
                         <div class="org-n bot">Seguridad (Tercerizado)</div>
                     </div>
                     <div class="org-branch">
@@ -1579,7 +1686,7 @@
 
     <!-- SLIDE 14: INVERSIÓN -->
     <div class="slide" id="s17">
-        <h2 class="s-title"><span class="num">13</span> Inversiones y Presupuesto</h2>
+        <h2 class="s-title"><span class="num">17</span> Inversiones y Presupuesto</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1632,7 +1739,7 @@
 
     <!-- SLIDE 15: FINANCIAMIENTO -->
     <div class="slide" id="s18">
-        <h2 class="s-title"><span class="num">14</span> Estructura de Financiamiento</h2>
+        <h2 class="s-title"><span class="num">18</span> Estructura de Financiamiento</h2>
         <div class="s-body">
             <div class="card" style="margin-bottom:15px;">
                 <h3><i class="fa-solid fa-building-columns"></i> Origen de los Fondos</h3>
@@ -1679,7 +1786,7 @@
 
     <!-- SLIDE 16: EVALUACIÓN FINANCIERA -->
     <div class="slide" id="s19">
-        <h2 class="s-title"><span class="num">15</span> Evaluación Financiera</h2>
+        <h2 class="s-title"><span class="num">19</span> Evaluación Financiera</h2>
         <div class="s-body">
             <div class="kpi-row">
                 <div class="kpi green">
@@ -1722,7 +1829,7 @@
 
     <!-- SLIDE 17: SENSIBILIDAD -->
     <div class="slide" id="s20">
-        <h2 class="s-title"><span class="num">16</span> Análisis de Sensibilidad</h2>
+        <h2 class="s-title"><span class="num">20</span> Análisis de Sensibilidad</h2>
         <div class="s-body">
             <div class="card">
                 <h3><i class="fa-solid fa-scale-unbalanced"></i> Impacto en la TIR ante variaciones negativas</h3>
@@ -1763,12 +1870,12 @@
 
     <!-- SLIDE 21: CONCLUSIONES -->
     <div class="slide" id="s21">
-        <h2 class="s-title"><span class="num">20</span> Conclusiones</h2>
+        <h2 class="s-title"><span class="num">21</span> Conclusiones</h2>
         <div class="s-body">
             <div class="card"
                 style="background:rgba(13,107,79,0.15); border:1px solid rgba(13,107,79,0.3); margin-bottom:10px;">
-                <p style="font-weight:700; font-size:15px; color:var(--primary-light); margin:0;">La implementación de
-                    una fábrica de harina de quinua en Santa Cruz de la Sierra es <strong style="color:white;">viable en
+                <p style="font-weight:600; font-size:15px; color:var(--text-main); margin:0;">La implementación de
+                    una fábrica de harina de quinua en Santa Cruz de la Sierra es <strong style="color:var(--primary-dark);">viable en
                         los aspectos técnico, comercial, económico y financiero</strong>.</p>
             </div>
             <div class="row row-2">
@@ -1814,7 +1921,7 @@
 
     <!-- SLIDE 22: RECOMENDACIONES -->
     <div class="slide" id="s22">
-        <h2 class="s-title"><span class="num">21</span> Recomendaciones</h2>
+        <h2 class="s-title"><span class="num">22</span> Recomendaciones</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1845,17 +1952,8 @@
         <div class="s-body">
             <div class="title-center">
                 <h1 style="font-size: 38px; color: white;">¡Gracias por su atención!</h1>
-                <h2 style="font-size: 18px; letter-spacing: 1px; color: var(--accent-light);">Estudio de Factibilidad —
-                    Fábrica de Harina de Quinua</h2>
-                <div class="meta" style="border-left-color: var(--accent); background: rgba(255,255,255,0.15);">
-                    <p style="font-size: 20px; font-weight: 700; color: white; margin-bottom: 6px;">Alejandro Fabian
-                        Torrico Rojas</p>
-                    <p style="font-size: 14px; font-weight: 600; color: var(--accent-light); margin-bottom: 4px;">
-                        Ingeniería Industrial y de Sistemas</p>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 3px;">Docente Guía: Mgs.
-                        Damir Eterovic Biggemann</p>
-                    <p style="font-size: 12px; color: rgba(255,255,255,0.7);">UPSA | 2026</p>
-                </div>
+                <p style="font-size: 22px; font-weight: 700; color: white; margin-top: 18px;">Alejandro Fabian Torrico Rojas</p>
+                <p style="font-size: 15px; color: var(--accent-light);">UPSA · 2026</p>
             </div>
         </div>
     </div>
@@ -1872,10 +1970,17 @@
     <script>
         let c = 0, p = false; const s = document.querySelectorAll('.slide'), t = s.length;
         function u() { document.getElementById('cnt').textContent = (c + 1) + ' / ' + t; document.getElementById('pbar').style.width = ((c + 1) / t * 100) + '%'; }
-        function go(d) { const n = c + d; if (n < 0 || n >= t) return; if (p) { s[c].classList.remove('active'); s[n].classList.add('active'); } else { s[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); } c = n; u(); }
-        function toggleP() { p = !p; document.body.classList.toggle('pres', p); if (p) { s.forEach(x => x.classList.remove('active')); s[c].classList.add('active'); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-compress"></i>'; if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else { s.forEach(x => x.classList.remove('active')); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-expand"></i>'; if (document.fullscreenElement) document.exitFullscreen(); s[c].scrollIntoView({ behavior: 'smooth', block: 'center' }); } u(); }
+        function go(d) { const n = c + d; if (n < 0 || n >= t) return; if (p) { s[c].classList.remove('active'); s[n].classList.remove('from-left', 'from-right'); void s[n].offsetWidth; s[n].classList.add('active', d > 0 ? 'from-right' : 'from-left'); } else { s[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); } c = n; u(); }
+        function toggleP() { p = !p; document.body.classList.toggle('pres', p); if (p) { s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); s[c].classList.add('active'); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-compress"></i>'; if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else { s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-expand"></i>'; if (document.fullscreenElement) document.exitFullscreen(); s[c].scrollIntoView({ behavior: 'smooth', block: 'center' }); } u(); }
         document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(1); } if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(-1); } if (e.key === 'F5') { e.preventDefault(); toggleP(); } if (e.key === 'Escape' && p) { e.preventDefault(); toggleP(); } });
         document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && p) toggleP(); });
+
+        /* Revelado al hacer scroll (modo normal) */
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('seen'); });
+        }, { threshold: 0.15 });
+        s.forEach(sl => io.observe(sl));
+
         u();
     </script>
 
