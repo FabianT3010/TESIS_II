@@ -426,6 +426,8 @@
             text-align: center;
             font-size: 14px;
             position: relative;
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         .org-n.top {
@@ -451,8 +453,10 @@
         .org-row {
             display: flex;
             gap: 15px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
+            align-items: flex-start;
+            width: 100%;
         }
 
         .org-line {
@@ -472,6 +476,8 @@
             align-items: center;
             gap: 0;
             position: relative;
+            flex: 1 1 0;
+            min-width: 0;
         }
 
         /* Línea horizontal: conecta del centro del 1er cargo al centro del último */
@@ -646,28 +652,31 @@
             max-width: 550px;
         }
 
-        /* ===== PRESENTATION MODE ===== */
+        /* ===== PRESENTATION MODE (lienzo fijo 1920x1080 escalado) ===== */
         body.pres {
             padding: 0;
             gap: 0;
             overflow: hidden;
-            background: #F5F0E8;
+            background: #14180e;
         }
 
         body.pres .slide {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 50%;
+            left: 50%;
+            width: 1920px;
+            height: 1080px;
             max-width: none;
-            min-height: 100vh;
+            min-height: 0;
             border-radius: 0;
             border: none;
             box-shadow: none;
-            padding: 50px 80px;
+            padding: 60px 90px;
             background: white;
+            overflow: hidden;
+            transform-origin: center center;
+            transform: translate(-50%, -50%) scale(var(--pres-scale, 1));
         }
 
         body.pres .slide.active {
@@ -685,6 +694,9 @@
         body.pres .card {
             height: auto;
         }
+
+        /* Índice: el grid llena el alto disponible y los ítems se reparten */
+        body.pres #sIndex .row { flex: 1 1 auto; grid-auto-rows: 1fr; }
 
         /* Presentation font sizes - escala UNIFORME y grande para aprovechar la proyección */
         body.pres .s-title { font-size: 46px; }
@@ -705,36 +717,18 @@
         body.pres .bar-lbl { font-size: 26px; }
         body.pres .bar-fill { font-size: 21px; }
 
-        /* Slide s12 (Tamaño y Localización) — escalar galpón en presentación */
-        body.pres #s12 img[alt="Galpón Elegido - Distrito 5"] {
-            height: 48vh !important;
-            object-fit: cover !important;
-            background: transparent !important;
-        }
-        /* Centra verticalmente la card de texto junto a la imagen (sin estirarse) */
-        #s12 .row {
-            align-items: center;
-        }
-        /* Tipografía más grande en la card de texto en presentación */
-        body.pres #s12 .card-accent h3 { font-size: 32px !important; }
-        body.pres #s12 .card-accent p { font-size: 28px !important; }
-        body.pres #s12 .card-accent .tag { font-size: 17px !important; padding: 7px 18px !important; }
-        /* Leyenda bajo la foto del galpón */
-        body.pres #s12 .row > .card:last-child p { font-size: 28px !important; }
-        body.pres #s12 .row > .card:last-child p strong { font-size: 30px !important; }
-
         /* Slide s14 (Flujograma) — agrandar SVG en presentación */
         body.pres #s14 svg {
             max-width: none !important;
-            max-height: 82vh !important;
+            max-height: 886px !important;
             width: auto !important;
-            height: 82vh !important;
+            height: 886px !important;
         }
 
         /* Slide s16 (Organización) — escalar nodos del organigrama */
-        body.pres #s16 .org-n.top { font-size: 40px !important; padding: 24px 44px !important; }
-        body.pres #s16 .org-n.mid { font-size: 30px !important; padding: 20px 36px !important; }
-        body.pres #s16 .org-n.bot { font-size: 26px !important; padding: 18px 30px !important; }
+        body.pres #s16 .org-n.top { font-size: 38px !important; padding: 22px 40px !important; }
+        body.pres #s16 .org-n.mid { font-size: 23px !important; padding: 18px 20px !important; line-height: 1.25; }
+        body.pres #s16 .org-n.bot { font-size: 22px !important; padding: 16px 22px !important; }
         body.pres #s16 .org-line { height: 28px !important; width: 3px !important; }
         body.pres #s16 .org-branch .org-line { height: 22px !important; }
         body.pres #s16 .org-branch::before { height: 3px !important; }
@@ -771,17 +765,17 @@
         body.pres #s13 img[alt="Escarificadora"],
         body.pres #s13 img[alt="Molino Industrial"],
         body.pres #s13 img[alt="Secador Industrial"] {
-            height: 22vh !important;
+            height: 238px !important;
         }
 
         /* Slide s7 (Materia Prima) — escalar 3 imágenes */
         body.pres #s7 .row-3 .card img {
-            height: 28vh !important;
+            height: 302px !important;
         }
 
         /* Slide s2 (Problema y Objetivo) — escalar imagen y caption */
         body.pres #s2 img[alt="Quinua en grano"] {
-            height: 40vh !important;
+            height: 432px !important;
         }
         body.pres #s2 .card p strong { font-size: 30px !important; }
         body.pres #s2 .card p span { font-size: 28px !important; }
@@ -795,7 +789,7 @@
 
         /* Slide s13b (Equipos Complementarios) — escalar imágenes y texto en presentación */
         body.pres #s13b .row-4 .card img {
-            height: 24vh !important;
+            height: 259px !important;
         }
         body.pres #s13b .row-4 .card h3 {
             font-size: 29px !important;
@@ -805,7 +799,7 @@
         }
         body.pres #s13b > .s-body > .card:last-child img {
             width: 180px !important;
-            height: 22vh !important;
+            height: 238px !important;
         }
         body.pres #s13b > .s-body > .card:last-child h3 {
             font-size: 32px !important;
@@ -815,7 +809,10 @@
         }
 
         /* Slide Índice / Contenido */
+        #sIndex .row { align-items: stretch; }
+        #sIndex .row > div { display: flex; flex-direction: column; gap: 16px; }
         .idx-item {
+            flex: 1;
             display: flex;
             align-items: center;
             gap: 16px;
@@ -843,9 +840,11 @@
         body.pres .idx-label { font-size: 32px; }
         body.pres .idx-num { width: 60px; height: 60px; font-size: 28px; }
 
-        /* Slide Obras Civiles y Distribución (planos + galpón) */
-        body.pres #sLayout .row-3 .card img { height: 46vh !important; }
-        body.pres #sLayout .row-3 .card p { font-size: 20px !important; }
+        /* Slide Localización y Distribución (plano principal grande + 2 secundarios) */
+        body.pres #sLayout img[alt="Planos planta baja"] { height: 626px !important; }
+        body.pres #sLayout img[alt="Planos planta alta"],
+        body.pres #sLayout img[alt="Galpón real"] { height: 281px !important; }
+        body.pres #sLayout .card p { font-size: 20px !important; }
 
         /* ===== CARÁTULAS DE CAPÍTULO ===== */
         .cap-cover .s-body { justify-content: center; align-items: center; }
@@ -866,12 +865,21 @@
 
         /* ===== ANIMACIONES Y TRANSICIONES ===== */
         @keyframes slideFade {
-            from { opacity: 0; transform: translateY(24px) scale(0.99); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translate(-50%, calc(-50% + 26px)) scale(var(--pres-scale,1)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
         }
-        @keyframes enterRight { from { opacity: 0; transform: translateX(70px);  } to { opacity: 1; transform: translateX(0); } }
-        @keyframes enterLeft  { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes zoomFade   { from { opacity: 0; transform: scale(1.06); }       to { opacity: 1; transform: scale(1); } }
+        @keyframes enterRight {
+            from { opacity: 0; transform: translate(calc(-50% + 90px), -50%) scale(var(--pres-scale,1)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
+        @keyframes enterLeft {
+            from { opacity: 0; transform: translate(calc(-50% - 90px), -50%) scale(var(--pres-scale,1)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
+        @keyframes zoomFade {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(calc(var(--pres-scale,1) * 1.04)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
         @keyframes popIn      { from { opacity: 0; transform: translateY(28px); }   to { opacity: 1; transform: translateY(0); } }
         @keyframes titleIn    { from { opacity: 0; transform: translateX(-40px); }  to { opacity: 1; transform: translateX(0); } }
         @keyframes kpiPop     { from { opacity: 0; transform: scale(0.6); }         to { opacity: 1; transform: scale(1); } }
@@ -1048,8 +1056,8 @@
     <div class="slide" id="sIndex">
         <h2 class="s-title"><span class="num"><i class="fa-solid fa-list-ul"></i></span> Contenido</h2>
         <div class="s-body">
-            <div class="row row-2">
-                <div style="display:flex; flex-direction:column; gap:14px;">
+            <div class="row row-3">
+                <div style="display:flex; flex-direction:column; gap:16px;">
                     <div class="idx-item">
                         <span class="idx-num">1</span>
                         <span class="idx-label">Introducción</span>
@@ -1062,34 +1070,32 @@
                         <span class="idx-num">3</span>
                         <span class="idx-label">Estudio de Mercado</span>
                     </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:16px;">
                     <div class="idx-item">
                         <span class="idx-num">4</span>
-                        <span class="idx-label">Localización y Tamaño</span>
+                        <span class="idx-label">Localización e Ingeniería</span>
                     </div>
                     <div class="idx-item">
                         <span class="idx-num">5</span>
-                        <span class="idx-label">Ingeniería del Proyecto</span>
-                    </div>
-                </div>
-                <div style="display:flex; flex-direction:column; gap:14px;">
-                    <div class="idx-item">
-                        <span class="idx-num">6</span>
                         <span class="idx-label">Presupuesto e Inversiones</span>
                     </div>
                     <div class="idx-item">
-                        <span class="idx-num">7</span>
+                        <span class="idx-num">6</span>
                         <span class="idx-label">Financiamiento</span>
                     </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:16px;">
                     <div class="idx-item">
-                        <span class="idx-num">8</span>
+                        <span class="idx-num">7</span>
                         <span class="idx-label">Organización</span>
                     </div>
                     <div class="idx-item">
-                        <span class="idx-num">9</span>
+                        <span class="idx-num">8</span>
                         <span class="idx-label">Evaluación Financiera</span>
                     </div>
                     <div class="idx-item">
-                        <span class="idx-num">10</span>
+                        <span class="idx-num">9</span>
                         <span class="idx-label">Conclusiones y Recomendaciones</span>
                     </div>
                 </div>
@@ -1537,59 +1543,22 @@
         <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
     </div>
 
-    <div class="slide cap-cover" id="cap4" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
-        <div class="s-body">
-            <div class="cap-inner">
-                <span class="cap-kicker">04</span>
-                <h1 class="cap-title">Localización y Tamaño</h1>
-                <div class="cap-rule"></div>
-            </div>
-        </div>
-    </div>
 
-    <div class="slide" id="s12">
-        <h2 class="s-title"><span class="num">12</span> Tamaño y Localización</h2>
-        <div class="s-body">
-            <div class="row row-2">
-                <div class="card card-accent">
-                    <h3><i class="fa-solid fa-map-location-dot"></i> Micro-Localización Óptima</h3>
-                    <p>Evaluada mediante el <strong>Método Dimensional</strong> considerando Costo, Tamaño, Seguridad y
-                        Transporte.</p>
-                    <p style="font-weight:700; color:var(--primary-light); font-size:16px; margin: 8px 0 4px;">Opción C:
-                        Distrito Municipal 5</p>
-                    <p>Av. Beni entre 6to y 7mo anillo. Galpón en alquiler de 750 m² con luz trifásica (Bs. 12,500/mes).
-                    </p>
-                    <div style="display:flex; gap:8px; margin-top:8px;">
-                        <span class="tag tag-low">Seguridad Alta</span>
-                        <span class="tag tag-low">Acceso Logístico</span>
-                    </div>
-                </div>
-                <div class="card" style="padding: 0; overflow: hidden; border-radius: 12px;">
-                    <img src="img/image35.jpeg" alt="Galpón Elegido - Distrito 5"
-                        style="width:100%; height: 220px; object-fit: contain; background:#1a1f0e;">
-                    <div style="padding: 12px 15px; background: #FAFAF5;">
-                        <p style="font-size: 14px; color: var(--text-dark); margin:0; text-align:center;"><strong>Galpón
-                                Elegido — Opción C</strong></p>
-                        <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-align:center;"><i class="fa-solid fa-location-dot" style="color:var(--accent);"></i> Av. Beni · Distrito 5 · 750 m² | Luz Trifásica | Bs. 12,500/mes</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="s-foot"><span>Capítulo V: Localización y Tamaño</span><span>Alejandro F. Torrico Rojas</span></div>
-    </div>
+
+
 
     <div class="slide cap-cover" id="cap5" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
         <div class="s-body">
             <div class="cap-inner">
-                <span class="cap-kicker">05</span>
-                <h1 class="cap-title">Ingeniería del Proyecto</h1>
+                <span class="cap-kicker">04</span>
+                <h1 class="cap-title">Localización e Ingeniería</h1>
                 <div class="cap-rule"></div>
             </div>
         </div>
     </div>
 
     <div class="slide" id="s13">
-        <h2 class="s-title"><span class="num">13</span> Plan de Producción y Tecnología</h2>
+        <h2 class="s-title"><span class="num">12</span> Plan de Producción y Tecnología</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1646,7 +1615,7 @@
     </div>
 
     <div class="slide" id="s13b">
-        <h2 class="s-title"><span class="num">14</span> Equipos Complementarios del Proceso</h2>
+        <h2 class="s-title"><span class="num">13</span> Equipos Complementarios del Proceso</h2>
         <div class="s-body">
             <div class="row row-4">
                 <div class="card card-accent" style="padding:14px;">
@@ -1682,7 +1651,7 @@
     </div>
 
     <div class="slide" id="s14">
-        <h2 class="s-title"><span class="num">15</span> Proceso Productivo — Flujograma</h2>
+        <h2 class="s-title"><span class="num">14</span> Proceso Productivo — Flujograma</h2>
         <div class="s-body" style="display:flex; justify-content:center; align-items:center;">
             <svg viewBox="0 0 720 480" style="max-width:720px; width:100%; height:auto; font-family:'Segoe UI',sans-serif;">
                 <defs>
@@ -1788,7 +1757,7 @@
     </div>
 
     <div class="slide" id="sInocuidad">
-        <h2 class="s-title"><span class="num">16</span> Inocuidad y Control de Calidad</h2>
+        <h2 class="s-title"><span class="num">15</span> Inocuidad y Control de Calidad</h2>
         <div class="s-body">
             <div class="alert" style="background:rgba(45,106,79,0.08); border:1px solid rgba(45,106,79,0.2); color:var(--primary-dark); margin-bottom:6px;">
                 <i class="fa-solid fa-shield-halved" style="color:var(--primary);"></i>
@@ -1828,32 +1797,40 @@
     </div>
 
     <div class="slide" id="sLayout">
-        <h2 class="s-title"><span class="num">17</span> Obras Civiles y Distribución de Planta</h2>
+        <h2 class="s-title"><span class="num">16</span> Localización y Distribución de Planta</h2>
         <div class="s-body">
-            <div class="alert" style="background:rgba(45,106,79,0.08); border:1px solid rgba(45,106,79,0.2); color:var(--primary-dark); margin-bottom:4px;">
-                <i class="fa-solid fa-diagram-project" style="color:var(--primary);"></i>
-                <span><strong>Distribución por producto (en línea):</strong> la elaboración sigue una secuencia fija de operaciones, con recorridos cortos, sin cruces entre material y personal, y separación entre áreas de polvo, producto final y administración.</span>
+            <div class="row row-2" style="margin-bottom:4px;">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-map-location-dot"></i> Micro-Localización (Método Dimensional)</h3>
+                    <p>Opción C — Distrito Municipal 5, Av. Beni entre 6to y 7mo anillo. Galpón de 750 m² con luz trifásica (Bs. 12,500/mes).</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-diagram-project" style="color:var(--accent);"></i> Distribución por Producto (en línea)</h3>
+                    <p>Secuencia fija de operaciones, recorridos cortos, sin cruces entre material y personal y separación entre áreas.</p>
+                </div>
             </div>
-            <div class="row row-3">
+            <div class="row" style="grid-template-columns: 1.3fr 1fr; gap:18px; align-items:stretch;">
                 <div class="card" style="padding:0; overflow:hidden;">
-                    <img src="img/image47.jpeg" alt="Planos planta baja" style="width:100%; height:300px; object-fit:contain; background:#fff;">
+                    <img src="img/image47.jpeg" alt="Planos planta baja" style="width:100%; height:440px; object-fit:contain; background:#fff;">
                     <div style="padding:10px 14px; background:#FAFAF5;"><p style="margin:0; text-align:center;"><strong>Planta baja</strong> — zonas y secuencia de máquinas (1–8)</p></div>
                 </div>
-                <div class="card" style="padding:0; overflow:hidden;">
-                    <img src="img/image48.jpeg" alt="Planos planta alta" style="width:100%; height:300px; object-fit:contain; background:#fff;">
-                    <div style="padding:10px 14px; background:#FAFAF5;"><p style="margin:0; text-align:center;"><strong>Planta alta</strong> — Oficina 2 y servicios</p></div>
-                </div>
-                <div class="card" style="padding:0; overflow:hidden;">
-                    <img src="img/image35.jpeg" alt="Galpón real" style="width:100%; height:300px; object-fit:cover;">
-                    <div style="padding:10px 14px; background:#FAFAF5;"><p style="margin:0; text-align:center;"><strong>Galpón real</strong> — Distrito 5</p></div>
+                <div style="display:flex; flex-direction:column; gap:18px;">
+                    <div class="card" style="padding:0; overflow:hidden;">
+                        <img src="img/image48.jpeg" alt="Planos planta alta" style="width:100%; height:190px; object-fit:contain; background:#fff;">
+                        <div style="padding:8px 12px; background:#FAFAF5;"><p style="margin:0; text-align:center;"><strong>Planta alta</strong> — Oficina 2 y servicios</p></div>
+                    </div>
+                    <div class="card" style="padding:0; overflow:hidden;">
+                        <img src="img/image35.jpeg" alt="Galpón real" style="width:100%; height:190px; object-fit:cover;">
+                        <div style="padding:8px 12px; background:#FAFAF5;"><p style="margin:0; text-align:center;"><strong>Galpón real</strong> — Distrito 5</p></div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="s-foot"><span>Capítulo VI: Ingeniería</span><span>Alejandro F. Torrico Rojas</span></div>
+        <div class="s-foot"><span>Capítulo V–VI: Localización e Ingeniería</span><span>Alejandro F. Torrico Rojas</span></div>
     </div>
 
     <div class="slide" id="s15">
-        <h2 class="s-title"><span class="num">18</span> Gestión Ambiental y Seguridad</h2>
+        <h2 class="s-title"><span class="num">17</span> Gestión Ambiental y Seguridad</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1882,7 +1859,7 @@
     <div class="slide cap-cover" id="cap6" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
         <div class="s-body">
             <div class="cap-inner">
-                <span class="cap-kicker">06</span>
+                <span class="cap-kicker">05</span>
                 <h1 class="cap-title">Presupuesto e Inversiones</h1>
                 <div class="cap-rule"></div>
             </div>
@@ -1890,7 +1867,7 @@
     </div>
 
     <div class="slide" id="s17">
-        <h2 class="s-title"><span class="num">19</span> Inversiones y Presupuesto</h2>
+        <h2 class="s-title"><span class="num">18</span> Inversiones y Presupuesto</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -1926,12 +1903,12 @@
                     <div style="display:flex; flex-direction:column; gap:12px; margin-top:8px;">
                         <div class="alert alert-red" style="flex-direction:column;">
                             <strong style="color:#FCA5A5;">Costos Variables: Bs. 4,105,788</strong>
-                            <p style="margin:0; font-size:12px;">MP quinua, bolsas e hilos. Crecen con volumen.</p>
+                            <p style="margin:0; font-size:12px;">MP quinua, bolsas e hilos.</p>
                         </div>
                         <div class="alert"
                             style="background:rgba(13,107,79,0.1); border:1px solid rgba(13,107,79,0.3); color:#6EE7B7; flex-direction:column;">
                             <strong>Costos Fijos: Bs. 887,421</strong>
-                            <p style="margin:0; font-size:12px;">Sueldos, alquiler, servicios, depreciación. Estables.
+                            <p style="margin:0; font-size:12px;">Sueldos, alquiler, servicios, depreciación.
                             </p>
                         </div>
                     </div>
@@ -1944,7 +1921,7 @@
     <div class="slide cap-cover" id="cap7" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
         <div class="s-body">
             <div class="cap-inner">
-                <span class="cap-kicker">07</span>
+                <span class="cap-kicker">06</span>
                 <h1 class="cap-title">Financiamiento</h1>
                 <div class="cap-rule"></div>
             </div>
@@ -1952,7 +1929,7 @@
     </div>
 
     <div class="slide" id="s18">
-        <h2 class="s-title"><span class="num">20</span> Estructura de Financiamiento</h2>
+        <h2 class="s-title"><span class="num">19</span> Estructura de Financiamiento</h2>
         <div class="s-body">
             <div class="card" style="margin-bottom:15px;">
                 <h3><i class="fa-solid fa-building-columns"></i> Origen de los Fondos</h3>
@@ -2000,7 +1977,7 @@
     <div class="slide cap-cover" id="cap8" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
         <div class="s-body">
             <div class="cap-inner">
-                <span class="cap-kicker">08</span>
+                <span class="cap-kicker">07</span>
                 <h1 class="cap-title">Organización</h1>
                 <div class="cap-rule"></div>
             </div>
@@ -2008,13 +1985,12 @@
     </div>
 
     <div class="slide" id="s16">
-        <h2 class="s-title"><span class="num">21</span> Estructura Legal y Organizacional</h2>
+        <h2 class="s-title"><span class="num">20</span> Estructura Legal y Organizacional</h2>
         <div class="s-body">
             <div class="card"
                 style="text-align:center; background:rgba(45,106,79,0.06); border:1px solid rgba(45,106,79,0.15); margin-bottom:15px;">
                 <h3 style="justify-content:center; font-size:16px;"><i class="fa-solid fa-building-shield"></i> S.R.L. —
                     Sociedad de Responsabilidad Limitada</h3>
-                <p>Protege el patrimonio personal. Administración ante SEPREC y Min. de Trabajo.</p>
             </div>
             <div class="org">
                 <div class="org-n top">Gerente General</div>
@@ -2023,23 +1999,23 @@
                 <div class="org-row">
                     <div class="org-branch">
                         <div class="org-line"></div>
-                        <div class="org-n mid">Enc. Prod. y Calidad</div>
+                        <div class="org-n mid">Encargado de Producción y Calidad</div>
                         <div class="org-line"></div>
                         <div class="org-n bot">Operarios (3-4)</div>
                     </div>
                     <div class="org-branch">
                         <div class="org-line"></div>
-                        <div class="org-n mid">Enc. Adm. y Finanzas</div>
+                        <div class="org-n mid">Encargado de Administración y Finanzas</div>
                         <div class="org-line dashed"></div>
                         <div class="org-n bot">Seguridad (Tercerizado)</div>
                     </div>
                     <div class="org-branch">
                         <div class="org-line"></div>
-                        <div class="org-n mid">Enc. Mkt. y Ventas</div>
+                        <div class="org-n mid">Encargado de Marketing y Ventas</div>
                     </div>
                     <div class="org-branch">
                         <div class="org-line"></div>
-                        <div class="org-n mid">Enc. Logística</div>
+                        <div class="org-n mid">Encargado de Logística</div>
                     </div>
                 </div>
             </div>
@@ -2050,7 +2026,7 @@
     <div class="slide cap-cover" id="cap9" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
         <div class="s-body">
             <div class="cap-inner">
-                <span class="cap-kicker">09</span>
+                <span class="cap-kicker">08</span>
                 <h1 class="cap-title">Evaluación Financiera</h1>
                 <div class="cap-rule"></div>
             </div>
@@ -2058,7 +2034,7 @@
     </div>
 
     <div class="slide" id="s19">
-        <h2 class="s-title"><span class="num">22</span> Evaluación Financiera</h2>
+        <h2 class="s-title"><span class="num">21</span> Evaluación Financiera</h2>
         <div class="s-body">
             <div class="kpi-row">
                 <div class="kpi green">
@@ -2100,7 +2076,7 @@
     </div>
 
     <div class="slide" id="s20">
-        <h2 class="s-title"><span class="num">23</span> Análisis de Sensibilidad</h2>
+        <h2 class="s-title"><span class="num">22</span> Análisis de Sensibilidad</h2>
         <div class="s-body">
             <div class="card">
                 <h3><i class="fa-solid fa-scale-unbalanced"></i> Impacto en la TIR ante variaciones negativas</h3>
@@ -2134,7 +2110,7 @@
             </div>
             <div class="alert alert-red"><i class="fa-solid fa-triangle-exclamation"></i><span><strong>Riesgo
                         Crítico:</strong> El proyecto es altamente sensible al precio de venta. Es vital mantener la
-                    estrategia comercial y contratos de materia prima firmes.</span></div>
+                    estrategia comercial y contratos de materia prima e insumos firmes.</span></div>
         </div>
         <div class="s-foot"><span>Capítulo X: Evaluación Financiera</span><span>Alejandro F. Torrico Rojas</span></div>
     </div>
@@ -2142,7 +2118,7 @@
     <div class="slide cap-cover" id="cap10" style="background: linear-gradient(135deg, rgba(27,67,50,0.92), rgba(45,106,79,0.88)), url('img/quinua-en-mano_nota.webp') center/cover;">
         <div class="s-body">
             <div class="cap-inner">
-                <span class="cap-kicker">10</span>
+                <span class="cap-kicker">09</span>
                 <h1 class="cap-title">Conclusiones y Recomendaciones</h1>
                 <div class="cap-rule"></div>
             </div>
@@ -2150,7 +2126,7 @@
     </div>
 
     <div class="slide" id="s21">
-        <h2 class="s-title"><span class="num">24</span> Conclusiones</h2>
+        <h2 class="s-title"><span class="num">23</span> Conclusiones</h2>
         <div class="s-body">
             <div class="card"
                 style="background:rgba(13,107,79,0.15); border:1px solid rgba(13,107,79,0.3); margin-bottom:10px;">
@@ -2200,7 +2176,7 @@
     </div>
 
     <div class="slide" id="s22">
-        <h2 class="s-title"><span class="num">25</span> Recomendaciones</h2>
+        <h2 class="s-title"><span class="num">24</span> Recomendaciones</h2>
         <div class="s-body">
             <div class="row row-2">
                 <div class="card card-accent">
@@ -2248,8 +2224,10 @@
     <script>
         let c = 0, p = false; const s = document.querySelectorAll('.slide'), t = s.length;
         function u() { document.getElementById('cnt').textContent = (c + 1) + ' / ' + t; document.getElementById('pbar').style.width = ((c + 1) / t * 100) + '%'; }
+        function fitScale() { document.body.style.setProperty('--pres-scale', Math.min(window.innerWidth / 1920, window.innerHeight / 1080)); }
+        window.addEventListener('resize', () => { if (p) fitScale(); });
         function go(d) { const n = c + d; if (n < 0 || n >= t) return; if (p) { s[c].classList.remove('active'); s[n].classList.remove('from-left', 'from-right'); void s[n].offsetWidth; s[n].classList.add('active', d > 0 ? 'from-right' : 'from-left'); } else { s[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); } c = n; u(); }
-        function toggleP() { p = !p; document.body.classList.toggle('pres', p); if (p) { s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); s[c].classList.add('active'); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-compress"></i>'; if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else { s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-expand"></i>'; if (document.fullscreenElement) document.exitFullscreen(); s[c].scrollIntoView({ behavior: 'smooth', block: 'center' }); } u(); }
+        function toggleP() { p = !p; document.body.classList.toggle('pres', p); if (p) { fitScale(); s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); s[c].classList.add('active'); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-compress"></i>'; if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else { s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-expand"></i>'; if (document.fullscreenElement) document.exitFullscreen(); s[c].scrollIntoView({ behavior: 'smooth', block: 'center' }); } u(); }
         document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(1); } if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(-1); } if (e.key === 'F5') { e.preventDefault(); toggleP(); } if (e.key === 'Escape' && p) { e.preventDefault(); toggleP(); } });
         document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && p) toggleP(); });
 
