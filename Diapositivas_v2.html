@@ -794,15 +794,18 @@
         body.pres #s13b .row-4 .card p {
             font-size: 25px !important;
         }
-        body.pres #s13b > .s-body > .card:last-child img {
+        body.pres #s13b .row:last-child .card-gold img {
             width: 180px !important;
             height: 238px !important;
         }
-        body.pres #s13b > .s-body > .card:last-child h3 {
+        body.pres #s13b .row:last-child .card-gold h3 {
             font-size: 32px !important;
         }
-        body.pres #s13b > .s-body > .card:last-child p {
+        body.pres #s13b .row:last-child .card-gold p {
             font-size: 28px !important;
+        }
+        body.pres #s13b .row:last-child .card-accent h3 {
+            font-size: 26px !important;
         }
 
         /* Slide Índice / Contenido */
@@ -1220,7 +1223,6 @@
                         style="width:100%; height:140px; object-fit:cover; object-position:center; border-radius:6px; margin-bottom:10px;">
                     <ul>
                         <li><strong>Proveedor:</strong> Quinoabol S.R.L.</li>
-                        <li><strong>Costo:</strong> Bs. 900 / saco (25 kg)</li>
                         <li><strong>Reposición:</strong> Quincenal</li>
                     </ul>
                 </div>
@@ -1230,7 +1232,6 @@
                         style="width:100%; height:140px; object-fit:contain; border-radius:6px; margin-bottom:10px; background:#FFFFFF;">
                     <ul>
                         <li><strong>Proveedor:</strong> Embolpack S.R.L.</li>
-                        <li><strong>Costo:</strong> Bs. 2.80 / unidad</li>
                         <li><strong>Reposición:</strong> Mensual</li>
                     </ul>
                 </div>
@@ -1241,8 +1242,6 @@
                     <ul>
                         <li><strong>Material:</strong> Fibra sintética de alta resistencia</li>
                         <li><strong>Proveedor:</strong> Embolpack S.R.L.</li>
-                        <li><strong>Costo:</strong> Bs. 135 / cono (2 kg)</li>
-                        <li><strong>Rendimiento:</strong> 0.46g por bolsa</li>
                     </ul>
                 </div>
             </div>
@@ -1268,7 +1267,7 @@
                 <div class="card card-accent">
                     <h3><i class="fa-solid fa-clipboard-list"></i> Diseño Muestral</h3>
                     <ul>
-                        <li><strong>Intermediarios (B2B):</strong> muestreo estratificado por tipo de negocio y zona geográfica.</li>
+                        <li><strong>Intermediarios (B2B):</strong> muestreo estratificado por tipo de negocio y zona geográfica — <strong>54 encuestas</strong>.</li>
                         <li><strong>Consumidores finales:</strong> muestreo no probabilístico por conveniencia — <strong>225 encuestas</strong>.</li>
                         <li><strong>Universo (N):</strong> 500 locales que usan harina en Santa Cruz de la Sierra.</li>
                     </ul>
@@ -1468,6 +1467,12 @@
                     <p>Mercado compuesto por microempresas de alcance regional. Pocas marcas consolidadas en
                         supermercados cruceños, lo que deja espacio para un producto nuevo.</p>
                 </div>
+                <div class="card" style="grid-column: 1 / -1;">
+                    <h3>Amenaza de Nuevos Competidores <span class="tag tag-med">MODERADA</span></h3>
+                    <p>La inversión en maquinaria e infraestructura y los requisitos sanitarios (SENASAG, BPM) elevan las
+                        barreras de entrada. No obstante, la amplia disponibilidad de quinua y el auge de los productos
+                        saludables atraen a pequeños productores y cooperativas con versiones artesanales.</p>
+                </div>
             </div>
         </div>
         <div class="s-foot"><span>Capítulo IV: Estudio de Mercado</span><span>Alejandro F. Torrico Rojas</span></div>
@@ -1486,13 +1491,13 @@
                         <li>Estructura S.R.L. eficiente</li>
                     </ul>
                 </div>
-                <div class="m-cell th">
-                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Amenazas</h4>
+                <div class="m-cell wk">
+                    <h4><i class="fa-solid fa-circle-exclamation"></i> Debilidades</h4>
                     <ul>
-                        <li>Inflación y volatilidad cambiaria</li>
-                        <li>Bloqueos que interrumpen suministro</li>
-                        <li>Competencia de harinas más baratas</li>
-                        <li>Variabilidad climática en quinua</li>
+                        <li>Dependencia de maquinaria importada</li>
+                        <li>Quinua tropicalizada aún limitada</li>
+                        <li>Marca nueva sin posicionamiento</li>
+                        <li>Alta inversión inicial requerida</li>
                     </ul>
                 </div>
                 <div class="m-cell op">
@@ -1504,13 +1509,13 @@
                         <li>Potencial de exportación</li>
                     </ul>
                 </div>
-                <div class="m-cell wk">
-                    <h4><i class="fa-solid fa-circle-exclamation"></i> Debilidades</h4>
+                <div class="m-cell th">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> Amenazas</h4>
                     <ul>
-                        <li>Dependencia de maquinaria importada</li>
-                        <li>Quinua tropicalizada aún limitada</li>
-                        <li>Marca nueva sin posicionamiento</li>
-                        <li>Alta inversión inicial requerida</li>
+                        <li>Inflación y volatilidad cambiaria</li>
+                        <li>Bloqueos que interrumpen suministro</li>
+                        <li>Competencia de harinas más baratas</li>
+                        <li>Variabilidad climática en quinua</li>
                     </ul>
                 </div>
             </div>
@@ -1614,11 +1619,17 @@
                     <p style="font-size:12px; margin:0;">Filtra la harina molida para separar grumos. Se usa post-molienda, previo al envasado.</p>
                 </div>
             </div>
-            <div class="card card-gold" style="background:rgba(198,139,0,0.06); border:1px solid rgba(198,139,0,0.2); display:flex; flex-direction:row; align-items:center; gap:18px;">
-                <img src="img/envasadora.jpg" alt="Envasadora Semiautomática" style="width:90px; height:110px; object-fit:contain; background:#FAFAF5; border-radius:6px; flex-shrink:0;">
-                <div style="flex:1;">
-                    <h3 style="font-size:14px;"><i class="fa-solid fa-box-open" style="color:var(--accent);"></i> Envasadora Semiautomática (Costura de Sacos)</h3>
-                    <p style="margin:4px 0 0;">Llena y cierra los sacos de 25 kg mediante costura. Inversión total en maquinaria y equipos: <strong>Bs. 348,094</strong>.</p>
+            <div class="row" style="grid-template-columns: 1.7fr 1fr; gap:15px; align-items:stretch;">
+                <div class="card card-gold" style="background:rgba(198,139,0,0.06); border:1px solid rgba(198,139,0,0.2); display:flex; flex-direction:row; align-items:center; gap:18px;">
+                    <img src="img/envasadora.jpg" alt="Envasadora Semiautomática" style="width:90px; height:110px; object-fit:contain; background:#FAFAF5; border-radius:6px; flex-shrink:0;">
+                    <div style="flex:1;">
+                        <h3 style="font-size:14px;"><i class="fa-solid fa-box-open" style="color:var(--accent);"></i> Envasadora Semiautomática (Costura de Sacos)</h3>
+                        <p style="margin:4px 0 0;">Llena y cierra los sacos de 25 kg mediante costura.</p>
+                    </div>
+                </div>
+                <div class="card card-accent" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+                    <h3 style="font-size:13px; justify-content:center; margin-bottom:8px;"><i class="fa-solid fa-sack-dollar"></i> Inversión Total en Maquinaria y Equipos</h3>
+                    <div class="big-num">Bs. 348,094</div>
                 </div>
             </div>
         </div>
@@ -1883,7 +1894,7 @@
                         <div class="alert"
                             style="background:rgba(13,107,79,0.1); border:1px solid rgba(13,107,79,0.3); color:#6EE7B7; flex-direction:column;">
                             <strong>Costos Fijos: Bs. 887,421</strong>
-                            <p style="margin:0; font-size:12px;">Sueldos, alquiler, servicios, depreciación.
+                            <p style="margin:0; font-size:12px;">Sueldos, alquiler, servicios, depreciación entre otros.
                             </p>
                         </div>
                     </div>
