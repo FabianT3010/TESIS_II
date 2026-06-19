@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stickers Cajas - Defensa de Tesis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ivory: #F7F2E8;
+            --paper: #F0E8D6;
+            --green-ink: #234B39;
+            --green-soft: #3C7A5B;
+            --green-mid: #5A8C68;
+            --green-slide: #1B4332;
+            --gold: #B58227;
+            --gold-bright: #CC9A38;
+            --terra: #B8642F;
+            --ink: #36381F;
+            --muted: #8A7E5E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #d7d1c4;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 40px 20px 80px;
+        }
+
+        .intro {
+            max-width: 640px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 22px 28px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, .1);
+        }
+
+        .intro h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--green-ink);
+            margin-bottom: 8px;
+        }
+
+        .intro p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .intro .hint {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--green-ink);
+            background: var(--ivory);
+            padding: 9px 13px;
+            border-radius: 6px;
+        }
+
+        .label {
+            font-size: 10.5px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--green-ink);
+            opacity: .6;
+            margin-bottom: -18px;
+        }
+
+        /* ----- emblema espiga (color por currentColor) ----- */
+        .wheat {
+            color: var(--gold);
+            display: block;
+        }
+
+        /* =================================================
+           A · SELLO REDONDO  (marfil + dorado, 90 mm)
+        ================================================= */
+        .seal {
+            width: 120mm;
+            height: 120mm;
+            border-radius: 50%;
+            background: var(--green-ink);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .seal::before {
+            content: '';
+            position: absolute;
+            inset: 5mm;
+            border-radius: 50%;
+            background:
+                radial-gradient(120% 120% at 50% 30%, #FBF7EF 0%, var(--ivory) 55%, #EFE6D3 100%);
+        }
+
+        .seal .core {
+            text-align: center;
+            padding: 0 15mm;
+            position: relative;
+            z-index: 1;
+            transform: scale(1.333);
+            transform-origin: center;
+        }
+
+        .seal .wheat {
+            margin: 0 auto 9px;
+        }
+
+        .seal .kicker {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .seal .over {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--green-soft);
+            margin-bottom: 2px;
+        }
+
+        .seal .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.0;
+            letter-spacing: 0;
+            color: var(--green-ink);
+            margin-bottom: 11px;
+        }
+
+        .seal .rule {
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 11px;
+            position: relative;
+        }
+
+        .seal .rule::before,
+        .seal .rule::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--gold);
+            transform: translateY(-50%);
+        }
+
+        .seal .rule::before {
+            left: -7px;
+        }
+
+        .seal .rule::after {
+            right: -7px;
+        }
+
+        .seal .name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 3px;
+        }
+
+        .seal .sub {
+            font-size: 7.5px;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .seal .foot {
+            margin-top: 13px;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* =================================================
+           B · ETIQUETA RECTANGULAR  (90 × 55 mm)
+           banda lateral verde fina = el verde como acento
+        ================================================= */
+        .tag {
+            width: 90mm;
+            height: 55mm;
+            border-radius: 2.5mm;
+            background: var(--ivory);
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            border: 0.5mm solid var(--gold);
+        }
+
+        .tag .band {
+            width: 11mm;
+            flex-shrink: 0;
+            background: var(--green-ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tag .band .wheat {
+            color: var(--gold-bright);
+        }
+
+        .tag .content {
+            flex: 1;
+            padding: 7mm 8mm 6mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tag .kicker {
+            font-size: 7.5px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .tag .over {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--green-soft);
+            margin-bottom: 2px;
+        }
+
+        .tag .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 29px;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--green-ink);
+        }
+
+        .tag .rule {
+            width: 34px;
+            height: 1px;
+            background: var(--gold);
+            margin: 3.5mm 0 0;
+        }
+
+        .tag .foot {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .tag .name {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .tag .sub {
+            font-size: 7.5px;
+            font-weight: 500;
+            color: var(--muted);
+            margin-top: 2px;
+            letter-spacing: .3px;
+        }
+
+        .tag .year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: .5px;
+        }
+
+        /* =================================================
+           C · SELLO CHICO  (45 mm) — dorado protagonista
+        ================================================= */
+        .mini {
+            width: 45mm;
+            height: 45mm;
+            border-radius: 50%;
+            background: var(--ivory);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.7mm solid var(--gold);
+        }
+
+        .mini .core {
+            text-align: center;
+            padding: 0 6mm;
+        }
+
+        .mini .wheat {
+            margin: 0 auto 4px;
+        }
+
+        .mini .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.0;
+            color: var(--green-ink);
+        }
+
+        .mini .core { padding: 0 7mm; }
+
+        .mini .rule {
+            width: 18px;
+            height: 1px;
+            background: var(--gold);
+            margin: 4px auto;
+        }
+
+        .mini .sub {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: .2px;
+            color: var(--ink);
+        }
+
+        .mini .year2 {
+            font-size: 6px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            color: var(--gold);
+            margin-top: 3px;
+        }
+
+        /* ----- impresión ----- */
+        .seal,
+        .tag,
+        .mini {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        @media print {
+
+            .intro,
+            .label {
+                display: none !important;
+            }
+
+            body {
+                background: #fff;
+                gap: 14mm;
+                padding: 10mm;
+            }
+
+            .seal,
+            .tag,
+            .mini {
+                outline: 0.2mm dashed #ccc;
+                outline-offset: 2.5mm;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="intro">
+        <h1>Stickers para las cajas</h1>
+        <p>Tres variantes a tamaño real con la paleta de las diapositivas v2. Ahora el marfil manda y el dorado
+            es el acento; el verde aparece solo como tinta y un detalle. Solo el dato de la tesis y tu persona.</p>
+        <p class="hint"><strong>Imprimir a escala exacta:</strong> Ctrl/Cmd + P → Márgenes "Ninguno" → Escala 100%
+            (no "ajustar a la página"). Redondo = 12 cm · etiqueta = 9 × 5,5 cm · sello chico = 4,5 cm.</p>
+    </div>
+
+    <!-- ===== plantilla SVG de espiga ===== -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <g id="sprig" fill="currentColor">
+                <line x1="12" y1="33" x2="12" y2="14" stroke="currentColor" stroke-width="1.1"
+                    stroke-linecap="round" />
+                <ellipse cx="12" cy="5.5" rx="1.6" ry="3.7" />
+                <ellipse cx="9.3" cy="10" rx="1.6" ry="3.6" transform="rotate(-30 9.3 10)" />
+                <ellipse cx="14.7" cy="10" rx="1.6" ry="3.6" transform="rotate(30 14.7 10)" />
+                <ellipse cx="8.9" cy="14.7" rx="1.6" ry="3.6" transform="rotate(-30 8.9 14.7)" />
+                <ellipse cx="15.1" cy="14.7" rx="1.6" ry="3.6" transform="rotate(30 15.1 14.7)" />
+                <ellipse cx="8.7" cy="19.4" rx="1.5" ry="3.4" transform="rotate(-30 8.7 19.4)" />
+                <ellipse cx="15.3" cy="19.4" rx="1.5" ry="3.4" transform="rotate(30 15.3 19.4)" />
+            </g>
+        </defs>
+    </svg>
+
+    <!-- ===== A · SELLO REDONDO ===== -->
+    <div class="label">A · Sello redondo (12 cm)</div>
+    <div class="seal">
+        <div class="core">
+            <svg class="wheat" width="52" height="37" viewBox="-12 0 48 34" overflow="visible">
+                <use href="#sprig" transform="translate(12 33) rotate(-42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" transform="translate(12 33) rotate(42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" />
+            </svg>
+            <div class="kicker">Estudio de Factibilidad</div>
+            <div class="over">Fábrica de</div>
+            <div class="title">Harina de Quinua</div>
+            <div class="rule"></div>
+            <div class="name">Alejandro Fabian Torrico Rojas</div>
+            <div class="sub">Ing. Industrial y de Sistemas</div>
+            <div class="foot">UPSA · 2026</div>
+        </div>
+    </div>
+
+    <!-- ===== B · ETIQUETA RECTANGULAR ===== -->
+    <div class="label">B · Etiqueta rectangular (9 × 5,5 cm)</div>
+    <div class="tag">
+        <div class="band">
+            <svg class="wheat" width="20" height="29" viewBox="0 0 24 34"><use href="#sprig" /></svg>
+        </div>
+        <div class="content">
+            <span class="kicker">Estudio de Factibilidad</span>
+            <div>
+                <div class="over">Fábrica de</div>
+                <div class="title">Harina de Quinua</div>
+                <div class="rule"></div>
+            </div>
+            <div class="foot">
+                <div>
+                    <div class="name">Alejandro Fabian Torrico Rojas</div>
+                    <div class="sub">Ing. Industrial y de Sistemas · UPSA</div>
+                </div>
+                <div class="year">2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== C · SELLO CHICO ===== -->
+    <div class="label">C · Sello chico (4,5 cm)</div>
+    <div class="mini">
+        <div class="core">
+            <svg class="wheat" width="36" height="25" viewBox="-12 0 48 34" overflow="visible">
+                <use href="#sprig" transform="translate(12 33) rotate(-42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" transform="translate(12 33) rotate(42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" />
+            </svg>
+            <div class="title">Harina de Quinua</div>
+            <div class="rule"></div>
+            <div class="sub">Alejandro Fabian Torrico Rojas</div>
+            <div class="year2">2026</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

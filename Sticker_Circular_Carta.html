@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stickers Circular - Hoja Carta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ivory: #F7F2E8;
+            --green-ink: #234B39;
+            --green-soft: #3C7A5B;
+            --gold: #B58227;
+            --ink: #36381F;
+            --muted: #8A7E5E;
+        }
+
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        html {
+            background: #cfc9bc;
+        }
+
+        body {
+            width: 215.9mm;
+            min-height: 279.4mm;
+            margin: 0 auto;
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12mm;
+        }
+
+        /* ===== SELLO REDONDO (120 mm) ===== */
+        .seal {
+            width: 120mm;
+            height: 120mm;
+            border-radius: 50%;
+            background: var(--green-ink);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .seal::before {
+            content: '';
+            position: absolute;
+            inset: 5mm;
+            border-radius: 50%;
+            background:
+                radial-gradient(120% 120% at 50% 30%, #FBF7EF 0%, var(--ivory) 55%, #EFE6D3 100%);
+        }
+
+        .seal .core {
+            text-align: center;
+            padding: 0 15mm;
+            position: relative;
+            z-index: 1;
+            transform: scale(1.333);
+            transform-origin: center;
+        }
+
+        .wheat {
+            color: var(--gold);
+            display: block;
+            margin: 0 auto 9px;
+        }
+
+        .kicker {
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .over {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--green-soft);
+            margin-bottom: 2px;
+        }
+
+        .title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            font-weight: 700;
+            line-height: 1.0;
+            color: var(--green-ink);
+            margin-bottom: 11px;
+        }
+
+        .rule {
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 11px;
+            position: relative;
+        }
+
+        .rule::before,
+        .rule::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--gold);
+            transform: translateY(-50%);
+        }
+
+        .rule::before { left: -7px; }
+        .rule::after { right: -7px; }
+
+        .name {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 3px;
+        }
+
+        .sub {
+            font-size: 7.5px;
+            font-weight: 500;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .foot {
+            margin-top: 13px;
+            font-size: 8px;
+            font-weight: 700;
+            letter-spacing: 3.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        @media print {
+            html { background: #fff; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- espiga reutilizable -->
+    <svg width="0" height="0" style="position:absolute">
+        <defs>
+            <g id="sprig" fill="currentColor">
+                <line x1="12" y1="33" x2="12" y2="14" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" />
+                <ellipse cx="12" cy="5.5" rx="1.6" ry="3.7" />
+                <ellipse cx="9.3" cy="10" rx="1.6" ry="3.6" transform="rotate(-30 9.3 10)" />
+                <ellipse cx="14.7" cy="10" rx="1.6" ry="3.6" transform="rotate(30 14.7 10)" />
+                <ellipse cx="8.9" cy="14.7" rx="1.6" ry="3.6" transform="rotate(-30 8.9 14.7)" />
+                <ellipse cx="15.1" cy="14.7" rx="1.6" ry="3.6" transform="rotate(30 15.1 14.7)" />
+                <ellipse cx="8.7" cy="19.4" rx="1.5" ry="3.4" transform="rotate(-30 8.7 19.4)" />
+                <ellipse cx="15.3" cy="19.4" rx="1.5" ry="3.4" transform="rotate(30 15.3 19.4)" />
+            </g>
+        </defs>
+    </svg>
+
+    <!-- sticker 1 -->
+    <div class="seal">
+        <div class="core">
+            <svg class="wheat" width="52" height="37" viewBox="-12 0 48 34" overflow="visible">
+                <use href="#sprig" transform="translate(12 33) rotate(-42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" transform="translate(12 33) rotate(42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" />
+            </svg>
+            <div class="kicker">Estudio de Factibilidad</div>
+            <div class="over">Fábrica de</div>
+            <div class="title">Harina de Quinua</div>
+            <div class="rule"></div>
+            <div class="name">Alejandro Fabian Torrico Rojas</div>
+            <div class="sub">Ing. Industrial y de Sistemas</div>
+            <div class="foot">UPSA · 2026</div>
+        </div>
+    </div>
+
+    <!-- sticker 2 -->
+    <div class="seal">
+        <div class="core">
+            <svg class="wheat" width="52" height="37" viewBox="-12 0 48 34" overflow="visible">
+                <use href="#sprig" transform="translate(12 33) rotate(-42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" transform="translate(12 33) rotate(42) scale(0.95) translate(-12 -33)" />
+                <use href="#sprig" />
+            </svg>
+            <div class="kicker">Estudio de Factibilidad</div>
+            <div class="over">Fábrica de</div>
+            <div class="title">Harina de Quinua</div>
+            <div class="rule"></div>
+            <div class="name">Alejandro Fabian Torrico Rojas</div>
+            <div class="sub">Ing. Industrial y de Sistemas</div>
+            <div class="foot">UPSA · 2026</div>
+        </div>
+    </div>
+
+</body>
+
+</html>
