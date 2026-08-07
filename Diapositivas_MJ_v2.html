@@ -1,0 +1,2065 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defensa de Tesis - Estandarización y Optimización de la Limpieza Industrial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            /* Paleta tomada de las ilustraciones propias de la tesis:
+               azul institucional + amarillo del Tablero de Gestión Visual (Il. 5.4)
+               y de los dashboards de control de consumo y desviaciones (Il. 5.5 / 5.6) */
+            --primary: #0A54A8;
+            --primary-light: #2E7CD6;
+            --primary-dark: #073B75;
+            --accent: #C99700;
+            --accent-light: #F5D45E;
+            --bg-dark: #EEF2F8;
+            --bg-card: #FFFFFF;
+            --bg-surface: #DFE7F2;
+            --text-main: #1B2838;
+            --text-muted: #4A5A6E;
+            --text-dark: #0F1A26;
+            --border: rgba(10, 84, 168, 0.30);
+            --glass: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #EEF2F8;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 50px;
+            padding: 50px 20px;
+        }
+
+        /* ===== SLIDE ===== */
+        .slide {
+            width: 100%;
+            max-width: 1200px;
+            aspect-ratio: 16 / 9;   /* misma proporción que la proyección */
+            background: rgba(255, 255, 255, 0.97);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 45px 55px 35px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-light));
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(10, 84, 168, 0.06), transparent 70%);
+            pointer-events: none;
+        }
+
+        /* ===== HEADER ===== */
+        .s-title {
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 1;
+        }
+
+        .s-title .num {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .s-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+
+        /* ===== CONTENT ===== */
+        .s-body {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            z-index: 1;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .row {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .row-2 { grid-template-columns: 1fr 1fr; }
+        .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+        .row-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: #FFFFFF;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(10, 84, 168, 0.32);
+            border-radius: 12px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-accent { border-left: 3px solid var(--primary); }
+        .card-gold { border-left: 3px solid var(--accent); }
+        .card-red { border-left: 3px solid #DC2626; }
+        .card-purple { border-left: 3px solid #7C3AED; }
+
+        .card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card h3 i {
+            color: var(--primary-light);
+            font-size: 16px;
+        }
+
+        .card p,
+        .card li {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        /* ===== KPI ===== */
+        .kpi-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .kpi {
+            flex: 1;
+            min-width: 170px;
+            padding: 22px;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi.green { background: linear-gradient(135deg, var(--primary-dark), var(--primary)); }
+        .kpi.gold { background: linear-gradient(135deg, #8A6800, var(--accent)); }
+        .kpi.dark { background: linear-gradient(135deg, #1E2A3A, #3C4F66); }
+        .kpi.red { background: linear-gradient(135deg, #7F1D1D, #DC2626); }
+
+        .kpi .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 1px;
+        }
+
+        .kpi .val {
+            font-size: 34px;
+            font-weight: 900;
+            color: white;
+            margin-top: 4px;
+        }
+
+        .kpi .val span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ===== TABLE ===== */
+        .tbl {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tbl th {
+            background: var(--primary-dark);
+            color: white;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .tbl td {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tbl tr:nth-child(even) { background: rgba(10, 84, 168, 0.04); }
+        .tbl td.num-c { text-align: right; font-variant-numeric: tabular-nums; }
+        .tbl th.num-c { text-align: right; }
+
+        /* ===== TAGS ===== */
+        .tag {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag-high { background: rgba(220, 38, 38, 0.1); color: #DC2626; }
+        .tag-med { background: rgba(201, 151, 0, 0.1); color: #8A6800; }
+        .tag-low { background: rgba(10, 84, 168, 0.1); color: var(--primary); }
+
+        /* ===== MATRIX ===== */
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .m-cell { padding: 20px; border-radius: 12px; }
+
+        .m-cell h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .m-cell ul {
+            padding-left: 16px;
+            font-size: 13px;
+            display: grid;
+            gap: 4px;
+        }
+
+        .m-cell.str { background: rgba(10, 84, 168, 0.08); border: 1px solid rgba(10, 84, 168, 0.2); }
+        .m-cell.str h4 { color: var(--primary); }
+        .m-cell.wk { background: rgba(201, 151, 0, 0.08); border: 1px solid rgba(201, 151, 0, 0.2); }
+        .m-cell.wk h4 { color: #8A6800; }
+        .m-cell.op { background: rgba(14, 124, 134, 0.07); border: 1px solid rgba(14, 124, 134, 0.20); }
+        .m-cell.op h4 { color: #0B6E77; }
+        .m-cell.th { background: rgba(220, 38, 38, 0.06); border: 1px solid rgba(220, 38, 38, 0.15); }
+        .m-cell.th h4 { color: #DC2626; }
+        .m-cell li { color: var(--text-muted); }
+
+        /* ===== PROCESS ===== */
+        .proc {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .proc-step {
+            flex: 1;
+            min-width: 220px;
+            text-align: center;
+            padding: 20px;
+            background: #F7F9FD;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .proc-step .ico {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            box-shadow: 0 4px 15px rgba(10, 84, 168, 0.3);
+        }
+
+        .proc-step h4 { font-size: 14px; color: var(--primary-light); margin-bottom: 6px; }
+        .proc-step p { font-size: 12px; color: var(--text-muted); }
+
+        /* ===== FLUJO DE 7 PASOS (compacto, horizontal) ===== */
+        .flow { display: flex; align-items: stretch; gap: 8px; width: 100%; }
+        .flow-step {
+            flex: 1;
+            background: #F7F9FD;
+            border: 1px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 10px;
+            padding: 14px 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+        }
+        .flow-step .fico {
+            width: 38px; height: 38px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #fff; font-size: 15px;
+        }
+        .flow-step .fnum {
+            font-size: 10px; font-weight: 800; letter-spacing: 1px;
+            color: var(--accent); text-transform: uppercase;
+        }
+        .flow-step h4 { font-size: 13px; font-weight: 700; color: var(--text-main); line-height: 1.25; }
+        .flow-step p { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+        body.pres .flow-step .fico { width: 68px; height: 68px; font-size: 28px; }
+        body.pres .flow-step .fnum { font-size: 18px; }
+        body.pres .flow-step h4 { font-size: 24px; }
+        body.pres .flow-step p { font-size: 19px; }
+
+        /* ===== BARS ===== */
+        .bar-chart { display: flex; flex-direction: column; gap: 12px; }
+        .bar-item { display: flex; align-items: center; gap: 12px; }
+        .bar-lbl { width: 200px; font-size: 13px; font-weight: 500; color: var(--text-muted); }
+        .bar-track { flex: 1; height: 24px; background: #DFE7F2; border-radius: 6px; overflow: hidden; }
+
+        .bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            border-radius: 6px;
+        }
+
+        .bar-pos { background: linear-gradient(90deg, var(--primary-dark), var(--primary-light)); }
+        .bar-neg { background: linear-gradient(90deg, #991B1B, #DC2626); }
+        .bar-gold { background: linear-gradient(90deg, #8A6800, var(--accent)); }
+
+        /* ===== FOOTER ===== */
+        .s-foot { display: none; }
+
+        /* ===== ALERT ===== */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .alert-red { background: rgba(220, 38, 38, 0.06); border: 1px solid rgba(220, 38, 38, 0.15); color: #991B1B; }
+        .alert-gold { background: rgba(201, 151, 0, 0.06); border: 1px solid rgba(201, 151, 0, 0.15); color: #8A6800; }
+        .alert-green { background: rgba(10, 84, 168, 0.06); border: 1px solid rgba(10, 84, 168, 0.18); color: var(--primary-dark); }
+        .alert i { margin-top: 2px; }
+
+        /* ===== HIGHLIGHT ===== */
+        .big-num { font-size: 32px; font-weight: 900; color: var(--primary); }
+        .big-num.gold { color: var(--accent); }
+        strong { color: var(--text-dark); }
+
+        /* ===== FIGURAS / IMÁGENES ===== */
+        .fig { padding: 0; overflow: hidden; border-radius: 12px; }
+        .fig img { width: 100%; display: block; object-fit: contain; background: #fff; }
+        .fig .cap {
+            padding: 10px 14px;
+            text-align: center;
+            background: #F7F9FD;
+            border-top: 1px solid var(--border);
+        }
+        .fig .cap p { font-size: 13px; color: var(--text-muted); margin: 0; }
+        body.pres .fig .cap p { font-size: 24px !important; }
+        /* Dentro de una fila la figura se centra en vez de estirarse: evita el hueco
+           vertical cuando la imagen es más baja que la columna vecina */
+        .row > .card.fig { align-self: center; }
+
+        /* ===== PROGRESS BAR VISUAL ===== */
+        .pbar {
+            display: flex;
+            height: 35px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .pbar-seg {
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            font-size: 13px;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* ===== TITLE SLIDE ===== */
+        .title-center {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            gap: 10px;
+        }
+
+        .title-center h1 {
+            font-size: 42px;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        .title-center h2 {
+            font-size: 22px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+        }
+
+        .title-center .meta {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 25px 40px;
+            border-radius: 12px;
+            max-width: 620px;
+        }
+
+        /* ===== PRESENTATION MODE (lienzo fijo 1920x1080 escalado) ===== */
+        body.pres {
+            padding: 0;
+            gap: 0;
+            overflow: hidden;
+            background: #0A1119;
+        }
+
+        body.pres .slide {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 1920px;
+            height: 1080px;
+            max-width: none;
+            aspect-ratio: auto;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            padding: 52px 80px 48px;
+            background: white;
+            overflow: hidden;
+            transform-origin: center center;
+            transform: translate(-50%, -50%) scale(var(--pres-scale, 1));
+        }
+
+        body.pres .slide.active { display: flex; }
+        body.pres .s-body { justify-content: center; }
+        body.pres .s-foot { display: none !important; }
+        body.pres .card { height: auto; }
+
+        /* Presentation font sizes - escala UNIFORME y grande para aprovechar la proyección */
+        body.pres .s-title { font-size: 46px; margin-bottom: 16px; }
+        body.pres .card h3 { font-size: 32px !important; }
+        body.pres .card p, body.pres .card li, body.pres .card ul { font-size: 28px !important; }
+        body.pres .kpi .label { font-size: 21px; }
+        body.pres .kpi .val { font-size: 66px; }
+        body.pres .kpi .val span { font-size: 31px; }
+        body.pres .big-num { font-size: 60px; }
+        body.pres .m-cell h4 { font-size: 32px; }
+        body.pres .m-cell li { font-size: 27px; }
+        body.pres .tbl th, body.pres .tbl td { font-size: 26px; padding: 16px 22px; }
+        body.pres .proc-step h4 { font-size: 27px; }
+        body.pres .proc-step p { font-size: 27px; }
+        body.pres .alert, body.pres .alert p { font-size: 27px; }
+        body.pres .tag { font-size: 17px; }
+        body.pres .bar-lbl { font-size: 26px; width: 380px; }
+        body.pres .bar-fill { font-size: 21px; }
+        body.pres .bar-track { height: 44px; }
+
+        /* Ajustes por slide en modo presentación */
+        body.pres #s1 h1 { font-size: 68px !important; line-height: 1.14; }
+        body.pres #s1 h2 { font-size: 40px !important; }
+        body.pres #s1 .meta p:nth-child(1) { font-size: 42px !important; }
+        body.pres #s1 .meta p:nth-child(2) { font-size: 31px !important; }
+        body.pres #s1 .meta p:nth-child(3) { font-size: 25px !important; }
+
+        body.pres #sFin h1 { font-size: 88px !important; }
+        body.pres #sFin .title-center p:nth-of-type(1) { font-size: 42px !important; }
+        body.pres #sFin .title-center p:nth-of-type(2) { font-size: 28px !important; }
+
+        /* Slides con figura: alto máximo en proyección */
+        body.pres #s2 .fig img  { max-height: 480px !important; }
+        body.pres #s6 .fig img  { max-height: 400px !important; }
+        body.pres #s7 .fig img  { max-height: 620px !important; }
+        body.pres #s8 .fig img  { max-height: 620px !important; }
+        /* Ishikawa: la columna derecha lleva 5 bloques, se compacta para que entren */
+        body.pres #s7 .card p, body.pres #s8 .card p { font-size: 25px !important; line-height: 1.42; }
+        body.pres #s7 .card h3, body.pres #s8 .card h3 { font-size: 28px !important; margin-bottom: 4px; }
+        body.pres #s7 .alert p, body.pres #s8 .alert p { font-size: 26px !important; }
+        body.pres #s7 .card-red, body.pres #s8 .card-red { padding: 18px 22px !important; }
+        body.pres #s13 .fig img { max-height: 560px !important; }
+        body.pres #s16 .fig img { max-height: 455px !important; }
+        body.pres #s17 .fig img { max-height: 430px !important; }
+        /* la columna de la derecha lleva ficha + tabla: se compacta un punto */
+        body.pres #s17 .col { gap: 14px; }
+        body.pres #s17 .tbl th, body.pres #s17 .tbl td { padding: 11px 20px; }
+        body.pres #s18 .fig img { max-height: 425px !important; }
+        body.pres #s19 .fig img { max-height: 570px !important; }
+        body.pres #s20 .fig img { max-height: 400px !important; }
+
+        /* Slide Índice / Contenido */
+        .idx-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            width: 100%;
+        }
+
+        .idx-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            padding: 22px 24px;
+            background: #F7F9FD;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .idx-top { display: flex; align-items: center; justify-content: space-between; }
+
+        .idx-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 17px;
+        }
+
+        .idx-ico { font-size: 24px; color: var(--primary-light); opacity: 0.5; }
+        .idx-label { font-size: 17px; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+        body.pres .idx-grid { gap: 34px; }
+        body.pres .idx-item { padding: 34px 36px; gap: 18px; border-radius: 18px; }
+        body.pres .idx-num { width: 64px; height: 64px; font-size: 30px; }
+        body.pres .idx-ico { font-size: 44px; }
+        body.pres .idx-label { font-size: 32px; }
+
+        /* ===== CARÁTULAS DE CAPÍTULO ===== */
+        .cap-cover .s-body { justify-content: center; align-items: center; }
+        .cap-inner { text-align: center; }
+
+        .cap-kicker {
+            display: inline-block;
+            font-size: 34px;
+            letter-spacing: 3px;
+            font-weight: 800;
+            color: var(--accent-light);
+            margin-bottom: 14px;
+        }
+
+        .cap-title { font-size: 72px; font-weight: 800; color: #fff; line-height: 1.08; margin: 0; }
+        .cap-rule { width: 100px; height: 5px; background: var(--accent); margin: 24px auto 0; border-radius: 2px; }
+        body.pres .cap-kicker { font-size: 76px; letter-spacing: 4px; }
+        body.pres .cap-title { font-size: 132px; }
+        body.pres .cap-rule { width: 180px; height: 8px; }
+
+        /* ===== ANIMACIONES Y TRANSICIONES ===== */
+        @keyframes slideFade {
+            from { opacity: 0; transform: translate(-50%, calc(-50% + 26px)) scale(var(--pres-scale,1)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
+        @keyframes enterRight {
+            from { opacity: 0; transform: translate(calc(-50% + 90px), -50%) scale(var(--pres-scale,1)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
+        @keyframes enterLeft {
+            from { opacity: 0; transform: translate(calc(-50% - 90px), -50%) scale(var(--pres-scale,1)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
+        @keyframes zoomFade {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(calc(var(--pres-scale,1) * 1.04)); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(var(--pres-scale,1)); }
+        }
+        @keyframes popIn      { from { opacity: 0; transform: translateY(28px); }   to { opacity: 1; transform: translateY(0); } }
+        @keyframes titleIn    { from { opacity: 0; transform: translateX(-40px); }  to { opacity: 1; transform: translateX(0); } }
+        @keyframes kpiPop     { from { opacity: 0; transform: scale(0.6); }         to { opacity: 1; transform: scale(1); } }
+        @keyframes cornerTL   { from { opacity: 0; transform: translate(-45px,-30px); } to { opacity: 1; transform: none; } }
+        @keyframes cornerTR   { from { opacity: 0; transform: translate(45px,-30px);  } to { opacity: 1; transform: none; } }
+        @keyframes cornerBL   { from { opacity: 0; transform: translate(-45px,30px);  } to { opacity: 1; transform: none; } }
+        @keyframes cornerBR   { from { opacity: 0; transform: translate(45px,30px);   } to { opacity: 1; transform: none; } }
+        @keyframes barGrow    { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+        /* Transición de slide: direccional según navegación */
+        body.pres .slide.active            { animation: slideFade 0.5s cubic-bezier(0.22,1,0.36,1); }
+        body.pres .slide.active.from-right { animation: enterRight 0.5s cubic-bezier(0.22,1,0.36,1); }
+        body.pres .slide.active.from-left  { animation: enterLeft 0.5s cubic-bezier(0.22,1,0.36,1); }
+        /* Portada y cierre: zoom del fondo (gana por especificidad de ID) */
+        body.pres #s1.active, body.pres #sFin.active { animation: zoomFade 0.7s ease; }
+
+        /* Título: entra desde la izquierda */
+        body.pres .slide.active .s-title { animation: titleIn 0.5s ease backwards 0.1s; }
+
+        /* Tarjetas en fila + tarjetas full-width: suben escalonadas */
+        body.pres .slide.active .row > *,
+        body.pres .slide.active > .s-body > .card {
+            animation: popIn 0.55s ease backwards;
+        }
+        /* KPIs: pop con rebote */
+        body.pres .slide.active .kpi-row > * {
+            animation: kpiPop 0.5s cubic-bezier(0.34,1.56,0.64,1) backwards;
+        }
+        /* Pasos del flujo de limpieza: entran escalonados */
+        body.pres .slide.active .flow > * { animation: popIn 0.5s ease backwards; }
+        body.pres .slide.active .flow > *:nth-child(1) { animation-delay: 0.20s; }
+        body.pres .slide.active .flow > *:nth-child(2) { animation-delay: 0.29s; }
+        body.pres .slide.active .flow > *:nth-child(3) { animation-delay: 0.38s; }
+        body.pres .slide.active .flow > *:nth-child(4) { animation-delay: 0.47s; }
+        body.pres .slide.active .flow > *:nth-child(5) { animation-delay: 0.56s; }
+        body.pres .slide.active .flow > *:nth-child(6) { animation-delay: 0.65s; }
+        body.pres .slide.active .flow > *:nth-child(7) { animation-delay: 0.74s; }
+        /* FODA: cada cuadrante entra desde su esquina */
+        body.pres .slide.active .matrix > *:nth-child(1) { animation: cornerTL 0.55s ease backwards 0.2s; }
+        body.pres .slide.active .matrix > *:nth-child(2) { animation: cornerTR 0.55s ease backwards 0.32s; }
+        body.pres .slide.active .matrix > *:nth-child(3) { animation: cornerBL 0.55s ease backwards 0.44s; }
+        body.pres .slide.active .matrix > *:nth-child(4) { animation: cornerBR 0.55s ease backwards 0.56s; }
+        /* Barras: crecen desde su origen hasta el valor medido */
+        body.pres .slide.active .bar-fill { animation: barGrow 0.55s cubic-bezier(0.4,0,0.2,1) backwards; transform-origin: left; }
+
+        /* Delays escalonados (filas, KPIs y barras) */
+        body.pres .slide.active .row > *:nth-child(1),
+        body.pres .slide.active .kpi-row > *:nth-child(1),
+        body.pres .slide.active .bar-item:nth-child(1) .bar-fill { animation-delay: 0.22s; }
+        body.pres .slide.active .row > *:nth-child(2),
+        body.pres .slide.active .kpi-row > *:nth-child(2),
+        body.pres .slide.active .bar-item:nth-child(2) .bar-fill { animation-delay: 0.34s; }
+        body.pres .slide.active .row > *:nth-child(3),
+        body.pres .slide.active .kpi-row > *:nth-child(3),
+        body.pres .slide.active .bar-item:nth-child(3) .bar-fill { animation-delay: 0.46s; }
+        body.pres .slide.active .row > *:nth-child(4),
+        body.pres .slide.active .kpi-row > *:nth-child(4),
+        body.pres .slide.active .bar-item:nth-child(4) .bar-fill { animation-delay: 0.58s; }
+        body.pres .slide.active .row > *:nth-child(5),
+        body.pres .slide.active .bar-item:nth-child(5) .bar-fill { animation-delay: 0.70s; }
+        body.pres .slide.active .row > *:nth-child(6),
+        body.pres .slide.active .bar-item:nth-child(6) .bar-fill { animation-delay: 0.82s; }
+
+        /* Tablas: las filas de datos aparecen en orden de lectura */
+        body.pres .slide.active .tbl tbody tr { animation: popIn 0.42s ease backwards; }
+        body.pres .slide.active .tbl tbody tr:nth-child(1) { animation-delay: 0.30s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(2) { animation-delay: 0.38s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(3) { animation-delay: 0.46s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(4) { animation-delay: 0.54s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(5) { animation-delay: 0.62s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(6) { animation-delay: 0.70s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(7) { animation-delay: 0.78s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(8) { animation-delay: 0.86s; }
+        body.pres .slide.active .tbl tbody tr:nth-child(9) { animation-delay: 0.94s; }
+
+        /* Carátulas de capítulo: número, título y línea entran escalonados */
+        @keyframes capRule { from { opacity: 0; transform: scaleX(0); } to { opacity: 1; transform: scaleX(1); } }
+        body.pres .cap-cover.active .cap-kicker { animation: kpiPop 0.55s cubic-bezier(0.34,1.56,0.64,1) backwards 0.15s; }
+        body.pres .cap-cover.active .cap-title  { animation: popIn 0.6s cubic-bezier(0.22,1,0.36,1) backwards 0.32s; }
+        body.pres .cap-cover.active .cap-rule   { animation: capRule 0.5s ease backwards 0.55s; transform-origin: center; }
+
+        /* Revelado al hacer scroll (modo normal) */
+        body:not(.pres) .slide {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        body:not(.pres) .slide.seen { opacity: 1; transform: translateY(0); }
+
+        /* Hover lift en tarjetas y KPIs */
+        .card, .kpi, .m-cell, .proc-step, .flow-step {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .card:hover, .m-cell:hover, .proc-step:hover, .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.13);
+        }
+        .kpi:hover { transform: translateY(-5px) scale(1.02); }
+
+        /* Botones de navegación */
+        #nav button { transition: transform 0.2s ease, background 0.2s ease; }
+        #nav button:hover { transform: scale(1.12); }
+
+        /* Respeta usuarios con movimiento reducido */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            body:not(.pres) .slide { opacity: 1; transform: none; }
+        }
+
+        /* ===== NAV ===== */
+        #nav {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 9999;
+            background: rgba(6, 38, 78, 0.92);
+            backdrop-filter: blur(15px);
+            padding: 10px 22px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #nav button {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        #nav button:hover { background: var(--primary); border-color: var(--primary); }
+
+        #nav span {
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            min-width: 55px;
+            text-align: center;
+        }
+
+        #pbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 10000;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ============ PORTADA ============ -->
+    <div class="slide" id="s1"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.93), rgba(10, 84, 168,0.88)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="title-center">
+                <h1 style="font-size: 36px; color: white;">Propuesta de Estandarización de Procesos y Optimización de la
+                    Limpieza Industrial</h1>
+                <h2 style="font-size: 20px; color: var(--accent-light);">Salas de Embutidos y Vacío — Empresa ABC</h2>
+                <div class="meta" style="background: rgba(255,255,255,0.15); border: none;">
+                    <p style="font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px;">Maria Jose Coronado
+                        Mendez</p>
+                    <p style="font-size: 15px; font-weight: 600; color: var(--accent-light); margin-bottom: 4px;">
+                        Ingeniería Industrial y de Sistemas</p>
+                    <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Docente guía: Mgs. Melisa Guzmán Vega
+                        &nbsp;·&nbsp; Santa Cruz de la Sierra, 2026</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ÍNDICE ============ -->
+    <div class="slide" id="sIndex">
+        <h2 class="s-title"><span class="num"><i class="fa-solid fa-list-ul"></i></span> Contenido</h2>
+        <div class="s-body">
+            <div class="idx-grid">
+                <div class="idx-item">
+                    <div class="idx-top"><span class="idx-num">1</span><i class="fa-solid fa-circle-info idx-ico"></i></div>
+                    <span class="idx-label">Introducción</span>
+                </div>
+                <div class="idx-item">
+                    <div class="idx-top"><span class="idx-num">2</span><i class="fa-solid fa-magnifying-glass idx-ico"></i></div>
+                    <span class="idx-label">Diagnóstico de la Situación Actual</span>
+                </div>
+                <div class="idx-item">
+                    <div class="idx-top"><span class="idx-num">3</span><i class="fa-solid fa-chart-line idx-ico"></i></div>
+                    <span class="idx-label">Análisis de Procesos</span>
+                </div>
+                <div class="idx-item">
+                    <div class="idx-top"><span class="idx-num">4</span><i class="fa-solid fa-lightbulb idx-ico"></i></div>
+                    <span class="idx-label">Propuesta de Mejora</span>
+                </div>
+                <div class="idx-item">
+                    <div class="idx-top"><span class="idx-num">5</span><i class="fa-solid fa-scale-balanced idx-ico"></i></div>
+                    <span class="idx-label">Análisis Costo-Beneficio</span>
+                </div>
+                <div class="idx-item">
+                    <div class="idx-top"><span class="idx-num">6</span><i class="fa-solid fa-flag-checkered idx-ico"></i></div>
+                    <span class="idx-label">Conclusiones y Recomendaciones</span>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Defensa de Proyecto de Grado</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CAPÍTULO 1 ============ -->
+    <div class="slide cap-cover" id="cap1"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.94), rgba(10, 84, 168,0.90)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="cap-inner">
+                <span class="cap-kicker">01</span>
+                <h1 class="cap-title">Introducción</h1>
+                <div class="cap-rule"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="s2">
+        <h2 class="s-title"><span class="num">01</span> Planteamiento del Problema y Objetivo General</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    <div class="card card-red">
+                        <h3><i class="fa-solid fa-circle-exclamation" style="color:#EF4444;"></i> El Problema Central</h3>
+                        <p>Las salas de Embutidos y Vacío de la empresa ABC ejecutan la limpieza industrial
+                            <strong>sin procesos estandarizados</strong>. Esto genera:</p>
+                        <ul style="margin-top: 8px;">
+                            <li>Dosificación química empírica, sin correspondencia con el requerimiento real.</li>
+                            <li>Variación en los resultados del control de calidad post-limpieza.</li>
+                            <li>Transporte manual ineficiente de insumos y esfuerzo físico evitable.</li>
+                            <li>Ausencia de rutinas definidas por puesto de trabajo.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-accent" style="background: rgba(10, 84, 168,0.10);">
+                        <h3><i class="fa-solid fa-bullseye"></i> Objetivo General</h3>
+                        <p style="font-weight: 600; color: var(--primary); font-size: 15px;">"Elaborar una propuesta de
+                            estandarización de procesos y optimización de recursos enfocados en la limpieza industrial
+                            de las salas de Embutidos y Vacío de la empresa ABC."</p>
+                    </div>
+                </div>
+                <div class="card fig">
+                    <img src="img_mj/ilu3-6-layout-de-la-sala-de-embutidos.jpeg" alt="Layout sala de Embutidos"
+                        style="height: 300px; object-fit: cover;">
+                    <div class="cap">
+                        <p><strong>Planta de Ulterior y Congelados (PUyC)</strong><br>
+                            <span style="font-size:13px;">Limpieza preoperacional nocturna · 21:00 – 05:00 hrs</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo I: Introducción</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s3">
+        <h2 class="s-title"><span class="num">02</span> Objetivos Específicos</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">1</span>
+                    <div>
+                        <h3 style="margin:0;">Diagnóstico</h3>
+                        <p style="margin:3px 0 0;">Realizar un diagnóstico de la situación actual del proceso de limpieza
+                            industrial dentro de las áreas de Embutidos y Vacío.</p>
+                    </div>
+                </div>
+                <div class="card card-gold" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">2</span>
+                    <div>
+                        <h3 style="margin:0;">Análisis de Procesos</h3>
+                        <p style="margin:3px 0 0;">Analizar los aspectos críticos detectados mediante ingeniería de
+                            métodos, para establecer la base de la propuesta de mejora.</p>
+                    </div>
+                </div>
+                <div class="card card-accent" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">3</span>
+                    <div>
+                        <h3 style="margin:0;">Propuesta de Mejora</h3>
+                        <p style="margin:3px 0 0;">Proponer mejoras en el proceso actual de limpieza industrial de las
+                            salas de Embutidos y Vacío.</p>
+                    </div>
+                </div>
+                <div class="card card-gold" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">4</span>
+                    <div>
+                        <h3 style="margin:0;">Costo-Beneficio</h3>
+                        <p style="margin:3px 0 0;">Realizar un análisis costo-beneficio de la propuesta de mejora de la
+                            limpieza industrial.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo I: Introducción</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CAPÍTULO 2 ============ -->
+    <div class="slide cap-cover" id="cap2"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.94), rgba(10, 84, 168,0.90)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="cap-inner">
+                <span class="cap-kicker">02</span>
+                <h1 class="cap-title">Diagnóstico de la<br>Situación Actual</h1>
+                <div class="cap-rule"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="s5">
+        <h2 class="s-title"><span class="num">04</span> La Empresa y la Planta PUyC</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-industry"></i> Empresa ABC</h3>
+                    <p>Organización boliviana dedicada al procesamiento y comercialización de productos cárnicos de
+                        cerdo, res y pollo. Certificada bajo <strong>ISO 9001</strong> y con seguimiento de
+                        <strong>Buenas Prácticas de Manufactura</strong>.</p>
+                    <p style="margin-top:10px;">El proyecto se desarrolla en la <strong>Planta de Ulterior y Congelados
+                            (PUyC)</strong>, unidad dedicada a productos cárnicos de valor agregado.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-box-open"></i> Portafolio de Productos</h3>
+                    <ul>
+                        <li>Mortadelas, jamones, chorizos y salchichas</li>
+                        <li>Patés de hígado de cerdo y de pollo</li>
+                        <li>Hamburguesas, milanesas, nuggets y silpanchos</li>
+                        <li>Cortes de cerdo y de pavo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi green">
+                    <div class="label">Salas en estudio</div>
+                    <div class="val">2</div>
+                </div>
+                <div class="kpi dark">
+                    <div class="label">Operarios Embutidos</div>
+                    <div class="val">13</div>
+                </div>
+                <div class="kpi dark">
+                    <div class="label">Puestos en Vacío</div>
+                    <div class="val">9</div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">Turno de limpieza</div>
+                    <div class="val">21–05 <span>hrs</span></div>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-circle-info"></i>
+                <p>La limpieza se ejecuta al finalizar la jornada productiva, en turno nocturno, para no interferir con
+                    las operaciones de producción. El personal está dedicado <strong>exclusivamente</strong> a tareas de
+                    sanitización.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo II: Diagnóstico</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s6">
+        <h2 class="s-title"><span class="num">05</span> El Proceso de Limpieza Actual</h2>
+        <div class="s-body">
+            <div class="flow">
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-flask-vial"></i></div>
+                    <span class="fnum">Paso 1</span>
+                    <h4>Preparación y Dosificación</h4>
+                    <p>Selección, pesaje y carga de soluciones en espumadoras y baldes</p>
+                </div>
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <span class="fnum">Paso 2</span>
+                    <h4>Desarmado de Máquinas</h4>
+                    <p>Remoción de bandejas, cuchillas, cintas e inyectores</p>
+                </div>
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-droplet"></i></div>
+                    <span class="fnum">Paso 3</span>
+                    <h4>Pre-enjuague</h4>
+                    <p>Retiro de residuos gruesos con agua a presión</p>
+                </div>
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+                    <span class="fnum">Paso 4</span>
+                    <h4>Espumeado</h4>
+                    <p>Aplicación de espuma alcalina, ácida o neutra</p>
+                </div>
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-hands-bubbles"></i></div>
+                    <span class="fnum">Paso 5</span>
+                    <h4>Acción Mecánica</h4>
+                    <p>Refregado con cepillos y esponjas</p>
+                </div>
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-shower"></i></div>
+                    <span class="fnum">Paso 6</span>
+                    <h4>Enjuague Final</h4>
+                    <p>Agua potable a presión controlada</p>
+                </div>
+                <div class="flow-step">
+                    <div class="fico"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <span class="fnum">Paso 7</span>
+                    <h4>Verificación Sanitaria</h4>
+                    <p>Inspección visual del área de Calidad (CQ)</p>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="card fig">
+                    <img src="img_mj/ilu3-5-diagrama-de-flujo-del-proceso-de-limpieza.png"
+                        alt="Diagrama de flujo del proceso de limpieza" style="max-height: 250px;">
+                    <div class="cap"><p>Diagrama de flujo del proceso de limpieza</p></div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:16px;">
+                    <div class="card card-gold">
+                        <h3><i class="fa-solid fa-flask"></i> Insumos Químicos Empleados</h3>
+                        <p><strong>VQ 2000</strong> (maquinaria) · <strong>VQ 3500</strong> (infraestructura) ·
+                            <strong>VQ 30</strong> (inyectora) · <strong>EasyFoam</strong> (carros) ·
+                            <strong>Neutro</strong> (uso general) · <strong>Ácido Nítrico</strong> (drenajes)</p>
+                    </div>
+                    <div class="card card-accent">
+                        <h3><i class="fa-solid fa-toolbox"></i> Equipos de Limpieza</h3>
+                        <p>3 mochilas de desinfección (45 L) · 2 espumadoras fijas · 2 espumadoras adaptadas a móvil
+                            (45 L) · 2 espumadoras con regulador de caudal (100 L)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo II: Diagnóstico</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s7">
+        <h2 class="s-title"><span class="num">06</span> Causa Raíz — Sala de Embutidos</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 1.15fr 0.85fr;">
+                <div class="card fig">
+                    <img src="img_mj/ilu3-7-diagrama-de-ishikawa-sala-de-embutidos.png"
+                        alt="Diagrama de Ishikawa - Sala de Embutidos" style="max-height: 380px;">
+                    <div class="cap"><p>Diagrama de Ishikawa — Sala de Embutidos</p></div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div class="alert alert-red" style="font-weight:600;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <p><strong>Efecto:</strong> variación en los resultados de CQ después del proceso de limpieza</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-users" style="color:#DC2626;"></i> Mano de Obra</h3>
+                        <p style="font-size:14px;">Falta de supervisión del dosificado; los operarios aplican los químicos
+                            empíricamente sin usar instrumentos de medición.</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-list-check" style="color:#DC2626;"></i> Método</h3>
+                        <p style="font-size:14px;">El instructivo de dosificado existente es demasiado general y no
+                            especifica actividades por equipo.</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-boxes-stacked" style="color:#DC2626;"></i> Materiales</h3>
+                        <p style="font-size:14px;">Jarras medidoras sin etiquetar; el traslado de insumos se hace pieza
+                            por pieza desde el almacén.</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-gears" style="color:#DC2626;"></i> Máquina, Medio y Medición</h3>
+                        <p style="font-size:14px;">Espumadoras con fugas y baja presión; iluminación deficiente en
+                            sectores; registros incompletos y no sistemáticos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo II: Diagnóstico</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s8">
+        <h2 class="s-title"><span class="num">07</span> Causa Raíz — Sala de Vacío</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 1.15fr 0.85fr;">
+                <div class="card fig">
+                    <img src="img_mj/ilu3-9-diagrama-de-ishikawa-sala-de-vacio.png"
+                        alt="Diagrama de Ishikawa - Sala de Vacío" style="max-height: 380px;">
+                    <div class="cap"><p>Diagrama de Ishikawa — Sala de Vacío</p></div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div class="alert alert-red" style="font-weight:600;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                        <p><strong>Efecto:</strong> diferencias en las rutinas de trabajo de cada puesto — falta de
+                            estandarización de actividades</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-arrows-rotate" style="color:#DC2626;"></i> Mano de Obra</h3>
+                        <p style="font-size:14px;">Rotación mensual del personal de limpieza y de calidad; el ausentismo
+                            obliga a cubrir tareas que no se dominan.</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-file-circle-xmark" style="color:#DC2626;"></i> Método</h3>
+                        <p style="font-size:14px;">No existe un instructivo que defina las actividades por puesto de
+                            trabajo.</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-building-circle-exclamation" style="color:#DC2626;"></i> Medio Ambiente y Máquina</h3>
+                        <p style="font-size:14px;">Desgaste en paredes, uniones y superficies; soldaduras dañadas que
+                            dificultan mantener una rutina uniforme.</p>
+                    </div>
+                    <div class="card card-red" style="padding:16px;">
+                        <h3 style="margin-bottom:6px;"><i class="fa-solid fa-tags" style="color:#DC2626;"></i> Materiales y Medición</h3>
+                        <p style="font-size:14px;">Insumos sin identificación visible; baja concordancia con el estándar
+                            durante las verificaciones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo II: Diagnóstico</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s9">
+        <h2 class="s-title"><span class="num">08</span> Análisis FODA del Proceso de Limpieza</h2>
+        <div class="s-body">
+            <div class="matrix">
+                <div class="m-cell str">
+                    <h4><i class="fa-solid fa-shield-halved"></i> FORTALEZAS</h4>
+                    <ul>
+                        <li>Personal exclusivo para limpieza industrial, con disponibilidad permanente</li>
+                        <li>Asignación exclusiva que permite limpiezas planificadas y profundas</li>
+                        <li>Base normativa existente: cumplimiento parcial de ISO y BPM</li>
+                        <li>Horario nocturno sin interferencia con producción</li>
+                        <li>Validación de la limpieza mediante indicadores de CQ</li>
+                    </ul>
+                </div>
+                <div class="m-cell wk">
+                    <h4><i class="fa-solid fa-triangle-exclamation"></i> DEBILIDADES</h4>
+                    <ul>
+                        <li>Falta de estandarización de los métodos de limpieza entre turnos y operarios</li>
+                        <li>Movimientos de personal desordenados, sin puestos fijos definidos</li>
+                        <li>Aumento en el costo de los químicos que incrementa el gasto operativo</li>
+                        <li>Riesgo sobre las certificaciones ante auditorías más rigurosas</li>
+                    </ul>
+                </div>
+                <div class="m-cell op">
+                    <h4><i class="fa-solid fa-arrow-trend-up"></i> OPORTUNIDADES</h4>
+                    <ul>
+                        <li>Creciente exigencia del sector alimentario en inocuidad y manejo de químicos</li>
+                        <li>Tendencia hacia procesos más estandarizados, seguros y sostenibles</li>
+                        <li>ISO 9001 e ISO 22000 como criterio de diferenciación ante clientes y auditorías</li>
+                    </ul>
+                </div>
+                <div class="m-cell th">
+                    <h4><i class="fa-solid fa-bolt"></i> AMENAZAS</h4>
+                    <ul>
+                        <li>Variabilidad en resultados por falta de estandarización</li>
+                        <li>Personal sin formación completa en protocolos de inocuidad</li>
+                        <li>Deficiencias en identificación y trazabilidad de insumos</li>
+                        <li>Limitaciones de headcount que comprometen la sostenibilidad de las mejoras</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo II: Diagnóstico</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CAPÍTULO 3 ============ -->
+    <div class="slide cap-cover" id="cap3"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.94), rgba(10, 84, 168,0.90)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="cap-inner">
+                <span class="cap-kicker">03</span>
+                <h1 class="cap-title">Análisis de Procesos</h1>
+                <div class="cap-rule"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="s10">
+        <h2 class="s-title"><span class="num">09</span> Consumo y Costo de Insumos Químicos</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 1.25fr 0.75fr;">
+                <div class="card">
+                    <h3><i class="fa-solid fa-table-list"></i> Consumo semanal — Sala de Embutidos</h3>
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Químico</th>
+                                <th class="num-c">Litros / sem</th>
+                                <th class="num-c">Bs / litro</th>
+                                <th class="num-c">Costo semanal</th>
+                                <th>Destino</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>VQ 2000</strong></td><td class="num-c">114</td><td class="num-c">25,00</td><td class="num-c"><strong>2.850,00</strong></td><td>Equipos</td></tr>
+                            <tr><td>VQ 3500</td><td class="num-c">120</td><td class="num-c">17,25</td><td class="num-c">2.070,00</td><td>Infraestructura</td></tr>
+                            <tr><td>Ácido Nítrico</td><td class="num-c">84</td><td class="num-c">24,00</td><td class="num-c">2.016,00</td><td>Canaletas</td></tr>
+                            <tr><td>Easy Foam</td><td class="num-c">60</td><td class="num-c">18,00</td><td class="num-c">1.080,00</td><td>Carros</td></tr>
+                            <tr><td>Neutro</td><td class="num-c">135</td><td class="num-c">7,14</td><td class="num-c">963,90</td><td>Espumado</td></tr>
+                            <tr><td>VQ 30</td><td class="num-c">12</td><td class="num-c">39,75</td><td class="num-c">477,00</td><td>Inyectora</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:16px; justify-content:center;">
+                    <div class="kpi green">
+                        <div class="label">Costo semanal total</div>
+                        <div class="val">9.457 <span>Bs</span></div>
+                    </div>
+                    <div class="kpi gold">
+                        <div class="label">Mayor incidencia</div>
+                        <div class="val">VQ 2000</div>
+                    </div>
+                    <div class="alert alert-gold">
+                        <i class="fa-solid fa-arrow-up-right-dots"></i>
+                        <p>El <strong>VQ 2000</strong> concentra el <strong>30%</strong> del gasto semanal en químicos,
+                            lo que lo convierte en la prioridad de optimización.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                <p>Datos obtenidos de la observación directa durante <strong>dos semanas de operación</strong> y del
+                    registro histórico de consumo, valorizados al precio de proveedor del mes analizado.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s11">
+        <h2 class="s-title"><span class="num">10</span> Pruebas de Dosificación con Control de Calidad</h2>
+        <div class="s-body">
+            <div class="card card-accent">
+                <h3><i class="fa-solid fa-vials"></i> Objetivo de las pruebas</h3>
+                <p>Determinar, para cada actividad, la <strong>dosificación mínima que cumple los criterios de
+                        aceptación de Calidad</strong>, evitando tanto la sub-dosificación (limpieza ineficaz) como la
+                    sobredosificación (desperdicio y residuo químico).</p>
+            </div>
+            <div class="row row-3">
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-spray-can-sparkles"></i> Espumeado de Equipos</h3>
+                    <p style="font-size:14px;">Alternativa seleccionada:</p>
+                    <p style="margin-top:6px;"><span class="big-num gold" style="font-size:26px;">Neutro 3,00%</span></p>
+                    <p style="font-size:14px; margin-top:4px;">100 L de agua · 3,00 L de producto</p>
+                    <p style="font-size:14px;"><strong>Costo: 18,62 Bs</strong> por preparación</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-hands-bubbles"></i> Refregado de Equipos</h3>
+                    <p style="font-size:14px;">Alternativas seleccionadas:</p>
+                    <p style="margin-top:6px;"><span class="big-num gold" style="font-size:26px;">VQ 3500 2,50%</span></p>
+                    <p style="font-size:14px; margin-top:4px;">20 L de agua · 0,50 L → <strong>7,50 Bs</strong></p>
+                    <p style="font-size:14px;">VQ 2000 al 2,00% → <strong>8,70 Bs</strong></p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-building"></i> Espumado de Infraestructura</h3>
+                    <p style="font-size:14px;">Alternativa seleccionada:</p>
+                    <p style="margin-top:6px;"><span class="big-num gold" style="font-size:26px;">Neutro 3,00%</span></p>
+                    <p style="font-size:14px; margin-top:4px;">45 L de agua · 1,35 L de producto</p>
+                    <p style="font-size:14px;"><strong>Costo: 8,38 Bs</strong> por preparación</p>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="alert alert-green">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p><strong>Hallazgo:</strong> la eficacia varía según el material del equipo y la temperatura del
+                        agua. El VQ 2000 al 2,00% con agua a 40 °C dio el mejor resultado en superficies metálicas.</p>
+                </div>
+                <div class="alert alert-gold">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <p><strong>Limitación observada:</strong> en materiales sintéticos, como las cintas transportadoras,
+                        persiste una ligera película de grasa que requiere tratamiento diferenciado.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s12">
+        <h2 class="s-title"><span class="num">11</span> Desviación entre el Estándar y la Práctica</h2>
+        <div class="s-body">
+            <div class="card card-red">
+                <h3><i class="fa-solid fa-not-equal" style="color:#DC2626;"></i> Dosificación real vs. especificación ES-CQ</h3>
+                <p>La comparación entre la concentración indicada en el procedimiento y la aplicada efectivamente en
+                    planta revela desviaciones sistemáticas en <strong>ambos sentidos</strong>.</p>
+            </div>
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <span class="bar-lbl">VQ 30 — carros (reciclado)</span>
+                    <div class="bar-track"><div class="bar-fill bar-gold" style="width: 100%;">+150,0%</div></div>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-lbl">EasyFoam — carros</span>
+                    <div class="bar-track"><div class="bar-fill bar-gold" style="width: 40%;">+39,5%</div></div>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-lbl">VQ 2000 — amarradoras</span>
+                    <div class="bar-track"><div class="bar-fill bar-neg" style="width: 49%;">−49,4%</div></div>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-lbl">VQ 2000 — equipos en general</span>
+                    <div class="bar-track"><div class="bar-fill bar-neg" style="width: 39%;">−39,1%</div></div>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-lbl">VQ 3500 — infraestructura</span>
+                    <div class="bar-track"><div class="bar-fill bar-neg" style="width: 32%;">−31,8%</div></div>
+                </div>
+                <div class="bar-item">
+                    <span class="bar-lbl">VQ 2000 — espumadora 100 L</span>
+                    <div class="bar-track"><div class="bar-fill bar-neg" style="width: 20%;">−20,0%</div></div>
+                </div>
+            </div>
+            <div class="row row-2">
+                <div class="alert alert-red">
+                    <i class="fa-solid fa-arrow-down"></i>
+                    <p><strong>Sub-dosificación (hasta −49%):</strong> reduce la eficacia de la limpieza y explica las
+                        observaciones fuera de especificación registradas por Calidad.</p>
+                </div>
+                <div class="alert alert-gold">
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <p><strong>Sobredosificación (hasta +150%):</strong> genera desperdicio de insumo, mayor costo y
+                        riesgo de residuo químico en superficies de contacto.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s13">
+        <h2 class="s-title"><span class="num">12</span> Indicador de Inspección Visual (CQ)</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 1.3fr 0.7fr;">
+                <div class="card fig">
+                    <img src="img_mj/ilu4-1-inspeccion-visual-mensual.png" alt="Inspección visual mensual"
+                        style="max-height: 340px;">
+                    <div class="cap"><p>Puntos de desviación registrados por mes — enero 2024 a enero 2025</p></div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px; justify-content:center;">
+                    <div class="kpi red">
+                        <div class="label">Pico máximo — Octubre</div>
+                        <div class="val">186 <span>pts</span></div>
+                    </div>
+                    <div class="kpi dark">
+                        <div class="label">Diciembre</div>
+                        <div class="val">177 <span>pts</span></div>
+                    </div>
+                    <div class="kpi green">
+                        <div class="label">Mínimo — Agosto</div>
+                        <div class="val">51 <span>pts</span></div>
+                    </div>
+                    <div class="alert alert-red">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <p>La amplitud entre el mejor y el peor mes supera el <strong>260%</strong>, evidenciando que el
+                            resultado de la limpieza <strong>no es reproducible</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <p>Las inspecciones se realizan diariamente sobre equipos, pisos, paredes, drenajes y utensilios,
+                    priorizando superficies en contacto directo con el producto, y se clasifican según su criticidad.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s14">
+        <h2 class="s-title"><span class="num">13</span> Estudio de Tiempos y Productividad — Sala de Vacío</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-stopwatch"></i> Metodología aplicada</h3>
+                    <p>Se cronometraron las cinco etapas del proceso (hidrolavado, espumado, refregado, enjuagado y
+                        desinfección) agrupadas por tipo de equipo, y se aplicó el <strong>sistema Westinghouse</strong>
+                        para el factor de calificación.</p>
+                    <ul style="margin-top:10px;">
+                        <li><strong>Destreza, esfuerzo, consistencia y condiciones</strong> como factores calificativos</li>
+                        <li>Tiempo estándar = tiempo normal × 1,17 (suplementos por demoras)</li>
+                        <li>Superficie relevada en planta para el cálculo de productividad</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-ranking-star"></i> Actividad que domina el tiempo</h3>
+                    <p>El <strong>refregado</strong> concentra la mayor carga del proceso con 1.379,59 minutos, seguido
+                        del enjuagado con 948,94 minutos.</p>
+                    <div class="bar-chart" style="margin-top:12px;">
+                        <div class="bar-item">
+                            <span class="bar-lbl" style="width:120px;">Refregado</span>
+                            <div class="bar-track"><div class="bar-fill bar-pos" style="width:100%;">1.380 min</div></div>
+                        </div>
+                        <div class="bar-item">
+                            <span class="bar-lbl" style="width:120px;">Enjuagado</span>
+                            <div class="bar-track"><div class="bar-fill bar-pos" style="width:69%;">949 min</div></div>
+                        </div>
+                        <div class="bar-item">
+                            <span class="bar-lbl" style="width:120px;">Hidrolavado</span>
+                            <div class="bar-track"><div class="bar-fill bar-pos" style="width:58%;">805 min</div></div>
+                        </div>
+                        <div class="bar-item">
+                            <span class="bar-lbl" style="width:120px;">Espumado</span>
+                            <div class="bar-track"><div class="bar-fill bar-pos" style="width:13%;">174 min</div></div>
+                        </div>
+                        <div class="bar-item">
+                            <span class="bar-lbl" style="width:120px;">Desinfección</span>
+                            <div class="bar-track"><div class="bar-fill bar-pos" style="width:8%;">111 min</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi dark">
+                    <div class="label">Superficie total</div>
+                    <div class="val">7.441 <span>m²</span></div>
+                </div>
+                <div class="kpi dark">
+                    <div class="label">Tiempo total observado</div>
+                    <div class="val">3.419 <span>min</span></div>
+                </div>
+                <div class="kpi green">
+                    <div class="label">Productividad global</div>
+                    <div class="val">2,18 <span>m²/min</span></div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">Tiempo estándar total</div>
+                    <div class="val">4.007 <span>min</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s15">
+        <h2 class="s-title"><span class="num">14</span> Cálculo del Headcount Requerido</h2>
+        <div class="s-body">
+            <div class="row row-3">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-1"></i> Tiempo estándar</h3>
+                    <p>Suma del tiempo estándar de todos los agrupadores de la sala.</p>
+                    <p style="margin-top:8px;"><span class="big-num">4.007,45</span><br><span style="font-size:13px;">minutos</span></p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-2"></i> Tiempo complementario</h3>
+                    <p>Preparación de sala y de químicos: valor no agregado necesario (VNAN).</p>
+                    <p style="margin-top:8px;"><span class="big-num gold">332</span><br><span style="font-size:13px;">minutos · 8,82% del total</span></p>
+                </div>
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-3"></i> Jornada disponible</h3>
+                    <p>Tiempo efectivo por operario en una jornada de 8 horas.</p>
+                    <p style="margin-top:8px;"><span class="big-num">480</span><br><span style="font-size:13px;">minutos por persona</span></p>
+                </div>
+            </div>
+            <div class="card" style="background: rgba(10, 84, 168,0.08); border-left: 3px solid var(--primary); text-align:center;">
+                <p style="font-size:17px; color: var(--primary-dark); font-weight:600;">
+                    Headcount = (4.007,45 + 332) ÷ 480 = <strong style="font-size:22px;">9,04 → 9 operarios</strong>
+                </p>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi dark">
+                    <div class="label">Personal actual</div>
+                    <div class="val">10</div>
+                </div>
+                <div class="kpi green">
+                    <div class="label">Personal requerido</div>
+                    <div class="val">9</div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">Diferencia</div>
+                    <div class="val">−1 <span>operario</span></div>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-user-check"></i>
+                <p>El resultado sustenta el <strong>instructivo de nueve puestos de trabajo (A–I)</strong> desarrollado en
+                    la propuesta, donde cada operario tiene actividades, secuencia y materiales definidos.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s16">
+        <h2 class="s-title"><span class="num">15</span> Análisis de Puestos de Trabajo — Recorridos</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card fig">
+                    <img src="img_mj/ilu4-2-puesto-de-trabajo-a-primer-dia.jpeg" alt="Puesto de trabajo A - primer día"
+                        style="max-height: 300px;">
+                    <div class="cap"><p><strong>Puesto A — Primer día</strong></p></div>
+                </div>
+                <div class="card fig">
+                    <img src="img_mj/ilu4-3-puesto-de-trabajo-a-segundo-dia.jpeg" alt="Puesto de trabajo A - segundo día"
+                        style="max-height: 300px;">
+                    <div class="cap"><p><strong>Puesto A — Segundo día</strong></p></div>
+                </div>
+            </div>
+            <div class="alert alert-red">
+                <i class="fa-solid fa-route"></i>
+                <p><strong>Hallazgo central:</strong> el mismo operario, en el mismo puesto y en días consecutivos,
+                    ejecuta <strong>recorridos y tareas distintas</strong>. La situación se repite en los otros ocho
+                    puestos observados: no existe una rutina de trabajo establecida.</p>
+            </div>
+            <div class="row row-3">
+                <div class="card" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-person-walking"></i> Desplazamientos</h3>
+                    <p style="text-align:center;">Recirculación innecesaria entre el depósito y la zona de trabajo</p>
+                </div>
+                <div class="card" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-people-arrows"></i> Duplicidad</h3>
+                    <p style="text-align:center;">Tareas cubiertas por más de un operario y otras sin responsable</p>
+                </div>
+                <div class="card" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-clock-rotate-left"></i> Variabilidad</h3>
+                    <p style="text-align:center;">Tiempos de ejecución distintos entre jornadas para la misma actividad</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo III: Análisis de Procesos</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CAPÍTULO 4 ============ -->
+    <div class="slide cap-cover" id="cap4"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.94), rgba(10, 84, 168,0.90)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="cap-inner">
+                <span class="cap-kicker">04</span>
+                <h1 class="cap-title">Propuesta de Mejora</h1>
+                <div class="cap-rule"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="s17">
+        <h2 class="s-title"><span class="num">16</span> Estandarización de la Dosificación</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 1.1fr 0.9fr;">
+                <div class="card fig">
+                    <img src="img_mj/ilu5-2-especificacion-de-preparacion-de-productos-quimicos.png"
+                        alt="Especificación de preparación de productos químicos" style="max-height: 340px;">
+                    <div class="cap"><p>Especificación <strong>ES-CQ-4 (Rev. 52)</strong> — validada por Control de Calidad</p></div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:16px; justify-content:center;">
+                    <div class="card card-accent">
+                        <h3><i class="fa-solid fa-file-signature"></i> Documento emitido</h3>
+                        <p>Como resultado del análisis técnico se emite la especificación
+                            <strong>ES-CQ-4 Rev. 52</strong>, que define los parámetros de concentración permitida y las
+                            preparaciones sugeridas para <strong>ocho detergentes industriales</strong> aplicables a
+                            equipos, infraestructura y ambientes.</p>
+                    </div>
+                    <div class="card card-gold">
+                        <h3><i class="fa-solid fa-calendar-week"></i> Planificación semanal del consumo</h3>
+                        <table class="tbl">
+                            <thead>
+                                <tr><th>Químico</th><th class="num-c">Actual</th><th class="num-c">Propuesto</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>VQ 3500</td><td class="num-c">120 L</td><td class="num-c"><strong>110 L</strong></td></tr>
+                                <tr><td>VQ 2000</td><td class="num-c">114 L</td><td class="num-c"><strong>105 L</strong></td></tr>
+                                <tr><td>Neutro</td><td class="num-c">135 L</td><td class="num-c"><strong>120 L</strong></td></tr>
+                                <tr><td>Ácido Nítrico</td><td class="num-c">84 L</td><td class="num-c"><strong>78 L</strong></td></tr>
+                                <tr><td>Easy Foam</td><td class="num-c">60 L</td><td class="num-c"><strong>55 L</strong></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Propuesta de Mejora</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s18">
+        <h2 class="s-title"><span class="num">17</span> Controles Visuales y Señalización</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card fig">
+                    <img src="img_mj/ilu5-3-estandarizacion-de-envases.png" alt="Estandarización de envases"
+                        style="max-height: 280px;">
+                    <div class="cap"><p><strong>Jarras dosificadoras estandarizadas</strong><br>
+                        <span style="font-size:13px;">Marcas visibles y uniformes para cada volumen requerido</span></p></div>
+                </div>
+                <div class="card fig">
+                    <img src="img_mj/ilu5-4-tablero-de-seguimiento-y-gestion-visual.png"
+                        alt="Tablero de seguimiento y gestión visual" style="max-height: 280px;">
+                    <div class="cap"><p><strong>Tablero de seguimiento y gestión visual</strong><br>
+                        <span style="font-size:13px;">KPI, total semanal y desempeño por día, actualizado por turno</span></p></div>
+                </div>
+            </div>
+            <div class="row row-3">
+                <div class="card card-gold" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-sign-hanging"></i> Señalética</h3>
+                    <p style="text-align:center;"><span class="big-num gold">17</span><br>letreros de PVC: 16 de 30×40 cm
+                        y 1 tablero de 100×140 cm</p>
+                </div>
+                <div class="card card-accent" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-shoe-prints"></i> Lavado de botas</h3>
+                    <p style="text-align:center;">Dosis exacta de detergente Neutro indicada en cada estación, de 500 a
+                        2.000 ml según el punto</p>
+                </div>
+                <div class="card card-accent" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-eye"></i> Gestión a la vista</h3>
+                    <p style="text-align:center;">La actualización de datos forma parte de la rutina operativa,
+                        fomentando disciplina de registro</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Propuesta de Mejora</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s19">
+        <h2 class="s-title"><span class="num">18</span> Diseño del Carrito Transportador</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 0.9fr 1.1fr;">
+                <div class="card fig">
+                    <img src="img_mj/ilu5-1-propuesta-1-de-diseno-de-carrito.png" alt="Propuesta de diseño de carrito"
+                        style="max-height: 340px;">
+                    <div class="cap"><p>Propuesta de diseño — carrito transportador de insumos</p></div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:16px; justify-content:center;">
+                    <div class="card card-red">
+                        <h3><i class="fa-solid fa-person-carry-box" style="color:#DC2626;"></i> Situación actual</h3>
+                        <p>El traslado de insumos se realiza manualmente con los mismos baldes de preparación, obligando
+                            al operario a desplazarse repetidamente entre el depósito y la zona de trabajo, con
+                            exposición a derrames.</p>
+                    </div>
+                    <div class="card card-accent">
+                        <h3><i class="fa-solid fa-cart-flatbed"></i> Solución propuesta</h3>
+                        <ul>
+                            <li>Estructura en <strong>acero inoxidable 304</strong>, resistente y de fácil limpieza</li>
+                            <li>Dimensiones ajustadas al espacio de almacenamiento asignado</li>
+                            <li>Reduce la carga física y elimina los viajes repetidos al almacén</li>
+                        </ul>
+                    </div>
+                    <div class="kpi-row">
+                        <div class="kpi green">
+                            <div class="label">Unidades solicitadas</div>
+                            <div class="val">4</div>
+                        </div>
+                        <div class="kpi gold">
+                            <div class="label">Orden de trabajo</div>
+                            <div class="val" style="font-size:24px;">N° 4197896</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-hourglass-half"></i>
+                <p>La orden de trabajo fue gestionada mediante el sistema interno de la empresa y se encuentra
+                    actualmente <strong>en fila de espera para su ejecución</strong>.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Propuesta de Mejora</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s20">
+        <h2 class="s-title"><span class="num">19</span> Sistemas de Monitoreo y Seguimiento</h2>
+        <div class="s-body">
+            <div class="card fig">
+                <img src="img_mj/ilu5-5-dashboard-de-control-de-consumo.png" alt="Dashboard de control de consumo"
+                    style="max-height: 330px;">
+                <div class="cap"><p><strong>Dashboard de control de consumo de insumos químicos</strong> — construido en Excel</p></div>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-warehouse"></i> Dashboard 1 — Control de consumo</h3>
+                    <p>Registra entradas y salidas del depósito de químicos con fecha, movimiento, descripción,
+                        clasificación, cantidad, costo, responsable y código de material.</p>
+                    <p style="margin-top:8px; font-size:14px;">Seis gráficos: consumo semanal en Bs, top 10 de insumos,
+                        entradas y consumo diario y semanal por producto.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-chart-pie"></i> Dashboard 2 — Desviaciones de CQ</h3>
+                    <p>Registra las observaciones de la inspección visual: semana, fecha, ítem, tipo, detalle, si fue
+                        corregida y puntos asignados.</p>
+                    <p style="margin-top:8px; font-size:14px;">Tres gráficos: desviaciones diarias, distribución por
+                        tipo y top 10 de máquinas con más observaciones, con umbrales de alerta.</p>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Propuesta de Mejora</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s21">
+        <h2 class="s-title"><span class="num">20</span> Consolidado de la Propuesta</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-flask-vial"></i> Sala de Embutidos</h3>
+                    <p style="font-style:italic; margin-bottom:10px;">Problema: variación en los resultados de CQ por
+                        falta de uniformidad en la dosificación.</p>
+                    <ul>
+                        <li>Estandarización del proceso de dosificación y preparación de soluciones</li>
+                        <li>Dosificaciones específicas por producto y por equipo</li>
+                        <li>Planificación semanal del consumo de químicos</li>
+                        <li>Controles visuales en jarras dosificadoras y señalización</li>
+                        <li>Dashboards de consumo y de seguimiento de desviaciones</li>
+                        <li>Carritos transportadores de insumos</li>
+                    </ul>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-people-line"></i> Sala de Vacío</h3>
+                    <p style="font-style:italic; margin-bottom:10px;">Problema: falta de uniformidad en la ejecución del
+                        proceso de limpieza.</p>
+                    <ul>
+                        <li>Estandarización de actividades por puesto de trabajo</li>
+                        <li>Instructivo operativo para <strong>nueve puestos (A–I)</strong></li>
+                        <li>Definición de actividades macro y micro por operario</li>
+                        <li>Asignación de materiales y químicos según cada tarea</li>
+                        <li>Descripción formal del cargo de encargado de limpieza</li>
+                        <li>Formatos diarios de registro</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card" style="background: rgba(10, 84, 168,0.07); border-left:3px solid var(--primary);">
+                <h3><i class="fa-solid fa-graduation-cap"></i> Eje transversal: capacitación del personal</h3>
+                <p>Programa de formación técnica por competencias impartido por <strong>CENACE UPSA</strong>, en sesiones
+                    de 60 minutos con grupos rotativos para no interrumpir la operación. Se ejecuta
+                    <strong>trimestralmente</strong> para cubrir tanto al personal antiguo como a los nuevos ingresos.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo IV: Propuesta de Mejora</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CAPÍTULO 5 ============ -->
+    <div class="slide cap-cover" id="cap5"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.94), rgba(10, 84, 168,0.90)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="cap-inner">
+                <span class="cap-kicker">05</span>
+                <h1 class="cap-title">Análisis Costo-Beneficio</h1>
+                <div class="cap-rule"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="s22">
+        <h2 class="s-title"><span class="num">21</span> Inversión Requerida</h2>
+        <div class="s-body">
+            <div class="row row-3">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-cart-flatbed"></i> Carritos Transportadores</h3>
+                    <p style="font-size:14px;">4 unidades en acero inoxidable 304</p>
+                    <ul style="margin-top:8px; font-size:14px;">
+                        <li>Materiales: 2.826,00 Bs por unidad</li>
+                        <li>Mano de obra: 294,93 Bs por unidad</li>
+                        <li>6 horas de fabricación por carrito</li>
+                    </ul>
+                    <p style="margin-top:10px;"><span class="big-num" style="font-size:26px;">12.483,72</span> <span style="font-size:14px;">Bs</span></p>
+                    <p style="font-size:12px; color:var(--text-muted);">Costo único</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-chalkboard-user"></i> Capacitaciones</h3>
+                    <p style="font-size:14px;">Servicio externo CENACE UPSA</p>
+                    <ul style="margin-top:8px; font-size:14px;">
+                        <li>5.160,00 Bs por ciclo, incluye refrigerios</li>
+                        <li>4 ciclos al año (trimestral)</li>
+                        <li>Cubre nuevos ingresos y refuerzo</li>
+                    </ul>
+                    <p style="margin-top:10px;"><span class="big-num gold" style="font-size:26px;">20.640,00</span> <span style="font-size:14px;">Bs</span></p>
+                    <p style="font-size:12px; color:var(--text-muted);">Costo recurrente anual</p>
+                </div>
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-sign-hanging"></i> Señalización</h3>
+                    <p style="font-size:14px;">17 piezas en PVC</p>
+                    <ul style="margin-top:8px; font-size:14px;">
+                        <li>16 letreros de 30×40 cm a 60,00 Bs</li>
+                        <li>1 tablero de 100×140 cm a 600,00 Bs</li>
+                        <li>Dosificación y desinfección</li>
+                    </ul>
+                    <p style="margin-top:10px;"><span class="big-num" style="font-size:26px;">1.560,00</span> <span style="font-size:14px;">Bs</span></p>
+                    <p style="font-size:12px; color:var(--text-muted);">Costo único</p>
+                </div>
+            </div>
+            <div class="kpi-row">
+                <div class="kpi green">
+                    <div class="label">Inversión total del proyecto</div>
+                    <div class="val">36.315,27 <span>Bs</span></div>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-layer-group"></i>
+                <p>El análisis diferencia entre <strong>costos únicos</strong> —carritos y señalética, que se ejecutan
+                    una sola vez durante la implementación— y <strong>costos recurrentes</strong>, correspondientes a las
+                    capacitaciones trimestrales.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo V: Costo-Beneficio</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s23">
+        <h2 class="s-title"><span class="num">22</span> Beneficios de la Propuesta</h2>
+        <div class="s-body">
+            <div class="row row-2" style="grid-template-columns: 1.2fr 0.8fr;">
+                <div class="card">
+                    <h3><i class="fa-solid fa-coins"></i> Beneficios financieros — ahorro anual</h3>
+                    <table class="tbl">
+                        <thead>
+                            <tr><th>Detalle</th><th class="num-c">Actual (Bs)</th><th class="num-c">Propuesta (Bs)</th><th class="num-c">Ahorro (Bs)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>VQ 2000</td><td class="num-c">148.200,00</td><td class="num-c">136.500,00</td><td class="num-c">11.700,00</td></tr>
+                            <tr><td>VQ 3500</td><td class="num-c">107.640,00</td><td class="num-c">98.670,00</td><td class="num-c">8.970,00</td></tr>
+                            <tr><td>VQ 30</td><td class="num-c">24.804,00</td><td class="num-c">16.536,00</td><td class="num-c">8.268,00</td></tr>
+                            <tr><td>Ácido Nítrico</td><td class="num-c">104.832,00</td><td class="num-c">97.344,00</td><td class="num-c">7.488,00</td></tr>
+                            <tr><td>Neutro</td><td class="num-c">50.122,80</td><td class="num-c">44.553,60</td><td class="num-c">5.569,20</td></tr>
+                            <tr><td>Easy Foam</td><td class="num-c">56.160,00</td><td class="num-c">51.480,00</td><td class="num-c">4.680,00</td></tr>
+                            <tr style="background: rgba(10, 84, 168,0.10);"><td><strong>Subtotal químicos</strong></td><td class="num-c">491.758,80</td><td class="num-c">445.083,60</td><td class="num-c"><strong>46.675,20</strong></td></tr>
+                            <tr><td><strong>Personal</strong></td><td class="num-c">441.771,00</td><td class="num-c">397.593,90</td><td class="num-c"><strong>44.177,10</strong></td></tr>
+                            <tr style="background: rgba(201, 151, 0,0.12);"><td><strong>TOTAL</strong></td><td class="num-c">933.529,80</td><td class="num-c">842.677,50</td><td class="num-c"><strong>90.852,30</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-hand-holding-heart"></i> Beneficios no financieros</h3>
+                    <ul>
+                        <li><strong>Uniformidad del proceso:</strong> se eliminan las variaciones entre turnos y operarios</li>
+                        <li><strong>Menor esfuerzo físico:</strong> métodos más ergonómicos y transporte asistido</li>
+                        <li><strong>Disciplina operativa:</strong> tareas, responsabilidades y criterios explícitos</li>
+                        <li><strong>Uso adecuado de químicos:</strong> evita desperdicio y asegura la eficacia sanitaria</li>
+                        <li><strong>Preservación de equipos:</strong> métodos compatibles con los materiales prolongan la vida útil</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo V: Costo-Beneficio</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s24">
+        <h2 class="s-title"><span class="num">23</span> Relación Costo-Beneficio</h2>
+        <div class="s-body">
+            <div class="kpi-row">
+                <div class="kpi dark">
+                    <div class="label">Inversión total</div>
+                    <div class="val">36.315 <span>Bs</span></div>
+                </div>
+                <div class="kpi green">
+                    <div class="label">Ahorro anual</div>
+                    <div class="val">90.852 <span>Bs</span></div>
+                </div>
+                <div class="kpi gold">
+                    <div class="label">Relación B/C</div>
+                    <div class="val">2,50</div>
+                </div>
+            </div>
+            <div class="card" style="background: rgba(10, 84, 168,0.08); border-left:3px solid var(--primary); text-align:center;">
+                <p style="font-size:18px; color:var(--primary-dark); font-weight:600;">
+                    B/C = 90.852,30 ÷ 36.315,27 = <strong style="font-size:24px;">2,50</strong>
+                </p>
+                <p style="margin-top:6px;">Por cada boliviano invertido se generan <strong>2,50 bolivianos</strong> de beneficio</p>
+            </div>
+            <div class="row row-3">
+                <div class="card card-accent" style="text-align:center;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-check"></i> B/C &gt; 1</h3>
+                    <p style="text-align:center;">El proyecto es <strong>conveniente</strong></p>
+                </div>
+                <div class="card" style="text-align:center; opacity:0.55;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-equals"></i> B/C = 1</h3>
+                    <p style="text-align:center;">El proyecto es indiferente</p>
+                </div>
+                <div class="card" style="text-align:center; opacity:0.55;">
+                    <h3 style="justify-content:center;"><i class="fa-solid fa-xmark"></i> B/C &lt; 1</h3>
+                    <p style="text-align:center;">El proyecto no es conveniente</p>
+                </div>
+            </div>
+            <div class="alert alert-green">
+                <i class="fa-solid fa-circle-check"></i>
+                <p>Con una relación de <strong>2,50</strong>, los beneficios superan ampliamente la inversión requerida,
+                    lo que respalda técnica y económicamente la implementación de la propuesta.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo V: Costo-Beneficio</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CAPÍTULO 6 ============ -->
+    <div class="slide cap-cover" id="cap6"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.94), rgba(10, 84, 168,0.90)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="cap-inner">
+                <span class="cap-kicker">06</span>
+                <h1 class="cap-title">Conclusiones y<br>Recomendaciones</h1>
+                <div class="cap-rule"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="s25">
+        <h2 class="s-title"><span class="num">24</span> Conclusiones</h2>
+        <div class="s-body">
+            <div class="card card-accent">
+                <p style="font-size:16px;">Los cuatro objetivos específicos fueron cumplidos. Cada sala presentó un
+                    problema distinto y recibió una respuesta propia.</p>
+            </div>
+            <div class="row row-2">
+                <div class="card card-accent" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">1</span>
+                    <div>
+                        <h3 style="margin:0;">Diagnóstico</h3>
+                        <p style="margin:3px 0 0;">En Embutidos, imprecisión en las dosificaciones y señalización
+                            deficiente; en Vacío, ausencia de rutinas por puesto. El Ishikawa y los diagramas de
+                            recorrido aislaron las causas.</p>
+                    </div>
+                </div>
+                <div class="card card-gold" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">2</span>
+                    <div>
+                        <h3 style="margin:0;">Análisis de procesos</h3>
+                        <p style="margin:3px 0 0;">La variabilidad se originó en la falta de control de la dosificación.
+                            El estudio de tiempos cuantificó la carga real por operario.</p>
+                    </div>
+                </div>
+                <div class="card card-accent" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">3</span>
+                    <div>
+                        <h3 style="margin:0;">Propuesta de mejora</h3>
+                        <p style="margin:3px 0 0;">Dosificación estandarizada, jarras señalizadas, planificación semanal,
+                            carrito transportador y tablero de gestión visual.</p>
+                    </div>
+                </div>
+                <div class="card card-gold" style="display:flex; align-items:flex-start; gap:16px;">
+                    <span class="idx-num">4</span>
+                    <div>
+                        <h3 style="margin:0;">Evaluación económica</h3>
+                        <p style="margin:3px 0 0;">La relación costo-beneficio de <strong>2,50</strong> confirma que los
+                            beneficios superan la inversión inicial.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VI: Conclusiones</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <div class="slide" id="s26">
+        <h2 class="s-title"><span class="num">25</span> Recomendaciones</h2>
+        <div class="s-body">
+            <div class="row row-2">
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-arrows-rotate"></i> Actualización periódica</h3>
+                    <p>Actualizar los tiempos estándar y los registros de productividad para asegurar el control continuo
+                        del proceso de limpieza a medida que cambian los equipos y volúmenes.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-clipboard-check"></i> Evaluaciones internas</h3>
+                    <p>Realizar evaluaciones internas del proceso en intervalos definidos, con el fin de verificar el
+                        cumplimiento de los estándares y sostener la mejora alcanzada.</p>
+                </div>
+                <div class="card card-gold">
+                    <h3><i class="fa-solid fa-file-lines"></i> Documentación del proceso</h3>
+                    <p>Documentar de manera clara cada etapa del proceso de limpieza, de modo que los operarios cuenten
+                        con una guía precisa que minimice errores y variaciones entre jornadas.</p>
+                </div>
+                <div class="card card-accent">
+                    <h3><i class="fa-solid fa-rocket"></i> Implementación</h3>
+                    <p>Implementar el proyecto, dado que el análisis costo-beneficio demuestra su viabilidad y evidencia
+                        que las mejoras propuestas generan un resultado favorable para la empresa.</p>
+                </div>
+            </div>
+            <div class="alert alert-gold">
+                <i class="fa-solid fa-seedling"></i>
+                <p><strong>Sostenibilidad de la mejora:</strong> la estandarización de procesos y la adecuada
+                    distribución de recursos son los factores clave para sostener el resultado en el tiempo. Las
+                    reuniones Short Kaizen y los dashboards son los mecanismos que convierten los indicadores en
+                    decisiones.</p>
+            </div>
+        </div>
+        <div class="s-foot"><span>Capítulo VI: Recomendaciones</span><span>Maria Jose Coronado Mendez</span></div>
+    </div>
+
+    <!-- ============ CIERRE ============ -->
+    <div class="slide" id="sFin"
+        style="background: linear-gradient(135deg, rgba(6,44,92,0.90), rgba(10, 84, 168,0.85)), url('img_mj/ilu3-3-planos-arquitectonicos-de-la-planta-de-ulterior-y-co.jpeg') center/cover;">
+        <div class="s-body">
+            <div class="title-center">
+                <h1 style="font-size: 38px; color: white;">¡Gracias por su atención!</h1>
+                <p style="font-size: 22px; font-weight: 700; color: white; margin-top: 18px;">Maria Jose Coronado Mendez</p>
+                <p style="font-size: 15px; color: var(--accent-light);">Ingeniería Industrial y de Sistemas &nbsp;·&nbsp; UPSA</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <div id="nav">
+        <button onclick="go(-1)" title="← Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <span id="cnt">1 / 34</span>
+        <button onclick="go(1)" title="→ Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        <button onclick="toggleP()" id="bf" title="F5 Presentación"><i class="fa-solid fa-expand"></i></button>
+    </div>
+    <div id="pbar" style="width:0%;"></div>
+
+    <script>
+        let c = 0, p = false; const s = document.querySelectorAll('.slide'), t = s.length;
+        function u() { document.getElementById('cnt').textContent = (c + 1) + ' / ' + t; document.getElementById('pbar').style.width = ((c + 1) / t * 100) + '%'; }
+        function fitScale() { document.body.style.setProperty('--pres-scale', Math.min(window.innerWidth / 1920, window.innerHeight / 1080)); }
+        window.addEventListener('resize', () => { if (p) fitScale(); });
+        function go(d) { const n = c + d; if (n < 0 || n >= t) return; if (p) { s[c].classList.remove('active'); s[n].classList.remove('from-left', 'from-right'); void s[n].offsetWidth; s[n].classList.add('active', d > 0 ? 'from-right' : 'from-left'); } else { s[n].scrollIntoView({ behavior: 'smooth', block: 'center' }); } c = n; u(); }
+        function toggleP() { p = !p; document.body.classList.toggle('pres', p); if (p) { fitScale(); s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); s[c].classList.add('active'); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-compress"></i>'; if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); } else { s.forEach(x => x.classList.remove('active', 'from-left', 'from-right')); document.getElementById('bf').innerHTML = '<i class="fa-solid fa-expand"></i>'; if (document.fullscreenElement) document.exitFullscreen(); s[c].scrollIntoView({ behavior: 'smooth', block: 'center' }); } u(); }
+        document.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); go(1); } if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); go(-1); } if (e.key === 'F5') { e.preventDefault(); toggleP(); } if (e.key === 'Escape' && p) { e.preventDefault(); toggleP(); } });
+        document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && p) toggleP(); });
+
+        /* Revelado al hacer scroll (modo normal) */
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('seen'); });
+        }, { threshold: 0.15 });
+        s.forEach(sl => io.observe(sl));
+
+        /* Numera las secciones por su posición real: agregar o quitar una
+           lámina no obliga a renumerar a mano. */
+        let sec = 0;
+        document.querySelectorAll('.s-title .num').forEach(el => {
+            if (el.querySelector('i')) return;          // el índice lleva icono, no número
+            el.textContent = String(++sec).padStart(2, '0');
+        });
+
+        u();
+    </script>
+
+</body>
+
+</html>
