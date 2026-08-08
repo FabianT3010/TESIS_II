@@ -358,6 +358,109 @@ body.pres .fig figcaption{padding:13px}
   border-color:#0A3A6B;color:#fff;
 }
 .noche .bd{justify-content:center}
+
+/* Solo la portada lleva fotografía de fondo (1920×1080, la medida exacta del
+   lienzo). El azul del sistema va encima como veladura: más densa a la
+   izquierda, donde se apoya el texto sobre la pared lisa, y más abierta a la
+   derecha, para que se lea la escena. Las carátulas de capítulo no cambian. */
+#n00{
+  background:
+    linear-gradient(to right,rgba(4,24,47,.93) 0%,rgba(5,33,63,.86) 38%,rgba(8,48,90,.72) 70%,rgba(10,58,107,.62) 100%),
+    url('img_mj/images.jpg') center/cover no-repeat;
+}
+#n00 .bd{position:relative;z-index:2}
+/* portada sin líneas: ni la trama del fondo, ni la regla, ni el separador */
+#n00 .noche-tr,
+#n00 .pt-lin{display:none}
+#n00 .pt-fp{border-top:none;padding-top:0;margin-top:18px}
+
+/* Carátulas con fotografía propia: misma veladura azul en degradado —densa
+   sobre el texto, abierta del lado de la escena— y sin la trama de rejilla.
+   Las carátulas que aún no tienen imagen conservan su fondo original. */
+#cD,#cA,#cI{
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-image:
+    linear-gradient(to right,rgba(4,24,47,.93) 0%,rgba(5,33,63,.87) 40%,rgba(8,48,90,.76) 72%,rgba(10,58,107,.68) 100%),
+    var(--foto);
+}
+#cD{--foto:url('img_mj/introduccion.webp')}
+#cA{--foto:url('img_mj/analisis_procesos.jpg')}
+#cI{--foto:url('img_mj/mejora.webp')}
+
+/* Diagnóstico: la foto va espejada, así que se separa en un pseudo-elemento
+   —la veladura no se invierte con ella y sigue densa del lado del texto. */
+#cM{background:var(--noche-1)}
+#cM::before{
+  content:'';position:absolute;inset:0;
+  background:url('img_mj/diagnostico_de_situacion.jpg') center/cover no-repeat;
+  transform:scaleX(-1);
+}
+#cM::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(4,24,47,.93) 0%,rgba(5,33,63,.87) 40%,rgba(8,48,90,.76) 72%,rgba(10,58,107,.68) 100%);
+}
+
+/* Carátula de Costo-Beneficio: sin fotografía, el fondo es un gráfico
+   dibujado en la lámina. Recibe el mismo tratamiento que las otras carátulas
+   —veladura azul en degradado por encima y sin trama— para que la serie
+   pertenezca al conjunto: la tendencia supera a la serie, que es la idea
+   del capítulo. */
+#cB .graf{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+#cB .b{fill:var(--azul-cl);opacity:.34;transform-origin:center bottom}
+#cB .tend{fill:none;stroke:var(--amarillo);stroke-width:4;opacity:.62;
+  stroke-linecap:round;stroke-linejoin:round}
+#cB::after{
+  content:'';position:absolute;inset:0;z-index:2;
+  background:linear-gradient(to right,rgba(4,24,47,.90) 0%,rgba(5,33,63,.74) 34%,rgba(8,48,90,.52) 66%,rgba(10,58,107,.40) 100%);
+}
+#cB .bd{position:relative;z-index:3}
+
+/* la serie crece y después se traza la tendencia */
+body.pres #cB.act .b{animation:barraSube .55s cubic-bezier(.3,0,.2,1) backwards;
+  animation-delay:calc(.26s + var(--i) * .032s)}
+body.pres #cB.act .tend{
+  stroke-dasharray:2200;animation:trazo 1.25s ease-out backwards 1.15s}
+@keyframes barraSube{from{transform:scaleY(0)} to{transform:scaleY(1)}}
+@keyframes trazo{from{stroke-dashoffset:2200} to{stroke-dashoffset:0}}
+
+/* Carátula de Conclusiones: el ciclo DMAIC que la presentación viene
+   recorriendo en las etiquetas de cada carátula, aquí cerrado. La última
+   fase —Controlar, la de este capítulo— queda marcada en amarillo, y la
+   flecha indica que el ciclo vuelve a empezar: eso es la mejora continua.
+   Mismo tratamiento que las demás: veladura en degradado y sin trama. */
+#cC{
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  background-image:url('img_mj/limpieza-e-higiene-en-la-industria-alimentaria.jpg');
+}
+#cC .ciclo{position:absolute;inset:0;width:100%;height:100%;z-index:2}
+#cC .guia{fill:none;stroke:rgba(255,255,255,.10);stroke-width:1}
+#cC .arc{fill:none;stroke:#9CC6F2;stroke-width:15;opacity:.55;stroke-linecap:round}
+#cC .arc.ult{stroke:var(--amarillo);opacity:.85}
+#cC .nodo circle{fill:var(--noche-1);stroke:#9CC6F2;stroke-width:3;opacity:.96}
+#cC .nodo text{fill:#BBD8F7;opacity:1;font-family:var(--mono);font-size:34px;font-weight:700;
+  text-anchor:middle;dominant-baseline:central}
+#cC .nodo.ult circle{stroke:var(--amarillo)}
+#cC .nodo.ult text{fill:var(--amarillo)}
+#cC .fle{fill:#9CC6F2;opacity:.6}
+#cC::after{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to right,rgba(4,24,47,.94) 0%,rgba(5,33,63,.86) 36%,rgba(8,48,90,.72) 68%,rgba(10,58,107,.62) 100%);
+}
+#cC .bd{position:relative;z-index:3}
+
+/* el ciclo se traza fase por fase y después aparecen los nodos */
+body.pres #cC.act .arc{stroke-dasharray:375;
+  animation:trazoArco .5s ease-out backwards;animation-delay:calc(.30s + var(--i) * .17s)}
+body.pres #cC.act .nodo{animation:nodoEntra .4s cubic-bezier(.2,1,.3,1) backwards;
+  animation-delay:calc(.52s + var(--i) * .17s);transform-origin:center}
+body.pres #cC.act .fle{animation:enfoca .5s ease backwards 1.35s}
+@keyframes trazoArco{from{stroke-dashoffset:375} to{stroke-dashoffset:0}}
+@keyframes nodoEntra{from{opacity:0;transform:scale(.6)} to{opacity:1;transform:scale(1)}}
+
+#cD .noche-tr,#cM .noche-tr,#cA .noche-tr,#cI .noche-tr,#cB .noche-tr,#cC .noche-tr{display:none}
+#cD .bd,#cM .bd,#cA .bd,#cI .bd{position:relative;z-index:2}
 .noche-tr{
   position:absolute;inset:0;pointer-events:none;opacity:.35;
   background-image:
@@ -400,22 +503,33 @@ body.pres .pt-fp{gap:66px;padding-top:34px}
 body.pres .cr{padding:0 110px}
 body.pres .cr-fase{padding:11px 22px}
 body.pres .cr-lin{width:190px;height:7px;margin-top:36px}
-.ix{display:flex;flex-direction:column;width:100%}
+/* Índice en grilla: mismo lenguaje que las fichas del resto —borde recto,
+   banda azul a la izquierda, número en monoespaciada— pero en bloques. */
+.ix{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%}
+.ix.ix-2{grid-template-columns:repeat(2,1fr)}
 .ix-i{
-  display:flex;align-items:baseline;gap:22px;
-  padding:16px 4px;border-bottom:1px solid var(--linea);
+  display:flex;flex-direction:column;justify-content:space-between;gap:18px;
+  /* velo del azul institucional al 5 %: da cuerpo al bloque sobre el blanco
+     sin generar contraste duro */
+  background:rgba(10,84,168,.05);
+  border:1px solid rgba(10,84,168,.14);
+  border-radius:2px;padding:20px 22px;
 }
-.ix-i:first-child{border-top:1px solid var(--linea)}
+.ix-top{display:flex;align-items:center;justify-content:space-between}
 .ix-n{
-  font-family:var(--mono);font-size:var(--t-lead);font-weight:700;
-  color:var(--azul);width:1.6em;flex-shrink:0;
+  font-family:var(--mono);font-size:var(--t-num-sm);font-weight:700;
+  color:var(--azul);line-height:1;letter-spacing:-.02em;
 }
-.ix-t{flex:1;font-size:var(--t-lead);font-weight:600;color:var(--tinta);line-height:1.3}
+.ix-i .ico{width:1.45em;height:1.45em;color:var(--azul-cl);font-size:var(--t-lead)}
+.ix-t{font-size:var(--t-lead);font-weight:650;color:var(--tinta);line-height:1.28;display:block}
+.ix-d{font-size:var(--t-body);line-height:1.55;color:var(--tinta-2);margin-top:8px;display:block}
 .ix-c{
   font-size:var(--t-xs);letter-spacing:var(--tr);text-transform:uppercase;
-  font-weight:600;color:var(--tinta-3);flex-shrink:0;
+  font-weight:600;color:var(--tinta-3);margin-top:5px;display:block;
 }
-body.pres .ix-i{padding:38px 6px;gap:34px}
+/* en proyección los bloques se reparten el alto disponible */
+body.pres .ix{gap:30px;flex:1;align-content:stretch;grid-auto-rows:minmax(0,1fr);max-height:660px;align-self:center}
+body.pres .ix-i{padding:40px 38px;gap:30px}
 
 .fin{position:relative;z-index:1;text-align:center;display:flex;
   flex-direction:column;align-items:center;gap:16px}
@@ -532,6 +646,16 @@ body.pres .slide.act .paso:nth-child(5){animation-delay:.70s}
 body.pres .slide.act .paso:nth-child(6){animation-delay:.81s}
 body.pres .slide.act .paso:nth-child(7){animation-delay:.92s}
 
+/* Índice: los seis bloques entran en orden de lectura, para poder ir
+   nombrando cada parte de la exposición mientras aparecen. */
+body.pres .slide.act .ix-i{animation:enfoca .5s ease backwards}
+body.pres .slide.act .ix-i:nth-child(1){animation-delay:.18s}
+body.pres .slide.act .ix-i:nth-child(2){animation-delay:.29s}
+body.pres .slide.act .ix-i:nth-child(3){animation-delay:.40s}
+body.pres .slide.act .ix-i:nth-child(4){animation-delay:.51s}
+body.pres .slide.act .ix-i:nth-child(5){animation-delay:.62s}
+body.pres .slide.act .ix-i:nth-child(6){animation-delay:.73s}
+
 /* FODA: un cuadrante tras otro */
 body.pres .slide.act .mz-c:nth-child(1){animation:enfoca .55s ease backwards .24s}
 body.pres .slide.act .mz-c:nth-child(2){animation:enfoca .55s ease backwards .40s}
@@ -638,14 +762,12 @@ body.pres.quieto{cursor:none}
   <div class="noche-tr"></div>
   <div class="bd">
     <div class="pt">
-      <span class="pt-et">Proyecto de Grado · 2026</span>
       <h1>Estandarización de procesos y optimización de la <b>limpieza industrial</b></h1>
       <div class="pt-lin"></div>
       <p class="pt-sub">Salas de Embutidos y Vacío — Planta de Ulterior y Congelados, Empresa ABC</p>
       <div class="pt-fp">
-        <div><span class="k">Postulante</span><span class="v">Maria Jose Coronado Mendez</span></div>
-        <div><span class="k">Docente guía</span><span class="v">Mgs. Melisa Guzmán Vega</span></div>
-        <div><span class="k">Carrera</span><span class="v">Ing. Industrial y de Sistemas</span></div>
+        <div><span class="v">Maria Jose Coronado Mendez</span></div>
+        <div><span class="v">Ingeniería Industrial y de Sistemas</span></div>
       </div>
     </div>
   </div>
@@ -656,12 +778,30 @@ body.pres.quieto{cursor:none}
   <div class="hd"><h2>Contenido</h2></div>
   <div class="bd">
     <div class="ix">
-      <div class="ix-i"><span class="ix-n">1</span><span class="ix-t">Introducción</span><span class="ix-c">Capítulo I</span></div>
-      <div class="ix-i"><span class="ix-n">2</span><span class="ix-t">Diagnóstico de la situación actual</span><span class="ix-c">Capítulo III</span></div>
-      <div class="ix-i"><span class="ix-n">3</span><span class="ix-t">Análisis de procesos</span><span class="ix-c">Capítulo IV</span></div>
-      <div class="ix-i"><span class="ix-n">4</span><span class="ix-t">Propuesta de mejora</span><span class="ix-c">Capítulo V</span></div>
-      <div class="ix-i"><span class="ix-n">5</span><span class="ix-t">Análisis costo-beneficio</span><span class="ix-c">Capítulo VI</span></div>
-      <div class="ix-i"><span class="ix-n">6</span><span class="ix-t">Conclusiones y recomendaciones</span><span class="ix-c">Capítulo VII</span></div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">01</span><svg class="ico"><use href="#i-diana"/></svg></div>
+        <div><span class="ix-t">Introducción</span><span class="ix-c">Capítulo I</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">02</span><svg class="ico"><use href="#i-lupa"/></svg></div>
+        <div><span class="ix-t">Diagnóstico de la situación actual</span><span class="ix-c">Capítulo III</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">03</span><svg class="ico"><use href="#i-grafico"/></svg></div>
+        <div><span class="ix-t">Análisis de procesos</span><span class="ix-c">Capítulo IV</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">04</span><svg class="ico"><use href="#i-llave"/></svg></div>
+        <div><span class="ix-t">Propuesta de mejora</span><span class="ix-c">Capítulo V</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">05</span><svg class="ico"><use href="#i-balanza"/></svg></div>
+        <div><span class="ix-t">Análisis costo-beneficio</span><span class="ix-c">Capítulo VI</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">06</span><svg class="ico"><use href="#i-bandera"/></svg></div>
+        <div><span class="ix-t">Conclusiones y recomendaciones</span><span class="ix-c">Capítulo VII</span></div>
+      </div>
     </div>
   </div>
   <div class="pie">02</div>
@@ -726,18 +866,23 @@ body.pres.quieto{cursor:none}
 <div class="slide" id="n02">
   <div class="hd"><h2>Objetivos específicos</h2></div>
   <div class="bd">
-    <div class="g g2">
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-lupa"/></svg>OE 1 · Diagnóstico</div>
-        <div class="f-b"><p>Realizar un diagnóstico de la situación actual del proceso de limpieza
-          industrial en las áreas de Embutidos y Vacío.</p></div></div>
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-grafico"/></svg>OE 2 · Análisis</div>
-        <div class="f-b"><p>Analizar los aspectos críticos mediante ingeniería de métodos, para
-          establecer la base de la propuesta de mejora.</p></div></div>
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-llave"/></svg>OE 3 · Propuesta</div>
-        <div class="f-b"><p>Proponer mejoras en el proceso actual de limpieza industrial de ambas
-          salas.</p></div></div>
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-balanza"/></svg>OE 4 · Costo-beneficio</div>
-        <div class="f-b"><p>Realizar un análisis costo-beneficio de la propuesta de mejora.</p></div></div>
+    <div class="ix ix-2">
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">01</span><svg class="ico"><use href="#i-lupa"/></svg></div>
+        <div><span class="ix-t">Diagnóstico</span><span class="ix-d">Realizar un diagnóstico de la situación actual del proceso de limpieza industrial en las áreas de Embutidos y Vacío.</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">02</span><svg class="ico"><use href="#i-grafico"/></svg></div>
+        <div><span class="ix-t">Análisis de procesos</span><span class="ix-d">Analizar los aspectos críticos mediante ingeniería de métodos, para establecer la base de la propuesta de mejora.</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">03</span><svg class="ico"><use href="#i-llave"/></svg></div>
+        <div><span class="ix-t">Propuesta de mejora</span><span class="ix-d">Proponer mejoras en el proceso actual de limpieza industrial de ambas salas.</span></div>
+      </div>
+      <div class="ix-i">
+        <div class="ix-top"><span class="ix-n">04</span><svg class="ico"><use href="#i-balanza"/></svg></div>
+        <div><span class="ix-t">Costo-beneficio</span><span class="ix-d">Realizar un análisis costo-beneficio de la propuesta de mejora.</span></div>
+      </div>
     </div>
   </div>
   <div class="pie">05</div>
@@ -1361,6 +1506,35 @@ body.pres.quieto{cursor:none}
 <!-- ══════════════════ CARÁTULA · COSTO-BENEFICIO ══════════════════ -->
 <div class="slide noche" id="cB">
   <div class="noche-tr"></div>
+    <svg class="graf" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
+    <rect class="b" style="--i:0" x="-20" y="879" width="58" height="211" rx="3"/>
+    <rect class="b" style="--i:1" x="54" y="822" width="58" height="268" rx="3"/>
+    <rect class="b" style="--i:2" x="128" y="818" width="58" height="272" rx="3"/>
+    <rect class="b" style="--i:3" x="202" y="817" width="58" height="273" rx="3"/>
+    <rect class="b" style="--i:4" x="276" y="769" width="58" height="321" rx="3"/>
+    <rect class="b" style="--i:5" x="350" y="718" width="58" height="372" rx="3"/>
+    <rect class="b" style="--i:6" x="424" y="715" width="58" height="375" rx="3"/>
+    <rect class="b" style="--i:7" x="498" y="718" width="58" height="372" rx="3"/>
+    <rect class="b" style="--i:8" x="572" y="675" width="58" height="415" rx="3"/>
+    <rect class="b" style="--i:9" x="646" y="623" width="58" height="467" rx="3"/>
+    <rect class="b" style="--i:10" x="720" y="619" width="58" height="471" rx="3"/>
+    <rect class="b" style="--i:11" x="794" y="625" width="58" height="465" rx="3"/>
+    <rect class="b" style="--i:12" x="868" y="585" width="58" height="505" rx="3"/>
+    <rect class="b" style="--i:13" x="942" y="533" width="58" height="557" rx="3"/>
+    <rect class="b" style="--i:14" x="1016" y="527" width="58" height="563" rx="3"/>
+    <rect class="b" style="--i:15" x="1090" y="536" width="58" height="554" rx="3"/>
+    <rect class="b" style="--i:16" x="1164" y="498" width="58" height="592" rx="3"/>
+    <rect class="b" style="--i:17" x="1238" y="445" width="58" height="645" rx="3"/>
+    <rect class="b" style="--i:18" x="1312" y="438" width="58" height="652" rx="3"/>
+    <rect class="b" style="--i:19" x="1386" y="448" width="58" height="642" rx="3"/>
+    <rect class="b" style="--i:20" x="1460" y="414" width="58" height="676" rx="3"/>
+    <rect class="b" style="--i:21" x="1534" y="360" width="58" height="730" rx="3"/>
+    <rect class="b" style="--i:22" x="1608" y="350" width="58" height="740" rx="3"/>
+    <rect class="b" style="--i:23" x="1682" y="362" width="58" height="728" rx="3"/>
+    <rect class="b" style="--i:24" x="1756" y="331" width="58" height="759" rx="3"/>
+    <rect class="b" style="--i:25" x="1830" y="277" width="58" height="813" rx="3"/>
+    <polyline class="tend" points="9,849 83,792 157,788 231,787 305,739 379,688 453,685 527,688 601,645 675,593 749,589 823,595 897,555 971,503 1045,497 1119,506 1193,468 1267,415 1341,408 1415,418 1489,384 1563,330 1637,320 1711,332 1785,301 1859,247"/>
+  </svg>
   <div class="bd">
     <div class="cr">
       <div class="cr-top"><span class="cr-fase">Evaluación</span><span class="cr-n">Capítulo VI</span></div>
@@ -1479,6 +1653,20 @@ body.pres.quieto{cursor:none}
 <!-- ══════════════════ CARÁTULA · CONTROLAR ══════════════════ -->
 <div class="slide noche" id="cC">
   <div class="noche-tr"></div>
+    <svg class="ciclo" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle class="guia" cx="1512" cy="540" r="338"/>
+    <path class="arc" style="--i:0" d="M 1541.5 203.3 A 338 338 0 0 1 1823.1 407.9"/>
+    <path class="arc" style="--i:1" d="M 1841.3 464.0 A 338 338 0 0 1 1733.7 795.1"/>
+    <path class="arc" style="--i:2" d="M 1686.1 829.7 A 338 338 0 0 1 1337.9 829.7"/>
+    <path class="arc" style="--i:3" d="M 1290.3 795.1 A 338 338 0 0 1 1182.7 464.0"/>
+    <path class="arc ult" style="--i:4" d="M 1200.9 407.9 A 338 338 0 0 1 1482.5 203.3"/>
+    <polygon class="fle" points="1541.5,203.3 1525.9,192.4 1524.2,211.3"/>
+    <g class="nodo" style="--i:0"><circle cx="1710.7" cy="266.6" r="40"/><text x="1710.7" y="266.6">D</text></g>
+    <g class="nodo" style="--i:1"><circle cx="1833.5" cy="644.4" r="40"/><text x="1833.5" y="644.4">M</text></g>
+    <g class="nodo" style="--i:2"><circle cx="1512.0" cy="878.0" r="40"/><text x="1512.0" y="878.0">A</text></g>
+    <g class="nodo" style="--i:3"><circle cx="1190.5" cy="644.4" r="40"/><text x="1190.5" y="644.4">I</text></g>
+    <g class="nodo ult" style="--i:4"><circle cx="1313.3" cy="266.6" r="40"/><text x="1313.3" y="266.6">C</text></g>
+  </svg>
   <div class="bd">
     <div class="cr">
       <div class="cr-top"><span class="cr-fase">Controlar</span><span class="cr-n">Capítulo VII</span></div>
