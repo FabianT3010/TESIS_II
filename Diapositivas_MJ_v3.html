@@ -122,7 +122,12 @@ body.pres .hd{padding:52px 68px 0}
 body.pres .hd h2{padding-bottom:20px;border-bottom-width:3px}
 
 /* ─── NUMERACIÓN ─────────────────────────────────────────────────────── */
+/* La numeración se oculta, pero se conserva el espacio que ocupaba: el reparto
+   vertical de todas las láminas está ajustado contra esa franja, y eliminarla
+   del flujo correría el contenido hacia abajo. Para volver a mostrarla, basta
+   con quitar la línea de visibility. */
 .pie{
+  visibility:hidden;
   padding:0 44px 20px;text-align:right;flex-shrink:0;
   font-family:var(--mono);font-size:var(--t-xs);color:var(--tinta-3);
 }
@@ -1029,8 +1034,8 @@ body.pres.quieto{cursor:none}
     <div class="g g2">
       <div class="f"><div class="f-h"><svg class="ico"><use href="#i-almacen"/></svg>Empresa ABC</div>
         <div class="f-b"><p>Empresa boliviana de procesamiento y comercialización de productos
-          cárnicos de cerdo, res y pollo. Certificada bajo <strong>ISO 9001</strong> y con
-          seguimiento de Buenas Prácticas de Manufactura.</p>
+          cárnicos de cerdo, res y pollo, con <strong>cumplimiento parcial</strong> de las normas
+          ISO y seguimiento de Buenas Prácticas de Manufactura.</p>
           <p>El proyecto se desarrolla en la planta PUyC, dedicada a productos cárnicos de valor
             agregado.</p></div></div>
       <div class="f"><div class="f-h"><svg class="ico"><use href="#i-lista"/></svg>Productos</div>
@@ -1542,7 +1547,7 @@ body.pres.quieto{cursor:none}
             máquinas con más observaciones.</p></div></div>
     </div>
     <div class="nota verde"><svg class="ico"><use href="#i-tablero"/></svg>
-      <p>Los datos se analizan semanalmente en las reuniones Short Kaizen, donde se asignan
+      <p>Los datos se analizan de manera periódica en las reuniones Short Kaizen, donde se asignan
         responsables y plazos de corrección.</p></div>
   </div>
   <div class="pie">26</div>

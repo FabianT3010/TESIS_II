@@ -64,7 +64,7 @@ Los tiempos son acumulados: en cada apartado tenés que estar *empezando* a esa 
 
 > El capítulo tercero comprende un diagnóstico general de la empresa y un diagnóstico específico del proceso de limpieza de cada sala.
 >
-> La empresa ABC es una procesadora y comercializadora boliviana de productos cárnicos de cerdo, res y pollo, certificada bajo ISO 9001 y con seguimiento de Buenas Prácticas de Manufactura. El proyecto se desarrolla en la Planta de Ulterior y Congelados, dedicada a productos de valor agregado: mortadelas, jamones, chorizos, patés, hamburguesas y cortes.
+> La empresa ABC es una procesadora y comercializadora boliviana de productos cárnicos de cerdo, res y pollo, con cumplimiento parcial de las normas ISO y seguimiento de Buenas Prácticas de Manufactura. El proyecto se desarrolla en la Planta de Ulterior y Congelados, dedicada a productos de valor agregado: mortadelas, jamones, chorizos, patés, hamburguesas y cortes.
 >
 > En el proceso de limpieza participan trece operarios en la sala de Embutidos y diez en la sala de Vacío, y se trabaja con seis insumos químicos.
 
@@ -196,7 +196,7 @@ Los tiempos son acumulados: en cada apartado tenés que estar *empezando* a esa 
 >
 > El primer tablero controla el consumo de insumos: registra entradas y salidas del depósito con fecha, movimiento, clasificación, cantidad, costo y responsable. El segundo hace seguimiento de las desviaciones de la inspección visual, con su tipo, su corrección y los puntos asignados.
 >
-> Los datos se analizan semanalmente en las reuniones Short Kaizen, donde se asignan responsables y plazos de corrección. Ese mecanismo convierte la propuesta en un proceso de mejora continua y no en una medida aislada.
+> Los datos se analizan de manera periódica en las reuniones Short Kaizen, donde se asignan responsables y plazos de corrección. Ese mecanismo convierte la propuesta en un proceso de mejora continua y no en una medida aislada.
 
 ### `14:19` — Propuesta para la sala de Vacío
 
