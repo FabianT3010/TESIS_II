@@ -239,7 +239,11 @@ body.pres .nota{padding:19px 24px;gap:17px}
 #n04 .prods img{width:100%;aspect-ratio:1;object-fit:contain;display:block}
 /* Dos lineas reservadas en todos los pies: el mas largo envuelve al estrecharse
    el lienzo, y sin el hueco fijo esa columna quedaria desalineada del resto. */
-#n04 .prods figcaption{font-size:var(--t-xs);line-height:1.3;min-height:2.6em;
+/* --t-sm es el mayor cuerpo con margen: a partir de --t-body el pie mas largo
+   se parte en tres lineas y descuadra la fila. min-height va en em, asi que el
+   hueco de dos lineas se reajusta solo al cambiar el cuerpo. */
+#n04 .prods figcaption{font-family:var(--mono);font-size:var(--t-sm);
+  line-height:1.3;min-height:2.6em;font-weight:700;
   color:var(--tinta-2);text-align:center}
 body.pres #n04 .prods{gap:16px}
 
