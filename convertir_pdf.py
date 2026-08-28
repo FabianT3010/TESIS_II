@@ -44,7 +44,9 @@ def render(html, outdir, escala):
                 void s[idx].offsetWidth;
                 s[idx].classList.add('act');
             }""", i)
-            page.wait_for_timeout(1600)      # dejar terminar las animaciones
+            page.wait_for_timeout(3200)      # dejar terminar las animaciones
+            # el flujograma es la lamina mas larga: 2,55 s de retardo
+            # acumulado + 0,38 s de la ultima entrada
             out = os.path.join(outdir, f"slide_{i:02d}.png")
             page.screenshot(path=out, clip={"x": 0, "y": 0, "width": W, "height": H})
             pngs.append(out)

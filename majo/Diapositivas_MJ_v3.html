@@ -209,10 +209,6 @@ body.pres .nota{padding:19px 24px;gap:17px}
   font-variant-numeric:tabular-nums;
 }
 .dato .v.chico{font-size:var(--t-num-sm)}
-/* Valor que es una frase, no una cifra: mismo tipo que el resto de los datos,
-   con el cuerpo reducido. La mono ocupa lo mismo por caracter, y a cuerpo pleno
-   una frase no entra en el ancho de media columna. */
-.dato.txt .v{font-size:calc(var(--t-num-sm)*.79)}
 .dato .v em{font-style:normal;font-size:.44em;font-weight:600;color:var(--tinta-3);margin-left:.2em}
 .dato .n{font-size:var(--t-sm);color:var(--tinta-3);line-height:1.4}
 .dato.oro .v{color:var(--ambar)}
@@ -247,15 +243,118 @@ body.pres .nota{padding:19px 24px;gap:17px}
   color:var(--tinta-2);text-align:center}
 body.pres #n04 .prods{gap:16px}
 
-#n04 .dato{align-items:center;text-align:center}
+/* n01 y n04 comparten el tratamiento de la fila de indicadores: contenido
+   centrado, veladura de fondo y par de tonos por familia. Solo cambia el
+   cuerpo de la cifra, porque en n01 las tarjetas son la mitad de anchas y una
+   frase en mono no entra a cuerpo pleno. */
+/* La nota de n05 es una sola linea corta en una caja a todo el ancho: el grupo
+   icono + texto se centra en lugar de quedar arrimado al margen izquierdo. */
+#n05 .nota{justify-content:center}
+
+#n01 .dato,#n04 .dato,#n10 .dato,#n12 .dato,#n14 .dato,#n19 .dato{align-items:center;text-align:center}
+/* n12: maximo y minimo toman la veladura de su propia familia, con el par
+   claro/borde que el sistema ya usa en las notas roja y verde. */
+#n12 .dato.mal{background:var(--rojo-cl);border-color:#F2C9C9}
+#n12 .dato.ok {background:var(--verde-cl);border-color:#BFE0CD}
+/* La etiqueta abandona el gris y toma el tono oscuro de su familia —los mismos
+   #8E1F1F y #125F39 que el sistema usa en las cabeceras de ficha y en las
+   notas—, un paso por debajo de la cifra. */
+/* Mismo cuerpo de cifra que la fila de indicadores de n10, para que las dos
+   laminas de diagnostico se lean a la misma escala. */
+#n12 .dato .v{font-size:calc(var(--t-num-sm)*.85)}
+#n12 .dato.mal .k,#n12 .dato.mal .v em{color:#8E1F1F}
+#n12 .dato.ok  .k,#n12 .dato.ok  .v em{color:#125F39}
+#n12 .nota{justify-content:center}
+/* ── n14 · TIEMPOS Y HEADCOUNT ─────────────────────────────────────── */
+/* Cifras al mismo cuerpo que las demas filas de indicadores del mazo. */
+#n14 .dato .v{font-size:calc(var(--t-num-sm)*.85)}
+/* La ficha del headcount absorbe el alto sobrante: encuadra arriba con la de
+   tiempos y deja a la fila de indicadores cerrando abajo, sin huecos sueltos. */
+#n14 .col{justify-content:flex-start}
+#n14 .col>.f{flex:1}
+#n14 .col>.f .f-b{justify-content:center}
+/* Formula y pie suben de cuerpo y comparten el centrado: el pie venia alineado
+   a la izquierda y desalineaba el bloque. A 32px la formula deja 63px de
+   holgura; a 34 ya rozaria el borde de la ficha. */
+#n14 .col>.f .formula{font-size:32px}
+#n14 .col>.f .pie-n{font-size:var(--t-body);text-align:center}
+/* La nota de cierre, centrada como en las otras laminas. */
+#n14 .nota{justify-content:center}
+#n14 .nota p{text-align:center}
+#n16 .nota{justify-content:center}
+#n16 .nota p{text-align:center}
+
+/* ── n22 · INVERSION ───────────────────────────────────────────────────── */
+/* El total ocupaba el ancho completo con la cifra arrimada a la izquierda y un
+   hueco enorme a la derecha. Comparte fila con la nota: el ancho se reparte
+   entre dos bloques con contenido en vez de quedar vacio. */
+#n22 .dato.fuerte{align-items:center;text-align:center}
+#n22 .g2>.nota{align-self:center;justify-content:center}
+#n22 .g2>.nota p{text-align:center}
+
+/* ── n19 · CARRITO ─────────────────────────────────────────────────────── */
+/* El plano fuera de flujo: el alto lo fija la columna de texto y el recuadro lo
+   copia, bordes superior e inferior coincidiendo. */
+/* La solucion propuesta pasa al verde del sistema: es el resultado favorable
+   frente a la situacion actual en rojo, el mismo par que usan las notas. */
+/* Las etiquetas de los dos indicadores pasan al azul del mazo; el gris las
+   dejaba fuera del sistema de color de la lamina. */
+/* Vuelve la versalita con tracking del resto de los indicadores, pero un paso
+   por encima del --t-xs por defecto: a 16px se leia muy chica. */
+#n19 .dato .k{color:var(--azul-os);font-size:var(--t-sm)}
+/* La nota de cierre de n20, centrada como en el resto del mazo. */
+#n20 .nota{justify-content:center}
+#n20 .nota p{text-align:center}
+#n19 .f.propone .f-h{color:#125F39}
+#n19 .f.propone .f-h .ico{color:var(--verde)}
+#n19 .figw{position:relative}
+#n19 .figw .fig{position:absolute;inset:0}
+#n19 .fig img{flex:1;height:0;min-height:0;max-height:none}
+
+/* ── n18 · CONTROLES VISUALES ──────────────────────────────────────────── */
+/* La fila de figuras se lleva el alto sobrante y la de fichas se queda con lo
+   que pide su texto; el cuerpo se apoya arriba con mas aire bajo el titulo, en
+   vez de repartirlo el centrado. */
+#n18 .bd{justify-content:flex-start;padding-top:34px;gap:26px;min-height:0}
+body.pres #n18 .bd{padding-top:52px;gap:40px}
+#n18 .g2{flex:1;min-height:0}
+/* Estiradas, las dos figuras cierran a la misma altura pese a tener relaciones
+   de aspecto distintas; centradas cada una tomaba su propio alto. */
+#n18 .g2>.fig{align-self:stretch;min-height:0}
+#n18 .fig img{flex:1;height:0;min-height:0;max-height:none}
+#n18 .g3 .f-b{padding-top:14px;padding-bottom:14px}
+body.pres #n18 .g3 .f-b{padding-top:20px;padding-bottom:20px}
+
+/* ── n17 · ESTANDARIZACION DE LA DOSIFICACION ──────────────────────────── */
+/* El bloque del documento encabeza la lamina, asi que sale de la familia verde
+   —reservada al semaforo— y toma el azul del mazo. */
+#n17 .f.valida .f-h,#n17 .f.propone .f-h{color:var(--azul-os)}
+#n17 .f.valida .f-h .ico,#n17 .f.propone .f-h .ico{color:var(--azul)}
+/* Columnas de cifras centradas, como en la tabla de consumo de n10. */
+#n17 .tb .n,#n17 .tb th.n{text-align:center}
+/* Misma solucion que en n01: fuera de flujo la imagen no aporta alto a la fila,
+   asi que el alto lo fija la tabla y la figura lo copia — bordes superior e
+   inferior coincidiendo. */
+#n17 .figw{position:relative}
+#n17 .figw .fig{position:absolute;inset:0}
+#n17 .fig img{flex:1;height:0;min-height:0;max-height:none}
+
+/* La aspa toma el rojo del titulo que acompana, no el saturado de los graficos. */
+#n12 .f.alerta .f-h .ico{color:#8E1F1F}
+/* La nota de cierre se despega del bloque de arriba: es la lectura del conjunto,
+   no una fila mas del mismo grupo. */
+#n12 .bd>.nota{margin-top:14px}
+body.pres #n12 .bd>.nota{margin-top:22px}
 #n04 .dato .v{font-size:var(--t-num-sm)}
+#n01 .dato .v{font-size:calc(var(--t-num-sm)*.79)}
 /* Los otros tres traducen al ambar el juego del turno: misma veladura de fondo
    y de borde, etiqueta en el tono medio y cifra en el oscuro. Los contrastes
    sobre el tinte (#F8F4E9) replican la relacion del par azul —etiqueta 3,3 y
    cifra 6,1, frente a 6,4 y 10,7— asi que la jerarquia se lee igual. */
-#n04 .dato:not(.fuerte){background:rgba(176,125,0,.085);border-color:rgba(176,125,0,.22)}
-#n04 .dato:not(.fuerte) .k{color:var(--ambar)}
-#n04 .dato:not(.fuerte) .v{color:#7A5600}
+#n01 .dato:not(.fuerte),#n04 .dato:not(.fuerte){
+  background:rgba(176,125,0,.085);border-color:rgba(176,125,0,.22)}
+#n01 .dato:not(.fuerte) .k,#n04 .dato:not(.fuerte) .k{color:var(--ambar)}
+#n01 .dato:not(.fuerte) .v,#n04 .dato:not(.fuerte) .v{color:#7A5600}
 
 .dato.plano{border:none;padding:0;background:none}
 body.pres .dato{padding:22px 26px}
@@ -323,31 +422,16 @@ body.pres .fluj{max-height:722px}
 .fluj .fsi.fin{text-anchor:end}
 
 /* el recorrido se dibuja en el orden del proceso */
-body.pres .slide.act .fluj .fnodo{animation:enfoca .38s ease backwards}
-body.pres .slide.act .fluj .fnodo:nth-of-type(1){animation-delay:0.18s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(2){animation-delay:0.23s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(3){animation-delay:0.29s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(4){animation-delay:0.34s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(5){animation-delay:0.40s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(6){animation-delay:0.46s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(7){animation-delay:0.51s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(8){animation-delay:0.56s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(9){animation-delay:0.62s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(10){animation-delay:0.68s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(11){animation-delay:0.73s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(12){animation-delay:0.78s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(13){animation-delay:0.84s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(14){animation-delay:0.90s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(15){animation-delay:0.95s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(16){animation-delay:1.00s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(17){animation-delay:1.06s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(18){animation-delay:1.11s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(19){animation-delay:1.17s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(20){animation-delay:1.22s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(21){animation-delay:1.28s}
-body.pres .slide.act .fluj .fnodo:nth-of-type(22){animation-delay:1.33s}
-body.pres .slide.act .fluj .fl{animation:enfoca .3s ease backwards .28s}
-body.pres .slide.act .fluj .fno,body.pres .slide.act .fluj .fsi{animation:enfoca .45s ease backwards 1.42s}
+/* La lamina se recorre como el proceso: entra la flecha y detras la caja a la
+   que apunta, de INICIO a FIN. El orden lo lleva --d, escrito en cada elemento,
+   porque el nth-of-type anterior solo alcanzaba a las cajas y dejaba todos los
+   conectores dibujados desde el primer fotograma. */
+body.pres .slide.act .fluj .fnodo{animation:enfoca .38s ease backwards;
+  animation-delay:var(--d,0s)}
+body.pres .slide.act .fluj .fl,
+body.pres .slide.act .fluj .fno,
+body.pres .slide.act .fluj .fsi{animation:surge .26s ease backwards;
+  animation-delay:var(--d,0s)}
 
 /* ─── RUTA DE PROCESO ────────────────────────────────────────────────── */
 .ruta{display:flex;width:100%}
@@ -480,6 +564,71 @@ body.pres #n26 .f-b{padding:38px 34px}
 body.pres #n10 .col>.dato{padding-top:38px;padding-bottom:38px}
 #n10 .tb td{padding:13px 13px}
 body.pres #n10 .tb th,body.pres #n10 .tb td{padding:22px 22px}
+/* La tabla es el contenido de la lamina; las tarjetas de al lado sobraban de
+   ancho —el texto mas largo pedia 393px de 754—, asi que la fila cede espacio
+   a favor de la tabla. */
+#n10 .g{grid-template-columns:1.9fr 1fr}
+/* Cifras centradas en su columna; quimico y destino siguen alineados a la
+   izquierda, que es como se leen las etiquetas de texto. */
+#n10 .tb .n,#n10 .tb th.n{text-align:center}
+/* El total llevaba un celeste que competia con la veladura del encabezado. Pasa
+   al gris del sistema, dos pasos por debajo, que cierra la tabla sin color. */
+#n10 .tb .tot{background:var(--acero-2) !important}
+/* Las dos tarjetas se leen como un par: mismo cuerpo en etiqueta, cifra y linea
+   de apoyo. La cifra pierde el aumento de .fuerte y el .chico de la otra —queda
+   el escalon del sistema— y etiqueta y pie suben un paso cada uno. */
+#n10 .dato .k{font-size:var(--t-label)}
+#n10 .dato .v{font-size:calc(var(--t-num-sm)*.85)}
+#n10 .dato .n{font-size:var(--t-sm)}
+/* La procedencia del dato encabeza la lamina como acotacion, sin recuadro: es
+   contexto de lectura de la tabla, no un bloque mas que competir con ella. */
+/* ── n11 · PRUEBAS DE DOSIFICACION ─────────────────────────────────── */
+#n11 .f-h{justify-content:center}
+/* La ficha pasa de la familia verde a la azul del mazo: el verde quedaba solo
+   en esta lamina y competia con las dos notas de cierre, que si lo usan como
+   semaforo. */
+#n11 .f.valida .f-h{color:var(--azul-os)}
+#n11 .f.valida .f-h .ico{color:var(--azul)}
+#n11 .dato.ok .v{color:var(--azul-os)}
+/* Cuerpo en dos columnas: el texto se apoya a la izquierda y la derecha queda
+   para la foto del producto. Sin foto el texto ocupa el ancho completo, asi que
+   basta con anadir la <img class="foto"> cuando esten las imagenes. */
+#n11 .f-b{flex-direction:row;align-items:center;gap:18px}
+#n11 .f-b .cnt{flex:1;min-width:0;display:flex;flex-direction:column;
+  gap:10px;text-align:left;align-items:flex-start}
+#n11 .f-b .foto{flex-shrink:0;height:130px;width:auto;object-fit:contain}
+/* La dosificacion es el dato de la ficha, pero venia a mayor cuerpo que el
+   titulo que la encabeza: baja al del titulo y se distingue por la mono, no
+   por el tamano. */
+#n11 .dato.ok .v{font-size:var(--t-lead)}
+/* Las dos notas de cierre: el bloque de texto se centra en horizontal, pero el
+   icono se queda arriba, a la altura de la primera linea, como en el resto del
+   mazo; centrado quedaba flotando junto a la linea del medio. */
+#n11 .nota{justify-content:center}
+#n11 .nota p{text-align:center}
+body.pres #n11 .f-b .cnt{gap:15px}
+body.pres #n11 .f-b .foto{height:190px}
+
+#n10 .fuente{display:flex;align-items:flex-start;gap:11px;
+  font-size:var(--t-body);line-height:1.5;color:var(--tinta-3);max-width:none}
+/* mismo tratamiento de icono que traia dentro de la nota */
+#n10 .fuente .ico{width:1.15em;height:1.15em;flex-shrink:0;margin-top:.2em;color:var(--azul)}
+/* La foto del envase encabeza la tarjeta: liga el codigo del producto con lo
+   que el operario tiene delante, sin recuadro propio ni pie que repita el dato
+   que ya esta debajo. */
+#n10 .dato .foto{height:194px;width:auto;object-fit:contain;margin-bottom:6px}
+body.pres #n10 .dato .foto{height:300px}
+/* El cuerpo deja de centrarse y se apoya arriba: asi la acotacion sube hacia el
+   titulo y el hueco de separacion mantiene la tabla en su sitio, en vez de que
+   el centrado reparta el movimiento entre las dos. */
+#n10 .bd{justify-content:flex-start;padding-top:30px;gap:35px}
+body.pres #n10 .bd{padding-top:46px;gap:54px}
+/* Las dos tarjetas encuadran con la tabla: la primera arranca en su linea
+   superior y la segunda cierra en la inferior. El sobrante lo absorbe la
+   primera —la de menos contenido— con su texto centrado, en vez de quedar como
+   un hueco entre ambas. */
+#n10 .col{justify-content:flex-start}
+#n10 .col>.dato:first-child{flex:1;justify-content:center}
 
 #n06 .ph-banda{height:34px}
 body.pres #n06 .ph-banda{height:58px}
@@ -754,6 +903,7 @@ body.pres .slide.act{display:flex}
   from{opacity:0;filter:blur(8px);transform:translateY(14px)}
   to  {opacity:1;filter:blur(0);transform:none}
 }
+@keyframes surge{from{opacity:0} to{opacity:1}}
 @keyframes crece{from{transform:scaleX(0)} to{transform:scaleX(1)}}
 @keyframes cae  {from{opacity:0;transform:translateY(-24px)} to{opacity:1;transform:none}}
 @keyframes lee{
@@ -1018,9 +1168,9 @@ body.pres.quieto{cursor:none}
             y Vacío de la empresa ABC.</p></div>
         </div>
         <div class="datos">
-          <div class="dato txt"><span class="k">Turno de sanitización</span>
+          <div class="dato fuerte"><span class="k">Turno de sanitización</span>
             <span class="v chico">21:00 – 05:00</span></div>
-          <div class="dato oro txt"><span class="k">Salas bajo estudio</span>
+          <div class="dato oro"><span class="k">Salas bajo estudio</span>
             <span class="v chico">Embutidos y Vacío</span></div>
         </div>
       </div>
@@ -1123,55 +1273,55 @@ body.pres.quieto{cursor:none}
         <marker id="fptaN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
           <path d="M 0 1 L 9 5 L 0 9 z" fill="#B07D00"/></marker>
       </defs>
-      <path class="fl" d="M 190 64 L 190 93" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 190 165 L 190 194" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 310 239 L 345 239" marker-end="url(#fpta)"/>
-      <path class="fno" d="M 470 275 L 470 298.5 L 196 298.5" marker-end="url(#fptaN)"/>
-      <path class="fl" d="M 190 284 L 190 313" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 190 385 L 190 414" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 190 486 L 190 515" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 190 587 L 190 616" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 830 59 L 830 93" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 830 165 L 830 203" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 830 275 L 830 313" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 830 385 L 830 399.5 M 685 399.5 L 975 399.5"/>
-      <path class="fl" d="M 685 399.5 L 685 414" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 975 399.5 L 975 414" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 685 486 L 685 506.5 M 975 486 L 975 506.5 M 685 506.5 L 975 506.5"/>
-      <path class="fl" d="M 830 506.5 L 830 527" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 1340 59 L 1340 93" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 1340 165 L 1340 194" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 1460 239 L 1495 239" marker-end="url(#fpta)"/>
-      <path class="fno" d="M 1620 275 L 1620 298.5 L 1346 298.5" marker-end="url(#fptaN)"/>
-      <path class="fl" d="M 1340 284 L 1340 313" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 1340 385 L 1340 414" marker-end="url(#fpta)"/>
-      <path class="fl" d="M 1340 486 L 1340 522" marker-end="url(#fpta)"/>
-      <text class="fsi" x="316" y="227">No</text>
-      <text class="fsi fin" x="178" y="284.5">Sí</text>
-      <text class="fsi" x="1466" y="227">No</text>
-      <text class="fsi fin" x="1328" y="284.5">Sí</text>
-      <g class="fnodo"><rect class="fo" x="90" y="6" width="200" height="58" rx="29"/><text class="fov" x="190" y="35">INICIO</text></g>
-      <g class="fnodo"><rect class="fp" x="65" y="93" width="250" height="72" rx="3"/><text class="ftx" x="190" y="118.5"><tspan x="190" dy="0">Verificación de</tspan><tspan x="190" dy="21">pesaje</tspan></text></g>
-      <g class="fnodo"><polygon class="fd" points="190,194 310,239 190,284 70,239"/><text class="ftx dec" x="190" y="239"><tspan x="190" dy="0">Control</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="345" y="203" width="250" height="72" rx="3"/><text class="ftx" x="470" y="228.5"><tspan x="470" dy="0">Medidas de</tspan><tspan x="470" dy="21">corrección</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="65" y="313" width="250" height="72" rx="3"/><text class="ftx" x="190" y="328"><tspan x="190" dy="0">Preparación de la</tspan><tspan x="190" dy="21">dosificación para cada</tspan><tspan x="190" dy="21">equipo de limpieza</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="65" y="414" width="250" height="72" rx="3"/><text class="ftx" x="190" y="439.5"><tspan x="190" dy="0">Desarmado de la</tspan><tspan x="190" dy="21">maquinaria</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="65" y="515" width="250" height="72" rx="3"/><text class="ftx" x="190" y="530"><tspan x="190" dy="0">Aplicación de solución</tspan><tspan x="190" dy="21">neutro a máquinas</tspan><tspan x="190" dy="21">y techo</tspan></text></g>
-      <g class="fnodo"><circle class="fo" cx="190" cy="640" r="24"/><text class="fco" x="190" y="640">A</text></g>
-      <g class="fnodo"><circle class="fo" cx="830" cy="35" r="24"/><text class="fco" x="830" y="35">A</text></g>
-      <g class="fnodo"><path class="fde" d="M 705 93 H 919 A 36 36 0 0 1 919 165 H 705 Z"/><text class="ftx" x="820" y="118.5"><tspan x="820" dy="0">Esperar tiempo de</tspan><tspan x="820" dy="21">acción de la solución</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="705" y="203" width="250" height="72" rx="3"/><text class="ftx" x="830" y="228.5"><tspan x="830" dy="0">Refregar con el insumo</tspan><tspan x="830" dy="21">de limpieza adecuado</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="705" y="313" width="250" height="72" rx="3"/><text class="ftx" x="830" y="328"><tspan x="830" dy="0">Aplicar la solución</tspan><tspan x="830" dy="21">química dosificada</tspan><tspan x="830" dy="21">previamente</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="555" y="414" width="260" height="72" rx="3"/><text class="ftx" x="685" y="439.5"><tspan x="685" dy="0">Refriegue y enjuague</tspan><tspan x="685" dy="21">de maquinaria</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="845" y="414" width="260" height="72" rx="3"/><text class="ftx" x="975" y="439.5"><tspan x="975" dy="0">Barrido y enjuague de</tspan><tspan x="975" dy="21">suelo y paredes</tspan></text></g>
-      <g class="fnodo"><circle class="fo" cx="830" cy="551" r="24"/><text class="fco" x="830" y="551">B</text></g>
-      <g class="fnodo"><circle class="fo" cx="1340" cy="35" r="24"/><text class="fco" x="1340" y="35">B</text></g>
-      <g class="fnodo"><rect class="fp" x="1215" y="93" width="250" height="72" rx="3"/><text class="ftx" x="1340" y="118.5"><tspan x="1340" dy="0">Verificación de la</tspan><tspan x="1340" dy="21">limpieza de parte de CQ</tspan></text></g>
-      <g class="fnodo"><polygon class="fd" points="1340,194 1460,239 1340,284 1220,239"/><text class="ftx dec" x="1340" y="239"><tspan x="1340" dy="0">Control</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="1495" y="203" width="250" height="72" rx="3"/><text class="ftx" x="1620" y="228.5"><tspan x="1620" dy="0">Medidas de</tspan><tspan x="1620" dy="21">corrección</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="1215" y="313" width="250" height="72" rx="3"/><text class="ftx" x="1340" y="338.5"><tspan x="1340" dy="0">Liberación de maquinaria</tspan><tspan x="1340" dy="21">e infraestructura</tspan></text></g>
-      <g class="fnodo"><rect class="fp" x="1215" y="414" width="250" height="72" rx="3"/><text class="ftx" x="1340" y="439.5"><tspan x="1340" dy="0">Preparación de la dosificación</tspan><tspan x="1340" dy="21">para la jornada siguiente</tspan></text></g>
-      <g class="fnodo"><rect class="fo" x="1240" y="522" width="200" height="58" rx="29"/><text class="fov" x="1340" y="551">FIN</text></g>
+      <path style="--d:0.21s" class="fl" d="M 190 64 L 190 93" marker-end="url(#fpta)"/>
+      <path style="--d:0.33s" class="fl" d="M 190 165 L 190 194" marker-end="url(#fpta)"/>
+      <path style="--d:0.45s" class="fl" d="M 310 239 L 345 239" marker-end="url(#fpta)"/>
+      <path style="--d:0.57s" class="fno" d="M 470 275 L 470 298.5 L 196 298.5" marker-end="url(#fptaN)"/>
+      <path style="--d:0.63s" class="fl" d="M 190 284 L 190 313" marker-end="url(#fpta)"/>
+      <path style="--d:0.75s" class="fl" d="M 190 385 L 190 414" marker-end="url(#fpta)"/>
+      <path style="--d:0.87s" class="fl" d="M 190 486 L 190 515" marker-end="url(#fpta)"/>
+      <path style="--d:0.99s" class="fl" d="M 190 587 L 190 616" marker-end="url(#fpta)"/>
+      <path style="--d:1.17s" class="fl" d="M 830 59 L 830 93" marker-end="url(#fpta)"/>
+      <path style="--d:1.29s" class="fl" d="M 830 165 L 830 203" marker-end="url(#fpta)"/>
+      <path style="--d:1.41s" class="fl" d="M 830 275 L 830 313" marker-end="url(#fpta)"/>
+      <path style="--d:1.53s" class="fl" d="M 830 385 L 830 399.5 M 685 399.5 L 975 399.5"/>
+      <path style="--d:1.53s" class="fl" d="M 685 399.5 L 685 414" marker-end="url(#fpta)"/>
+      <path style="--d:1.53s" class="fl" d="M 975 399.5 L 975 414" marker-end="url(#fpta)"/>
+      <path style="--d:1.65s" class="fl" d="M 685 486 L 685 506.5 M 975 486 L 975 506.5 M 685 506.5 L 975 506.5"/>
+      <path style="--d:1.65s" class="fl" d="M 830 506.5 L 830 527" marker-end="url(#fpta)"/>
+      <path style="--d:1.83s" class="fl" d="M 1340 59 L 1340 93" marker-end="url(#fpta)"/>
+      <path style="--d:1.95s" class="fl" d="M 1340 165 L 1340 194" marker-end="url(#fpta)"/>
+      <path style="--d:2.07s" class="fl" d="M 1460 239 L 1495 239" marker-end="url(#fpta)"/>
+      <path style="--d:2.19s" class="fno" d="M 1620 275 L 1620 298.5 L 1346 298.5" marker-end="url(#fptaN)"/>
+      <path style="--d:2.25s" class="fl" d="M 1340 284 L 1340 313" marker-end="url(#fpta)"/>
+      <path style="--d:2.37s" class="fl" d="M 1340 385 L 1340 414" marker-end="url(#fpta)"/>
+      <path style="--d:2.49s" class="fl" d="M 1340 486 L 1340 522" marker-end="url(#fpta)"/>
+      <text style="--d:0.45s" class="fsi" x="316" y="227">No</text>
+      <text style="--d:0.63s" class="fsi fin" x="178" y="284.5">Sí</text>
+      <text style="--d:2.07s" class="fsi" x="1466" y="227">No</text>
+      <text style="--d:2.25s" class="fsi fin" x="1328" y="284.5">Sí</text>
+      <g style="--d:0.15s" class="fnodo"><rect class="fo" x="90" y="6" width="200" height="58" rx="29"/><text class="fov" x="190" y="35">INICIO</text></g>
+      <g style="--d:0.27s" class="fnodo"><rect class="fp" x="65" y="93" width="250" height="72" rx="3"/><text class="ftx" x="190" y="118.5"><tspan x="190" dy="0">Verificación de</tspan><tspan x="190" dy="21">pesaje</tspan></text></g>
+      <g style="--d:0.39s" class="fnodo"><polygon class="fd" points="190,194 310,239 190,284 70,239"/><text class="ftx dec" x="190" y="239"><tspan x="190" dy="0">Control</tspan></text></g>
+      <g style="--d:0.51s" class="fnodo"><rect class="fp" x="345" y="203" width="250" height="72" rx="3"/><text class="ftx" x="470" y="228.5"><tspan x="470" dy="0">Medidas de</tspan><tspan x="470" dy="21">corrección</tspan></text></g>
+      <g style="--d:0.69s" class="fnodo"><rect class="fp" x="65" y="313" width="250" height="72" rx="3"/><text class="ftx" x="190" y="328"><tspan x="190" dy="0">Preparación de la</tspan><tspan x="190" dy="21">dosificación para cada</tspan><tspan x="190" dy="21">equipo de limpieza</tspan></text></g>
+      <g style="--d:0.81s" class="fnodo"><rect class="fp" x="65" y="414" width="250" height="72" rx="3"/><text class="ftx" x="190" y="439.5"><tspan x="190" dy="0">Desarmado de la</tspan><tspan x="190" dy="21">maquinaria</tspan></text></g>
+      <g style="--d:0.93s" class="fnodo"><rect class="fp" x="65" y="515" width="250" height="72" rx="3"/><text class="ftx" x="190" y="530"><tspan x="190" dy="0">Aplicación de solución</tspan><tspan x="190" dy="21">neutro a máquinas</tspan><tspan x="190" dy="21">y techo</tspan></text></g>
+      <g style="--d:1.05s" class="fnodo"><circle class="fo" cx="190" cy="640" r="24"/><text class="fco" x="190" y="640">A</text></g>
+      <g style="--d:1.11s" class="fnodo"><circle class="fo" cx="830" cy="35" r="24"/><text class="fco" x="830" y="35">A</text></g>
+      <g style="--d:1.23s" class="fnodo"><path class="fde" d="M 705 93 H 919 A 36 36 0 0 1 919 165 H 705 Z"/><text class="ftx" x="820" y="118.5"><tspan x="820" dy="0">Esperar tiempo de</tspan><tspan x="820" dy="21">acción de la solución</tspan></text></g>
+      <g style="--d:1.35s" class="fnodo"><rect class="fp" x="705" y="203" width="250" height="72" rx="3"/><text class="ftx" x="830" y="228.5"><tspan x="830" dy="0">Refregar con el insumo</tspan><tspan x="830" dy="21">de limpieza adecuado</tspan></text></g>
+      <g style="--d:1.47s" class="fnodo"><rect class="fp" x="705" y="313" width="250" height="72" rx="3"/><text class="ftx" x="830" y="328"><tspan x="830" dy="0">Aplicar la solución</tspan><tspan x="830" dy="21">química dosificada</tspan><tspan x="830" dy="21">previamente</tspan></text></g>
+      <g style="--d:1.59s" class="fnodo"><rect class="fp" x="555" y="414" width="260" height="72" rx="3"/><text class="ftx" x="685" y="439.5"><tspan x="685" dy="0">Refriegue y enjuague</tspan><tspan x="685" dy="21">de maquinaria</tspan></text></g>
+      <g style="--d:1.59s" class="fnodo"><rect class="fp" x="845" y="414" width="260" height="72" rx="3"/><text class="ftx" x="975" y="439.5"><tspan x="975" dy="0">Barrido y enjuague de</tspan><tspan x="975" dy="21">suelo y paredes</tspan></text></g>
+      <g style="--d:1.71s" class="fnodo"><circle class="fo" cx="830" cy="551" r="24"/><text class="fco" x="830" y="551">B</text></g>
+      <g style="--d:1.77s" class="fnodo"><circle class="fo" cx="1340" cy="35" r="24"/><text class="fco" x="1340" y="35">B</text></g>
+      <g style="--d:1.89s" class="fnodo"><rect class="fp" x="1215" y="93" width="250" height="72" rx="3"/><text class="ftx" x="1340" y="118.5"><tspan x="1340" dy="0">Verificación de la</tspan><tspan x="1340" dy="21">limpieza de parte de CQ</tspan></text></g>
+      <g style="--d:2.01s" class="fnodo"><polygon class="fd" points="1340,194 1460,239 1340,284 1220,239"/><text class="ftx dec" x="1340" y="239"><tspan x="1340" dy="0">Control</tspan></text></g>
+      <g style="--d:2.13s" class="fnodo"><rect class="fp" x="1495" y="203" width="250" height="72" rx="3"/><text class="ftx" x="1620" y="228.5"><tspan x="1620" dy="0">Medidas de</tspan><tspan x="1620" dy="21">corrección</tspan></text></g>
+      <g style="--d:2.31s" class="fnodo"><rect class="fp" x="1215" y="313" width="250" height="72" rx="3"/><text class="ftx" x="1340" y="338.5"><tspan x="1340" dy="0">Liberación de maquinaria</tspan><tspan x="1340" dy="21">e infraestructura</tspan></text></g>
+      <g style="--d:2.43s" class="fnodo"><rect class="fp" x="1215" y="414" width="250" height="72" rx="3"/><text class="ftx" x="1340" y="439.5"><tspan x="1340" dy="0">Preparación de la dosificación</tspan><tspan x="1340" dy="21">para la jornada siguiente</tspan></text></g>
+      <g style="--d:2.55s" class="fnodo"><rect class="fo" x="1240" y="522" width="200" height="58" rx="29"/><text class="fov" x="1340" y="551">FIN</text></g>
     </svg>
     </div>
     <div class="nota roja"><svg class="ico"><use href="#i-alerta"/></svg>
@@ -1255,7 +1405,7 @@ body.pres.quieto{cursor:none}
         <div class="mz-b"><ul>
           <li>Personal exclusivo para limpieza industrial</li>
           <li>Limpiezas planificadas y profundas</li>
-          <li>Cumplimiento parcial de ISO y BPM</li>
+          <li>Cumplimiento de ISO y BPM</li>
           <li>Horario nocturno sin interferencia</li>
           <li>Validación mediante indicadores de Calidad</li>
         </ul></div></div>
@@ -1274,10 +1424,9 @@ body.pres.quieto{cursor:none}
         </ul></div></div>
       <div class="mz-c A"><div class="mz-h"><svg class="ico"><use href="#i-rayo"/></svg>Amenazas</div>
         <div class="mz-b"><ul>
-          <li>Variabilidad en los resultados</li>
+          <li>Falta de indicadores limitan mejoras sostenidas</li>
           <li>Personal sin formación en inocuidad</li>
           <li>Deficiencias en trazabilidad de insumos</li>
-          <li>Limitaciones de headcount</li>
         </ul></div></div>
     </div>
   </div>
@@ -1300,6 +1449,9 @@ body.pres.quieto{cursor:none}
 <div class="slide" id="n10">
   <div class="hd"><h2>Consumo y costo de insumos químicos</h2></div>
   <div class="bd">
+    <p class="fuente"><svg class="ico"><use href="#i-lupa"/></svg>Datos de observación directa
+      durante dos semanas y del registro histórico, valorizados al precio de proveedor del mes
+      analizado.</p>
     <div class="g g-32">
       <div class="f"><div class="f-h"><svg class="ico"><use href="#i-moneda"/></svg>Consumo semanal valorizado</div>
         <div class="f-b" style="padding:0">
@@ -1322,12 +1474,10 @@ body.pres.quieto{cursor:none}
         <div class="dato fuerte"><span class="k">Costo semanal en químicos</span>
           <span class="v">9.457 <em>Bs</em></span>
           <span class="n">525 L por semana, repartidos en seis productos</span></div>
-        <div class="dato oro"><span class="k">Mayor incidencia</span>
+        <div class="dato oro"><img class="foto" src="img_mj/vq2000.jpg" alt="Bidón de VQ-2000">
+          <span class="k">Mayor incidencia</span>
           <span class="v chico">VQ 2000</span>
           <span class="n">2.850 Bs/sem · 30 % del gasto</span></div>
-        <div class="nota"><svg class="ico"><use href="#i-lupa"/></svg>
-          <p>Datos de observación directa durante dos semanas y del registro histórico, valorizados
-            al precio de proveedor del mes analizado.</p></div>
       </div>
     </div>
   </div>
@@ -1344,19 +1494,28 @@ body.pres.quieto{cursor:none}
     <div class="g g3">
       <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-espuma"/></svg>Espumeado de equipos</div>
         <div class="f-b">
-          <div class="dato ok plano"><span class="v chico">Neutro 3,00 %</span></div>
-          <p>100 L de agua · 3,00 L de producto</p>
-          <p>Costo por preparación: <strong>18,62 Bs</strong></p></div></div>
+          <div class="cnt">
+            <div class="dato ok plano"><span class="v chico">Neutro 3,00 %</span></div>
+            <p>100 L de agua · 3,00 L de producto</p>
+            <p>Costo por preparación: <strong>18,62 Bs</strong></p>
+          </div>
+          <img class="foto" src="img_mj/neutro.jpg" alt="Bidón de detergente Neutro"></div></div>
       <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-cepillo"/></svg>Refregado de equipos</div>
         <div class="f-b">
-          <div class="dato ok plano"><span class="v chico">VQ 3500 2,50 %</span></div>
-          <p>20 L de agua · 0,50 L de producto</p>
-          <p>Costo por preparación: <strong>7,50 Bs</strong></p></div></div>
+          <div class="cnt">
+            <div class="dato ok plano"><span class="v chico">VQ 3500 2,50 %</span></div>
+            <p>20 L de agua · 0,50 L de producto</p>
+            <p>Costo por preparación: <strong>7,50 Bs</strong></p>
+          </div>
+          <img class="foto" src="img_mj/vq3500.jpg" alt="Bidón de VQ-3500"></div></div>
       <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-almacen"/></svg>Espumado de infraestructura</div>
         <div class="f-b">
-          <div class="dato ok plano"><span class="v chico">Neutro 3,00 %</span></div>
-          <p>45 L de agua · 1,35 L de producto</p>
-          <p>Costo por preparación: <strong>8,38 Bs</strong></p></div></div>
+          <div class="cnt">
+            <div class="dato ok plano"><span class="v chico">Neutro 3,00 %</span></div>
+            <p>45 L de agua · 1,35 L de producto</p>
+            <p>Costo por preparación: <strong>8,38 Bs</strong></p>
+          </div>
+          <img class="foto" src="img_mj/pared_espuma.jpg" alt="Espumado de una pared de la sala"></div></div>
     </div>
     <div class="g g2">
       <div class="nota verde"><svg class="ico"><use href="#i-check"/></svg>
@@ -1465,7 +1624,7 @@ body.pres.quieto{cursor:none}
       <figure class="fig"><img src="img_mj/ilu4-3-puesto-de-trabajo-a-segundo-dia.jpeg" alt="Recorrido del puesto A, segundo día">
         <figcaption>Segundo día</figcaption></figure>
     </div>
-    <div class="nota roja"><svg class="ico"><use href="#i-ruta"/></svg>
+    <div class="nota roja"><svg class="ico"><use href="#i-alerta"/></svg>
       <p>El operador presenta variaciones en su rutina entre un día y otro. La situación se repite
         en los otros ocho puestos observados.</p></div>
     <div class="g g3">
@@ -1496,17 +1655,18 @@ body.pres.quieto{cursor:none}
 <div class="slide" id="n17">
   <div class="hd"><h2>Estandarización de la dosificación</h2></div>
   <div class="bd">
+    <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-doc"/></svg>Documento emitido</div>
+      <div class="f-b"><p>Se emite la especificación <strong>ES-CQ-4 Rev. 52</strong>, que define
+        las concentraciones permitidas y las preparaciones sugeridas para ocho detergentes
+        industriales aplicables a equipos, infraestructura y ambientes.</p></div></div>
     <div class="g g-32">
-      <figure class="fig">
-        <img src="img_mj/ilu5-2-especificacion-de-preparacion-de-productos-quimicos.png" alt="Especificación de preparación de productos químicos">
-        <figcaption>ES-CQ-4 Rev. 52 — preparación de productos químicos</figcaption>
-      </figure>
-      <div class="col">
-        <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-doc"/></svg>Documento emitido</div>
-          <div class="f-b"><p>Se emite la especificación <strong>ES-CQ-4 Rev. 52</strong>, que define
-            las concentraciones permitidas y las preparaciones sugeridas para ocho detergentes
-            industriales aplicables a equipos, infraestructura y ambientes.</p></div></div>
-        <div class="f propone"><div class="f-h"><svg class="ico"><use href="#i-lista"/></svg>Planificación semanal del consumo</div>
+      <div class="figw">
+        <figure class="fig">
+          <img src="img_mj/ilu5-2-especificacion-de-preparacion-de-productos-quimicos.png" alt="Especificación de preparación de productos químicos">
+          <figcaption>ES-CQ-4 Rev. 52 — preparación de productos químicos</figcaption>
+        </figure>
+      </div>
+      <div class="f propone"><div class="f-h"><svg class="ico"><use href="#i-lista"/></svg>Planificación semanal del consumo</div>
           <div class="f-b" style="padding:0">
             <table class="tb">
               <thead><tr><th>Químico</th><th class="n">Actual</th><th class="n">Propuesto</th><th class="n">Δ</th></tr></thead>
@@ -1520,7 +1680,6 @@ body.pres.quieto{cursor:none}
               </tbody>
             </table>
           </div></div>
-      </div>
     </div>
   </div>
   <div class="pie">23</div>
@@ -1538,8 +1697,8 @@ body.pres.quieto{cursor:none}
     </div>
     <div class="g g3">
       <div class="f propone"><div class="f-h"><svg class="ico"><use href="#i-tablero"/></svg>Señalética</div>
-        <div class="f-b"><div class="dato oro plano"><span class="v">17</span></div>
-          <p>Letreros de PVC: 16 de 30×40 cm y 1 tablero de 100×140 cm.</p></div></div>
+        <div class="f-b"><p>Letreros de PVC: 16 de 30×40 cm y 1 tablero de
+          100×140 cm.</p></div></div>
       <div class="f"><div class="f-h"><svg class="ico"><use href="#i-gota"/></svg>Lavado de botas</div>
         <div class="f-b"><p>Cada estación indica su dosis de detergente neutro, de 500 a 2.000 ml
           según el punto.</p></div></div>
@@ -1556,8 +1715,10 @@ body.pres.quieto{cursor:none}
   <div class="hd"><h2>Diseño del carrito transportador</h2></div>
   <div class="bd">
     <div class="g g-23">
-      <figure class="fig"><img src="img_mj/ilu5-1-propuesta-1-de-diseno-de-carrito.png" alt="Propuesta de diseño del carrito transportador">
-        <figcaption>Propuesta de diseño del carrito</figcaption></figure>
+      <div class="figw">
+        <figure class="fig"><img src="img_mj/ilu5-1-propuesta-1-de-diseno-de-carrito.png" alt="Propuesta de diseño del carrito transportador">
+          <figcaption>Propuesta de diseño del carrito</figcaption></figure>
+      </div>
       <div class="col">
         <div class="f alerta"><div class="f-h"><svg class="ico"><use href="#i-alerta"/></svg>Situación actual</div>
           <div class="f-b"><p>El traslado de insumos se realiza de forma manual, con los mismos
@@ -1570,7 +1731,7 @@ body.pres.quieto{cursor:none}
             <li>Reduce la carga física del operador</li>
           </ul></div></div>
         <div class="datos">
-          <div class="dato ok"><span class="k">Unidades</span><span class="v">4</span></div>
+          <div class="dato ok"><span class="k">Cantidad</span><span class="v">4</span></div>
           <div class="dato oro"><span class="k">Orden de trabajo</span><span class="v chico">4197896</span>
             <span class="n">En fila de espera</span></div>
         </div>
@@ -1679,12 +1840,12 @@ body.pres.quieto{cursor:none}
           <div class="dato plano"><span class="v chico">1.560,00 <em>Bs</em></span>
             <span class="n">Costo único</span></div></div></div>
     </div>
-    <div class="datos">
+    <div class="g g2">
       <div class="dato fuerte"><span class="k">Inversión total</span><span class="v">36.315,27 <em>Bs</em></span></div>
+      <div class="nota"><svg class="ico"><use href="#i-balanza"/></svg>
+        <p>Los carritos y la señalética son costos únicos; las capacitaciones, un costo recurrente
+          trimestral.</p></div>
     </div>
-    <div class="nota"><svg class="ico"><use href="#i-balanza"/></svg>
-      <p>Los carritos y la señalética son costos únicos; las capacitaciones, un costo recurrente
-        trimestral.</p></div>
   </div>
   <div class="pie">29</div>
 </div>
