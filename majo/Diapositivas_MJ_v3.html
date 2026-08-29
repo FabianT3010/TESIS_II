@@ -249,7 +249,6 @@ body.pres #n04 .prods{gap:16px}
    frase en mono no entra a cuerpo pleno. */
 /* La nota de n05 es una sola linea corta en una caja a todo el ancho: el grupo
    icono + texto se centra en lugar de quedar arrimado al margen izquierdo. */
-#n05 .nota{justify-content:center}
 
 #n01 .dato,#n04 .dato,#n10 .dato,#n12 .dato,#n14 .dato,#n19 .dato{align-items:center;text-align:center}
 /* n12: maximo y minimo toman la veladura de su propia familia, con el par
@@ -264,7 +263,6 @@ body.pres #n04 .prods{gap:16px}
 #n12 .dato .v{font-size:calc(var(--t-num-sm)*.85)}
 #n12 .dato.mal .k,#n12 .dato.mal .v em{color:#8E1F1F}
 #n12 .dato.ok  .k,#n12 .dato.ok  .v em{color:#125F39}
-#n12 .nota{justify-content:center}
 /* ── n14 · TIEMPOS Y HEADCOUNT ─────────────────────────────────────── */
 /* Cifras al mismo cuerpo que las demas filas de indicadores del mazo. */
 #n14 .dato .v{font-size:calc(var(--t-num-sm)*.85)}
@@ -279,18 +277,38 @@ body.pres #n04 .prods{gap:16px}
 #n14 .col>.f .formula{font-size:32px}
 #n14 .col>.f .pie-n{font-size:var(--t-body);text-align:center}
 /* La nota de cierre, centrada como en las otras laminas. */
-#n14 .nota{justify-content:center}
-#n14 .nota p{text-align:center}
-#n16 .nota{justify-content:center}
-#n16 .nota p{text-align:center}
+
+/* ── n24 · COSTO-BENEFICIO ─────────────────────────────────────────────── */
+/* La formula es el resultado de la lamina y ocupaba 408px de los 1738 de su
+   ficha: sube al cuerpo de cifra del sistema. */
+#n24 .formula{font-size:var(--t-num-sm)}
+
+/* ── NOTAS CENTRADAS ───────────────────────────────────────────────────
+   El bloque icono + texto se centra en la caja, pero el texto va alineado a la
+   izquierda y el parrafo se encoge a su contenido: con el texto centrado y el
+   parrafo a todo el ancho, la primera linea se despegaba del icono y dejaba un
+   hueco de hasta 45px. Asi el icono queda siempre a la misma distancia. */
+#n04 .nota,#n05 .nota,#n11 .nota,#n12 .nota,#n14 .nota,#n16 .nota,#n20 .nota,
+#n24 .nota,#n25 .nota,#n22 .g2>.nota{justify-content:center}
+#n04 .nota p,#n05 .nota p,#n11 .nota p,#n12 .nota p,#n14 .nota p,#n16 .nota p,
+#n20 .nota p,#n24 .nota p,#n25 .nota p,
+#n22 .g2>.nota p{width:fit-content;max-width:100%;text-align:left}
+
+/* ── n23 · BENEFICIOS ──────────────────────────────────────────────────── */
+/* Columnas de cifras centradas, como en las otras dos tablas del mazo. */
+#n23 .tb .n,#n23 .tb th.n{text-align:center}
 
 /* ── n22 · INVERSION ───────────────────────────────────────────────────── */
 /* El total ocupaba el ancho completo con la cifra arrimada a la izquierda y un
    hueco enorme a la derecha. Comparte fila con la nota: el ancho se reparte
    entre dos bloques con contenido en vez de quedar vacio. */
 #n22 .dato.fuerte{align-items:center;text-align:center}
-#n22 .g2>.nota{align-self:center;justify-content:center}
-#n22 .g2>.nota p{text-align:center}
+/* La nota se estira para cerrar con el total arriba y abajo; su contenido va en
+   un bloque interno que se centra en vertical, de modo que el icono sigue a la
+   altura de la primera linea en lugar de flotar a media caja. */
+#n22 .g2>.nota{align-items:center}
+#n22 .nota-in{display:flex;gap:11px;align-items:flex-start}
+body.pres #n22 .nota-in{gap:17px}
 
 /* ── n19 · CARRITO ─────────────────────────────────────────────────────── */
 /* El plano fuera de flujo: el alto lo fija la columna de texto y el recuadro lo
@@ -302,9 +320,10 @@ body.pres #n04 .prods{gap:16px}
 /* Vuelve la versalita con tracking del resto de los indicadores, pero un paso
    por encima del --t-xs por defecto: a 16px se leia muy chica. */
 #n19 .dato .k{color:var(--azul-os);font-size:var(--t-sm)}
+/* Las cifras dejan el verde y el ambar: los dos indicadores quedan en el azul
+   del mazo, igual que sus etiquetas. */
+#n19 .dato .v{color:var(--azul-os)}
 /* La nota de cierre de n20, centrada como en el resto del mazo. */
-#n20 .nota{justify-content:center}
-#n20 .nota p{text-align:center}
 #n19 .f.propone .f-h{color:#125F39}
 #n19 .f.propone .f-h .ico{color:var(--verde)}
 #n19 .figw{position:relative}
@@ -604,8 +623,6 @@ body.pres #n10 .tb th,body.pres #n10 .tb td{padding:22px 22px}
 /* Las dos notas de cierre: el bloque de texto se centra en horizontal, pero el
    icono se queda arriba, a la altura de la primera linea, como en el resto del
    mazo; centrado quedaba flotando junto a la linea del medio. */
-#n11 .nota{justify-content:center}
-#n11 .nota p{text-align:center}
 body.pres #n11 .f-b .cnt{gap:15px}
 body.pres #n11 .f-b .foto{height:190px}
 
@@ -1842,9 +1859,10 @@ body.pres.quieto{cursor:none}
     </div>
     <div class="g g2">
       <div class="dato fuerte"><span class="k">Inversión total</span><span class="v">36.315,27 <em>Bs</em></span></div>
-      <div class="nota"><svg class="ico"><use href="#i-balanza"/></svg>
-        <p>Los carritos y la señalética son costos únicos; las capacitaciones, un costo recurrente
-          trimestral.</p></div>
+      <div class="nota">
+        <div class="nota-in"><svg class="ico"><use href="#i-balanza"/></svg>
+          <p>Los carritos y la señalética son costos únicos; las capacitaciones, un costo recurrente
+            trimestral.</p></div></div>
     </div>
   </div>
   <div class="pie">29</div>
