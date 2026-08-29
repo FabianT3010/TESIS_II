@@ -250,7 +250,7 @@ body.pres #n04 .prods{gap:16px}
 /* La nota de n05 es una sola linea corta en una caja a todo el ancho: el grupo
    icono + texto se centra en lugar de quedar arrimado al margen izquierdo. */
 
-#n01 .dato,#n04 .dato,#n10 .dato,#n12 .dato,#n14 .dato,#n19 .dato{align-items:center;text-align:center}
+#n01 .dato,#n04 .dato,#n10 .dato,#n12 .dato,#n14 .dato,#n19 .dato,#n24 .dato{align-items:center;text-align:center}
 /* n12: maximo y minimo toman la veladura de su propia familia, con el par
    claro/borde que el sistema ya usa en las notas roja y verde. */
 #n12 .dato.mal{background:var(--rojo-cl);border-color:#F2C9C9}
@@ -282,6 +282,29 @@ body.pres #n04 .prods{gap:16px}
 /* La formula es el resultado de la lamina y ocupaba 408px de los 1738 de su
    ficha: sube al cuerpo de cifra del sistema. */
 #n24 .formula{font-size:var(--t-num-sm)}
+/* La ficha de cálculo pasa al azul del mazo, como en n11 y n17. */
+#n24 .f.valida .f-h{color:var(--azul-os)}
+#n24 .f.valida .f-h .ico{color:var(--azul)}
+
+/* Los tres cuadros de interpretación arrancan iguales; al revelar, el ganador
+   se resalta en amarillo y los otros se atenúan con transición suave. */
+#n24 .bc-box{transition:opacity .5s ease,background .5s ease,border-color .5s ease,box-shadow .5s ease}
+#n24 .bc-box .f-h{transition:color .5s ease}
+#n24 .bc-box .f-h .ico{transition:color .5s ease,opacity .5s ease}
+#n24 .bc-box .f-b p,#n24 .bc-box .f-b strong{transition:color .5s ease,font-weight .5s ease}
+/* Ocultar pistas antes de la revelación: icono y negrita delatan al ganador */
+#n24 .bc-ganador .f-h .ico{opacity:0}
+#n24 .bc-ganador .f-b strong{font-weight:400}
+
+/* Estado revelado: el ganador toma la familia verde */
+#n24.revelado .bc-ganador{background:var(--verde-cl);border-color:#BFE0CD;
+  box-shadow:0 4px 18px rgba(27,122,75,.13)}
+#n24.revelado .bc-ganador .f-h{color:#125F39}
+#n24.revelado .bc-ganador .f-h .ico{color:var(--verde);opacity:1}
+#n24.revelado .bc-ganador .f-b p,
+#n24.revelado .bc-ganador .f-b strong{color:#125F39}
+/* Los que no son el resultado se atenúan */
+#n24.revelado .bc-box:not(.bc-ganador){opacity:.38}
 
 /* ── NOTAS CENTRADAS ───────────────────────────────────────────────────
    El bloque icono + texto se centra en la caja, pero el texto va alineado a la
@@ -297,6 +320,11 @@ body.pres #n04 .prods{gap:16px}
 /* ── n23 · BENEFICIOS ──────────────────────────────────────────────────── */
 /* Columnas de cifras centradas, como en las otras dos tablas del mazo. */
 #n23 .tb .n,#n23 .tb th.n{text-align:center}
+/* Beneficios no financieros: título al azul del mazo y la ficha ajusta a su
+   contenido en lugar de estirarse al alto de la tabla. */
+#n23 .f.valida .f-h{color:var(--azul-os)}
+#n23 .f.valida .f-h .ico{color:var(--azul)}
+#n23 .g-32>.f.valida{align-self:start}
 
 /* ── n22 · INVERSION ───────────────────────────────────────────────────── */
 /* El total ocupaba el ancho completo con la cifra arrimada a la izquierda y un
@@ -573,6 +601,17 @@ body.pres #n01 .bd{padding-bottom:26px}
 #n26 .f-b p{font-size:var(--t-lead);line-height:1.65}
 #n26 .f-b{padding:26px 28px}
 body.pres #n26 .f-b{padding:38px 34px}
+/* Implementación pasa al azul del mazo en lugar del verde. */
+#n26 .f.valida .f-h{color:var(--azul-os)}
+#n26 .f.valida .f-h .ico{color:var(--azul)}
+/* Banda celeste en los títulos de ficha, como los encabezados de tabla. */
+#n26 .f-h{background:rgba(10,84,168,.085)}
+/* ── n25 · CONCLUSIONES ────────────────────────────────────────────────── */
+/* Evaluación económica pasa al azul del mazo en lugar del verde. */
+#n25 .f.valida .f-h{color:var(--azul-os)}
+#n25 .f.valida .f-h .ico{color:var(--azul)}
+/* Banda celeste en los títulos de ficha. */
+#n25 .f-h{background:rgba(10,84,168,.085)}
 
 /* La columna de la derecha es más corta que la tabla: en vez de estirar los dos
    datos —que era lo que dejaba la cifra flotando en un cuadro enorme— se reparte
@@ -1272,7 +1311,7 @@ body.pres.quieto{cursor:none}
       <div class="dato oro"><span class="k">Insumos químicos</span><span class="v">6</span></div>
     </div>
     <div class="nota"><svg class="ico"><use href="#i-reloj"/></svg>
-      <p>Las actividades se realizan <strong>al finalizar la jornada de producción</strong>, en
+      <p>Las actividades se realizan <strong style="color:var(--azul-os)">al finalizar la jornada de producción</strong>, en
         turno nocturno, para no interferir con las operaciones productivas.</p></div>
   </div>
   <div class="pie">08</div>
@@ -1673,7 +1712,7 @@ body.pres.quieto{cursor:none}
   <div class="hd"><h2>Estandarización de la dosificación</h2></div>
   <div class="bd">
     <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-doc"/></svg>Documento emitido</div>
-      <div class="f-b"><p>Se emite la especificación <strong>ES-CQ-4 Rev. 52</strong>, que define
+      <div class="f-b"><p>Se emite la especificación <strong style="color:var(--azul-os)">ES-CQ-4 Rev. 52</strong>, que define
         las concentraciones permitidas y las preparaciones sugeridas para ocho detergentes
         industriales aplicables a equipos, infraestructura y ambientes.</p></div></div>
     <div class="g g-32">
@@ -1713,7 +1752,7 @@ body.pres.quieto{cursor:none}
         <figcaption>Tablero de seguimiento y gestión visual</figcaption></figure>
     </div>
     <div class="g g3">
-      <div class="f propone"><div class="f-h"><svg class="ico"><use href="#i-tablero"/></svg>Señalética</div>
+      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-tablero"/></svg>Señalética</div>
         <div class="f-b"><p>Letreros de PVC: 16 de 30×40 cm y 1 tablero de
           100×140 cm.</p></div></div>
       <div class="f"><div class="f-h"><svg class="ico"><use href="#i-gota"/></svg>Lavado de botas</div>
@@ -1917,11 +1956,11 @@ body.pres.quieto{cursor:none}
       <div class="f-b"><p class="formula">90.852,30 ÷ 36.315,27 = <b>2,50</b></p></div>
     </div>
     <div class="g g3">
-      <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-check"/></svg>B/C mayor que 1</div>
-        <div class="f-b"><p class="ctr" style="color:var(--verde)"><strong>El proyecto es conveniente</strong></p></div></div>
-      <div class="f" style="opacity:.5"><div class="f-h">B/C igual a 1</div>
+      <div class="f bc-box bc-ganador"><div class="f-h"><svg class="ico"><use href="#i-check"/></svg>B/C mayor que 1</div>
+        <div class="f-b"><p class="ctr"><strong>El proyecto es conveniente</strong></p></div></div>
+      <div class="f bc-box"><div class="f-h">B/C igual a 1</div>
         <div class="f-b"><p class="ctr">El proyecto es indiferente</p></div></div>
-      <div class="f" style="opacity:.5"><div class="f-h">B/C menor que 1</div>
+      <div class="f bc-box"><div class="f-h">B/C menor que 1</div>
         <div class="f-b"><p class="ctr">El proyecto no es conveniente</p></div></div>
     </div>
     <div class="nota verde"><svg class="ico"><use href="#i-check"/></svg>
@@ -2054,10 +2093,44 @@ addEventListener('resize', ()=>{ if(pres) escala(); });
 
 const TRANS = ['atras'];
 
+/* ── Sub-pasos por lámina ──────────────────────────────────────────────
+   Algunas láminas necesitan un "clic intermedio" antes de avanzar.
+   subSteps guarda, por id de lámina, cuántos sub-pasos tiene (1 = normal,
+   2 = un clic extra). subCur lleva la cuenta del paso actual. */
+const subSteps = { n24: 2 };
+let subCur = 1;
+
+function revelarSubPaso(slide, paso) {
+  if (slide.id === 'n24' && paso === 2) {
+    slide.classList.add('revelado');
+  }
+}
+function resetSubPasos(slide) {
+  slide.classList.remove('revelado');
+}
+
 function ir(d){
+  const slide = L[i];
+  const maxSub = subSteps[slide.id] || 1;
+
+  /* Avance con sub-pasos: si hay pasos pendientes en la lámina actual,
+     consumimos uno en lugar de cambiar de diapositiva. */
+  if (pres && d === 1 && subCur < maxSub) {
+    subCur++;
+    revelarSubPaso(slide, subCur);
+    return;
+  }
+  /* Retroceso: si estamos en un sub-paso intermedio, deshacemos */
+  if (pres && d === -1 && subCur > 1) {
+    resetSubPasos(slide);
+    subCur = 1;
+    return;
+  }
+
   const n = i + d;
   if(n < 0 || n >= T) return;
   if(pres){
+    resetSubPasos(L[i]);
     L[i].classList.remove('act');
     L[n].classList.remove('act', ...TRANS);
     void L[n].offsetWidth;                 // reinicia la animación
@@ -2066,7 +2139,9 @@ function ir(d){
   } else {
     L[n].scrollIntoView({behavior:'smooth', block:'center'});
   }
-  i = n; pinta();
+  i = n;
+  subCur = 1;  // reinicia sub-pasos para la nueva lámina
+  pinta();
 }
 
 function modo(){
