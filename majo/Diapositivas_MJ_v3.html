@@ -320,11 +320,24 @@ body.pres #n04 .prods{gap:16px}
 /* ── n23 · BENEFICIOS ──────────────────────────────────────────────────── */
 /* Columnas de cifras centradas, como en las otras dos tablas del mazo. */
 #n23 .tb .n,#n23 .tb th.n{text-align:center}
+/* Cuatro puntos cortos no llenan el alto que impone una tabla de once filas.
+   La foto toma el sobrante: recorta lo que haga falta para cerrar exactamente
+   con la tabla, sin estirar la lista ni separar sus lineas. */
+/* La imagen fuera de flujo dentro de un contenedor que toma el sobrante: asi no
+   aporta su alto natural a la fila —que la fija la tabla— y llena exactamente el
+   hueco que deja la lista. */
+#n23 .f.valida .f-b{min-height:0}
+#n23 .fotow{flex:1;min-height:0;position:relative;margin-top:4px}
+#n23 .fotow .foto{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;border-radius:2px}
+body.pres #n23 .fotow{margin-top:8px}
 /* Beneficios no financieros: título al azul del mazo y la ficha ajusta a su
    contenido en lugar de estirarse al alto de la tabla. */
 #n23 .f.valida .f-h{color:var(--azul-os)}
 #n23 .f.valida .f-h .ico{color:var(--azul)}
-#n23 .g-32>.f.valida{align-self:start}
+/* Antes se dejaba corta a proposito, y por eso quedaba blanco bajo la columna.
+   Ahora se estira contra la tabla y la foto ocupa el sobrante. */
+#n23 .g-32>.f.valida{align-self:stretch}
 
 /* ── n22 · INVERSION ───────────────────────────────────────────────────── */
 /* El total ocupaba el ancho completo con la cifra arrimada a la izquierda y un
@@ -1932,11 +1945,12 @@ body.pres.quieto{cursor:none}
       <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-escudo"/></svg>Beneficios no financieros</div>
         <div class="f-b"><ul>
           <li>Uniformidad del proceso entre turnos y operarios</li>
-          <li>Reducción del esfuerzo físico del personal</li>
           <li>Fortalecimiento de la disciplina operativa</li>
           <li>Uso adecuado de los productos químicos</li>
           <li>Preservación de equipos e instalaciones</li>
-        </ul></div></div>
+        </ul>
+          <div class="fotow"><img class="foto" src="img_mj/ingenieros.jpg"
+            alt="Equipo de trabajo"></div></div></div>
     </div>
   </div>
   <div class="pie">30</div>
