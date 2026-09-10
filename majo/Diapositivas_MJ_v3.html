@@ -944,7 +944,18 @@ body.pres .slide.act{display:flex}
    proyección, y se reescala sola al modo scroll (lienzo 1240 px ÷ 1920 px). */
 .fig img{max-height:calc(var(--fh,900px) * var(--fesc))}
 #n05{--fh:330px} #n07{--fh:520px} #n08{--fh:520px} #n13{--fh:520px}
-#n16{--fh:415px} #n17{--fh:520px} #n18{--fh:410px} #n19{--fh:500px} #n20{--fh:345px}
+#n16{--fh:415px} #n17{--fh:520px} #n18{--fh:410px} #n19{--fh:500px} #n20{--fh:420px}
+
+/* El dashboard es la evidencia de la lámina y con 345 px quedaba ilegible en
+   proyección: se recorta el relleno de los dos cuadros y de la nota para
+   devolverle ese alto a la imagen, que además pierde el marco blanco. */
+#n20 .fig img{padding:0}
+#n20 .fig figcaption{padding:5px 13px}
+#n20 .f-h{padding:9px 18px 8px} #n20 .f-b{padding:11px 18px;gap:7px}
+#n20 .nota{padding:9px 15px}
+body.pres #n20 .fig figcaption{padding:8px 13px}
+body.pres #n20 .f-h{padding:15px 28px 13px} body.pres #n20 .f-b{padding:18px 28px;gap:12px}
+body.pres #n20 .nota{padding:15px 24px}
 
 /* ═══ MOVIMIENTO ══════════════════════════════════════════════════════ */
 /* ═══ TRANSICIONES ════════════════════════════════════════════════════
