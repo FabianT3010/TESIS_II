@@ -686,6 +686,83 @@ Preguntas sobre lo que hiciste en una sala y no en la otra. Son legítimas y hay
 
 ---
 
+# Bloque N · Anexo de optimización y ampliaciones
+
+**189.** Tomando en cuenta que es un proyecto de estandarización y optimización, ¿qué porcentaje se optimizó?
+→ La optimización no salió de recortar recursos sino de aplicar un método, y es consecuencia de la estandarización: no se puede optimizar un proceso que cada operario ejecuta distinto cada noche. Trabajé con **DMAIC** dentro del enfoque **Lean Six Sigma**. En Definir y Medir caractericé el proceso con diagramas de flujo, seguimiento de recorridos por puesto y registro del consumo real. En Analizar identifiqué las causas con **Ishikawa** y **FODA**, y las cuantifiqué con **ingeniería de métodos**: estudio de tiempos por agrupador, calificación **Westinghouse**, suplementos, productividad y headcount; los **diagramas de recorrido** mostraron que el mismo operario cambiaba de rutina y volvía varias veces al depósito. En Mejorar se construye la propuesta sobre esas causas: la ES-CQ-4 validada con Control de Calidad, los instructivos para nueve puestos, controles visuales y señalización, planificación semanal del consumo y el **carrito transportador**. En Controlar, el tablero, los dashboards y el Short Kaizen sostienen el estándar. Cada ahorro tiene su herramienta: el recorrido baja porque el instructivo fija una secuencia única y el carrito elimina los viajes repetidos al depósito; el tiempo y el personal, porque el estudio de tiempos muestra que la carga se cubre con un operario menos si el trabajo está estandarizado; el costo, porque se dosifica con una concentración validada y no a ojo. El resultado es de alrededor de un cuarto en recorrido y cerca de un diez por ciento en personal y en costo, proyectado y verificable con los controles de la fase Controlar una vez implementado.
+
+**190.** ⚠️ ¿Por qué el recorrido baja cerca de un cuarto y el tiempo solo un diez por ciento?
+→ Porque el tiempo de limpieza depende de la superficie, no del recorrido: la Tabla 4.10 lo calcula como metros cuadrados por tiempo estándar. Caminar es menos del 2 % del tiempo del operario; en las hojas que registran tiempo, la distancia no explica la duración de la actividad. Por eso el ahorro de tiempo sale del headcount y de la preparación de químicos, que es la parte de la jornada que sí depende de los traslados.
+
+**191.** ⚠️ El requerido da 9,04 operarios. ¿Cómo lo redondea a nueve?
+→ La diferencia es de 19 minutos, menos del 0,5 % de la jornada. La propuesta libera alrededor de 77 minutos solo en preparación de químicos al eliminar traslados repetidos, así que el faltante queda cubierto dentro de la misma jornada.
+
+**192.** ¿Por qué el puesto F no ahorra minutos de preparación de químicos?
+→ Porque en su jornada más ordenada ya hacía un único traslado al depósito: el carrito no le quita viajes. Su optimización está en la distancia, por la secuencia fija del instructivo, no en los traslados.
+
+**193.** ⚠️ ¿Por qué el puesto E llega a cero minutos?
+→ Porque en su jornada estandarizada no registró traslados al depósito. Es el mejor caso posible, no el esperado: en la práctica va a necesitar al menos un viaje, así que su valor real queda algo por encima de cero.
+
+**194.** ⚠️⚠️ ¿De dónde salen los datos del puesto I?
+→ *(Responder con la verdad: pedir el diagrama deja sin salida cualquier otra respuesta.)* El puesto I lo crea el instructivo de la propuesta —sala de canastillas sucias—, así que no existía como tal en la observación y no tiene recorrido registrado. Sus valores son de referencia, con el promedio de los ocho puestos observados; el resto de los puestos sale de los diagramas de recorrido.
+
+**195.** ¿Por qué la tabla del anexo dice «estimación»?
+→ Porque las distancias se calcularon a escala sobre los planos, con sus cotas, y porque la propuesta está modelada, no implementada. Es coherente con la pregunta 3: la estandarización está entregada y validada; la optimización está proyectada.
+
+**196.** ⚠️ ¿Bajo qué criterios asignó los grados Westinghouse de cada agrupador?
+→ Contra la tabla estándar del sistema, factor por factor. En la Tabla 4.9: **destreza** C2 (+0,03) o C1 (+0,06) en equipos complejos —cintas, peladora, trituradora, rieles, lavador de tripas— y E1 (−0,05) en pared y piso; **esfuerzo** C2 (+0,02), C1 (+0,05) y B2 (+0,08) en los mismos equipos complejos, E1 (−0,04) en pared y piso; **condiciones** E (−0,03) donde el ambiente es adverso —trabajo en altura con escalera, humedad, zona de tripas—; **consistencia** D (0) en todos. La lógica: en equipos complejos el operario trabaja con más pericia y empeño que el promedio, su tiempo observado es más corto y hay que corregirlo hacia arriba; en tareas simples y repetitivas como pared y piso trabajó por debajo del ritmo normal. Rieles da el factor más alto (+0,11) y pared y piso el más bajo (−0,09). *(Ojo: la tesis no escribe esta justificación y en la Tabla 4.9 dos agrupadores se llaman «Ollas» y «Bandejas» mientras en la 4.10 son «Corrales» y «Desangrado», con los mismos tiempos.)*
+
+**197.** ¿Con qué criterios debería fabricarse el carrito transportador?
+→ El diseño propuesto resuelve lo funcional: acero inoxidable 304, dimensiones ajustadas al almacenamiento y menos carga física. Para fabricarlo corresponden dos criterios. **Diseño higiénico (EHEDG):** por ser industria alimentaria, soldaduras continuas y pulidas, sin rincones ni huecos donde se acumule suciedad, fácil de desarmar y lavar; el carrito no puede volverse un foco de contaminación. **Ergonomía:** altura de manijas según medidas antropométricas de los operarios, ruedas aptas para piso húmedo y esfuerzo de empuje dentro de los límites recomendados (ISO 11228-2), que es lo que vuelve verificable la «menor carga física».
+
+---
+
+# Bloque O · Química aplicada a la limpieza
+
+**198.** ¿Qué significa preparar el Neutro «al 3 %»?
+→ Tres litros de producto por cada cien litros de agua. La tesis calcula el porcentaje respecto al volumen de agua, que es el criterio operativo de planta porque el operario mide el agua y agrega el producto. En sentido estricto, sobre el volumen total da 3/103 = 2,91 %; la diferencia es de una décima y no cambia ninguna conclusión.
+
+**199.** Si el operario prepara 20 litros de VQ 3500 al 2,5 %, ¿cuánto producto usa? ¿Y si solo necesita la mitad?
+→ 0,5 litros (20 × 0,025). Para la mitad, 10 litros de agua y 0,25 de producto: se escalan los dos en la misma proporción. La concentración es una propiedad intensiva: no depende de la cantidad preparada, por eso un error típico —poner «un chorro» igual en un balde más chico— la cambia por completo. Es justamente lo que resuelven las jarras graduadas.
+
+**200.** ¿Por qué un detergente alcalino remueve la grasa de la carne?
+→ Por saponificación: el álcali reacciona con los triglicéridos de la grasa y los convierte en sales de ácidos grasos —jabón— y glicerol, que son solubles en agua y se van con el enjuague. Los humectantes o tensoactivos completan el trabajo emulsionando lo que no reacciona. Por eso VQ 3500, VQ 2000 y EasyFoam van en equipos con grasa y proteína.
+
+**201.** Si ya tienen alcalinos, ¿para qué usan VQ 30 y ácido nítrico?
+→ Porque hay suciedad que los alcalinos no disuelven: las incrustaciones minerales —sales de calcio y magnesio del agua dura— y los óxidos. Esas se remueven con ácidos. La propia ficha del VQ-7AS aclara que remueve grasas y residuos «excepto incrustaciones». Por eso el ácido no reemplaza al alcalino: se usa con otra frecuencia y sobre otro tipo de residuo.
+
+**202.** ¿Por qué el ácido nítrico no daña el acero inoxidable de los equipos?
+→ Porque es un ácido oxidante que, en vez de atacar el inoxidable, favorece la capa pasiva de óxido de cromo que lo protege; de hecho se usa para pasivar el inox. Distinto es un ácido clorhídrico o un exceso de cloro, que sí lo corroen. Es otra razón para respetar la concentración: el problema de corrosión aparece con la sobredosificación y los tiempos de contacto excesivos.
+
+**203.** ⚠️ EasyFoam y VQ 3500 son clorados. ¿Qué pasa exactamente si se mezclan con ácido nítrico o VQ 30?
+→ El hipoclorito es estable en medio alcalino. Al bajar el pH con un ácido se desplaza a ácido hipocloroso y, con acidez fuerte, se libera **cloro gaseoso**, que es tóxico e irritante para las vías respiratorias. Por eso la tesis prohíbe mezclar clorados con ácidos y ordena la aplicación: ácido y alcalino nunca en el mismo recipiente, y con enjuague entre uno y otro.
+
+**204.** EasyFoam trae álcali, hipoclorito y humectantes en un solo producto. ¿Qué hace cada uno?
+→ El álcali saponifica y afloja la grasa; el hipoclorito oxida y desinfecta; los humectantes bajan la tensión superficial para que la solución moje y penetre, y generan la espuma. El hipoclorito puede convivir en la fórmula precisamente porque el medio es alcalino: en medio ácido se descompondría liberando cloro.
+
+**205.** ¿Por qué se aplica espuma en paredes y equipos y no la solución líquida?
+→ Por el tiempo de contacto. En superficies verticales una solución líquida escurre en segundos; la espuma se adhiere y mantiene el químico actuando durante el tiempo de acción que marca el flujograma. Además es visible, lo que permite comprobar la cobertura. Por eso las espumadoras con fugas y baja presión del Ishikawa son un problema químico y no solo mecánico: generan espuma inconsistente y cobertura irregular.
+
+**206.** ¿Qué es el círculo de Sinner y dónde está en su propuesta?
+→ Son los cuatro factores de la limpieza: **química** (concentración), **temperatura**, **acción mecánica** y **tiempo**. Si uno baja, los otros tienen que compensar. En la propuesta están los cuatro: la concentración la fija la ES-CQ-4, la temperatura aparece en el resultado del VQ 2000 con agua a 40 °C, la acción mecánica es el refregado y el tiempo es la espera de acción de la solución. Estandarizar solo la concentración sin respetar el tiempo de acción no da el resultado validado.
+
+**207.** Si el agua caliente ayuda, ¿por qué 40 °C y no 80?
+→ Porque a unos 40 °C la grasa animal se ablanda y la reacción es más rápida, pero por encima de unos 60 °C las proteínas se desnaturalizan y se adhieren más a la superficie en vez de desprenderse. Además el calor acelera la descomposición del hipoclorito, así que un clorado muy caliente pierde poder desinfectante. Más temperatura no es mejor; hay un rango.
+
+**208.** ¿Por qué más concentración no es mejor?
+→ Porque por encima de lo necesario no se limpia más: se deja más residuo, que exige más enjuague y puede quedar en superficies en contacto con alimento, se acelera la corrosión y se gasta de más. Las pruebas lo muestran: el Neutro al 3 % cumple el criterio de Calidad y al 6 % cuesta el doble sin mejorar el resultado. Por eso el objetivo fue la dosificación mínima que cumple, no la máxima.
+
+**209.** ¿Por qué persiste una película de grasa en las cintas transportadoras sintéticas?
+→ Porque son polímeros —PVC o poliuretano— de afinidad por las grasas: la grasa se adsorbe en el material en vez de quedar sobre él, y además esas cintas no toleran altas temperaturas ni álcalis fuertes, que son justamente los que mejor la remueven. Lo que funciona en metal no se traslada tal cual; ahí hay que reforzar la acción mecánica y el tiempo de contacto dentro de lo que el material soporta.
+
+**210.** ¿Cómo sabe que después del enjuague no quedan residuos químicos?
+→ Por el enjuague completo que exige el procedimiento y la verificación de Calidad, con inspección visual y, para alérgenos, el kit cualitativo que indica la ES-CQ-4. Un control práctico y barato que se puede sumar es la tira de pH en el agua del último enjuague: si da neutra, no quedó alcalino ni ácido en la superficie.
+
+**211.** ⚠️ En su marco teórico el VQ-3500 aparece dos veces: una como «pH intermedio» y otra como «alcalino clorado». ¿Cuál es?
+→ Alcalino clorado de alta espuma, que es lo que dice la ficha técnica y la etiqueta del bidón. La descripción de «pH intermedio» para lavado manual corresponde al **VQ-2000**, que quedó rotulado como VQ-3500 por error; por eso el VQ-2000 no tiene su propia descripción en ese apartado. Es un error de transcripción que no afecta las pruebas ni los cálculos.
+
+---
+
 # Drill de datos
 
 Esto **no** son preguntas de tribunal — nadie te va a pedir que recites tu objetivo general ni que enumeres los seis químicos, porque acaban de escucharte decirlo. Pero los datos tienen que estar disponibles al instante, porque son la materia prima de todas las respuestas de arriba.

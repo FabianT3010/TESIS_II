@@ -159,6 +159,11 @@ body.pres .g,body.pres .col,body.pres .datos{gap:24px}
 }
 .f-h .ico{width:1.1em;height:1.1em;color:var(--azul);flex-shrink:0}
 .f-b{padding:16px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+/* Cuerpo de lectura mas firme. La Segoe UI instalada no expone pesos
+   intermedios: de 400 salta a 600, que ya se lee como negrita. Un trazo de
+   .015em sobre el propio color engrosa el asta lo justo —0,36px a 24px— sin
+   cambiar el ancho del texto, asi que ninguna linea se reacomoda. */
+.slide:not(.noche) .bd :is(p,li,td,figcaption,.n,.ix-d,.eq){-webkit-text-stroke:.015em currentColor}
 .f-b p,.f-b li{font-size:var(--t-body);line-height:1.6;color:var(--tinta-2)}
 .f-b ul{padding-left:19px;display:flex;flex-direction:column;gap:6px}
 .f-b strong{color:var(--tinta);font-weight:650}
@@ -250,7 +255,7 @@ body.pres #n04 .prods{gap:16px}
 /* La nota de n05 es una sola linea corta en una caja a todo el ancho: el grupo
    icono + texto se centra en lugar de quedar arrimado al margen izquierdo. */
 
-#n01 .dato,#n04 .dato,#n10 .dato,#n12 .dato,#n14 .dato,#n19 .dato,#n24 .dato{align-items:center;text-align:center}
+#n04 .dato,#n10 .dato,#n12 .dato,#n14 .dato,#n19 .dato,#n24 .dato,#nOpt .dato,#n21 .dato{align-items:center;text-align:center}
 /* n12: maximo y minimo toman la veladura de su propia familia, con el par
    claro/borde que el sistema ya usa en las notas roja y verde. */
 #n12 .dato.mal{background:var(--rojo-cl);border-color:#F2C9C9}
@@ -311,9 +316,9 @@ body.pres #n04 .prods{gap:16px}
    izquierda y el parrafo se encoge a su contenido: con el texto centrado y el
    parrafo a todo el ancho, la primera linea se despegaba del icono y dejaba un
    hueco de hasta 45px. Asi el icono queda siempre a la misma distancia. */
-#n04 .nota,#n05 .nota,#n11 .nota,#n12 .nota,#n14 .nota,#n16 .nota,#n20 .nota,
+#n03 .nota,#n04 .nota,#n11 .nota,#n12 .nota,#n14 .nota,#n20 .nota,
 #n21 .nota,#n24 .nota,#n25 .nota,#n22 .g2>.nota{justify-content:center}
-#n04 .nota p,#n05 .nota p,#n11 .nota p,#n12 .nota p,#n14 .nota p,#n16 .nota p,
+#n03 .nota p,#n04 .nota p,#n11 .nota p,#n12 .nota p,#n14 .nota p,
 #n20 .nota p,#n21 .nota p,#n24 .nota p,#n25 .nota p,
 #n22 .g2>.nota p{width:fit-content;max-width:100%;text-align:left}
 
@@ -406,15 +411,14 @@ body.pres #n18 .g3 .f-b{padding-top:20px;padding-bottom:20px}
 #n12 .bd>.nota{margin-top:14px}
 body.pres #n12 .bd>.nota{margin-top:22px}
 #n04 .dato .v{font-size:var(--t-num-sm)}
-#n01 .dato .v{font-size:calc(var(--t-num-sm)*.79)}
 /* Los otros tres traducen al ambar el juego del turno: misma veladura de fondo
    y de borde, etiqueta en el tono medio y cifra en el oscuro. Los contrastes
    sobre el tinte (#F8F4E9) replican la relacion del par azul —etiqueta 3,3 y
    cifra 6,1, frente a 6,4 y 10,7— asi que la jerarquia se lee igual. */
-#n01 .dato:not(.fuerte),#n04 .dato:not(.fuerte){
+#n04 .dato:not(.fuerte){
   background:rgba(176,125,0,.085);border-color:rgba(176,125,0,.22)}
-#n01 .dato:not(.fuerte) .k,#n04 .dato:not(.fuerte) .k{color:var(--ambar)}
-#n01 .dato:not(.fuerte) .v,#n04 .dato:not(.fuerte) .v{color:#7A5600}
+#n04 .dato:not(.fuerte) .k{color:var(--ambar)}
+#n04 .dato:not(.fuerte) .v{color:#7A5600}
 
 .dato.plano{border:none;padding:0;background:none}
 body.pres .dato{padding:22px 26px}
@@ -466,6 +470,18 @@ body.pres .qm{padding:10px 18px}
 .flujw{flex:0 1 auto;min-height:0;display:flex;align-items:center;justify-content:center}
 .fluj{width:100%;height:auto;aspect-ratio:1700/682;max-height:392px}
 body.pres .fluj{max-height:722px}
+/* Sin la nota de cierre el flujograma queda solo en el cuerpo. El pie oculto
+   seguia reservando su alto abajo y lo subia contra el titulo; fuera el pie y
+   con el mismo relleno arriba y abajo, queda centrado en el espacio libre. */
+#n05 .pie{display:none}
+/* n07: los Ishikawa venian con un tercio del archivo en blanco; recortados, el
+   limite pasa a ser el ancho de la columna y el tope de alto sobra. Mismo
+   centrado vertical que el resto: sin el pie oculto, relleno simetrico. */
+#n07 .pie{display:none}
+#n07 .bd{padding-bottom:20px}
+body.pres #n07 .bd{padding-bottom:26px}
+#n05 .bd{padding-bottom:20px}
+body.pres #n05 .bd{padding-bottom:26px}
 .fluj .fp{fill:rgba(10,84,168,.055);stroke:var(--azul);stroke-width:1.5}
 .fluj .fde{fill:rgba(201,151,0,.10);stroke:var(--ambar);stroke-width:1.5}
 .fluj .fd{fill:rgba(201,151,0,.12);stroke:var(--ambar);stroke-width:1.5}
@@ -477,7 +493,6 @@ body.pres .fluj{max-height:722px}
 .fluj .ftx.dec{fill:#7A5600;font-size:19px;font-weight:700}
 .fluj .fov{fill:#fff;font-size:20px;font-weight:700;letter-spacing:.06em}
 .fluj .fco{fill:#fff;font-size:21px;font-weight:700}
-#n05 .nota{padding:15px 22px}
 .fluj .fsi{fill:var(--tinta-3);font-family:var(--mono);font-size:15px;font-weight:700;text-anchor:start}
 .fluj .fsi.fin{text-anchor:end}
 
@@ -597,6 +612,15 @@ body.pres .mz-b ul{gap:9px}
    aspecto sigue sumando alto a la fila del grid, y el recuadro cerraba ~57px
    por debajo del ultimo cuadro de la izquierda. Fuera de flujo no aporta nada:
    el alto de la fila lo fija solo la columna de texto y la figura lo copia. */
+/* El objetivo toma la veladura azul que tenia la tarjeta del turno: mismo fondo,
+   borde y regla de cabecera en el tinte, titulo en el azul de los titulos. */
+#n01 .f.valida{background:rgba(10,84,168,.085);border-color:rgba(10,84,168,.22)}
+#n01 .f.valida .f-h{color:var(--azul-os);border-bottom-color:rgba(10,84,168,.22);
+  background:rgba(10,84,168,.10)}   /* solo la franja del titulo, un paso mas oscura */
+#n01 .f.valida .f-h .ico{color:var(--azul)}
+/* Sin las tarjetas la columna quedo corta frente al plano, que copia su alto:
+   el texto sube un paso para que ambas columnas vuelvan a pesar parecido. */
+#n01 .f-b p,#n01 .f-b li{font-size:var(--t-lead)}
 #n01 .figw{position:relative}
 #n01 .figw .fig{position:absolute;inset:0}
 #n01 .fig img{flex:1;height:0;min-height:0;max-height:none}
@@ -653,30 +677,80 @@ body.pres #n10 .tb th,body.pres #n10 .tb td{padding:22px 22px}
 #n10 .dato .n{font-size:var(--t-sm)}
 /* La procedencia del dato encabeza la lamina como acotacion, sin recuadro: es
    contexto de lectura de la tabla, no un bloque mas que competir con ella. */
+/* ── n03 · ZONAS CRITICAS ──────────────────────────────────────────────── */
+/* Tabla 3.7 de la tesis agrupada en cuatro familias de equipos: cada ficha lleva
+   la foto de un equipo representativo, las maquinas con su cantidad y las tres
+   zonas donde se concentra el residuo. Fotos al mismo alto y linea de equipos
+   con alto reservado, para que las cuatro listas arranquen en la misma linea. */
+.g4{grid-template-columns:repeat(4,1fr)}
+#n03 .zc .f-b{gap:10px}
+#n03 .zc .maq{display:block;align-self:center;height:150px;width:100%;object-fit:contain}
+#n03 .zc .eq{font-size:var(--t-sm);line-height:1.4;color:var(--tinta-3);height:2.8em}
+#n03 .zc .eq b{font-family:var(--mono);font-weight:700;color:var(--azul-os);line-height:1}
+/* el pie oculto reserva alto solo abajo: fuera, y relleno simetrico */
+#n03 .pie{display:none}
+#n03 .bd{padding-bottom:20px}
+body.pres #n03 .bd{padding-bottom:26px}
+body.pres #n03 .zc .f-b{gap:14px}
+body.pres #n03 .zc .maq{height:240px}
+
+/* ── n21 · PROPUESTA SALA DE VACIO ─────────────────────────────────────── */
+/* Instructivo arriba y sus indicadores debajo, en la misma columna; la ficha de
+   capacitacion ocupa la otra entera. La primera ficha absorbe el sobrante para
+   que ambas columnas cierren a la misma altura. */
+#n21 .col>.f{flex:1}
+/* titulos de ficha en el azul de los titulos del mazo, no en ambar */
+#n21 .f.propone .f-h{color:var(--azul-os)}
+#n21 .f.propone .f-h .ico{color:var(--azul)}
+#n21 .cap .tb{font-size:var(--t-sm);margin:4px 0}
+#n21 .cap .tb .n,#n21 .cap .tb th.n{text-align:center;width:3.2em}
+body.pres #n21 .cap .tb th{padding:10px 14px}
+body.pres #n21 .cap .tb td{padding:9px 14px}
+
+/* ── nOpt · ANEXO DE OPTIMIZACION ──────────────────────────────────────── */
+/* Indicadores a la izquierda repartiendo el alto de la tabla —bordes superior e
+   inferior coincidiendo—; la tabla lleva las cifras centradas y el total en el
+   gris del sistema, como las demas tablas del mazo. */
+#nOpt .g{grid-template-columns:1fr 2.4fr}
+#nOpt .col>.dato{flex:1;justify-content:center}
+#nOpt .dato .v{font-size:var(--t-num-sm)}
+#nOpt .dato .k{font-size:var(--t-sm)}
+#nOpt .tb .n,#nOpt .tb th.n{text-align:center}
+#nOpt .tb .tot{background:var(--acero-2) !important}
+/* nueve filas mas indicadores y nota: la tabla va con filas compactas para caber */
+body.pres #nOpt .tb th{padding:11px 16px}
+body.pres #nOpt .tb td{padding:6px 16px}
+/* La baja del decimo operario va
+   aparte del total, en tono apagado, porque no suma a ninguna columna. */
+#nOpt .tb .baja td{color:var(--tinta-3);font-style:italic;border-bottom:none;white-space:nowrap}
+#nOpt .tb .baja td[colspan]{text-align:center}
+
+/* ── n16 · RECORRIDOS ──────────────────────────────────────────────────── */
+/* Sin las tres fichas, los dos planos se llevan todo el alto que deja la nota,
+   que baja al pie de la lamina. Estirados cierran a la misma altura, y la imagen
+   no aporta su alto natural para no desbordar. */
+#n16 .bd{min-height:0}
+#n16 .g2{flex:1;min-height:0}
+#n16 .g2>.fig{align-self:stretch;min-height:0}
+#n16 .fig img{flex:1;height:0;min-height:0;max-height:none;padding:3px}
+/* Los planos son casi cuadrados y los limita el alto: se recorta el pie y el
+   relleno para devolverles altura. */
+body.pres #n16 .fig figcaption{padding:8px}
+body.pres #n16 .bd{padding-top:14px;padding-bottom:16px}
+/* sin la nota, los planos llegan hasta el pie: el pie oculto no reserva alto */
+#n16 .pie{display:none}
+/* Pies de "Primer dia / Segundo dia" invertidos: fondo azul oscuro del mazo y
+   letra clara, para que la etiqueta se lea sobre planos llenos de linea fina. */
+#n16 .fig figcaption{background:var(--azul-os);color:#fff;border-top-color:var(--azul-os)}
+
 /* ── n11 · PRUEBAS DE DOSIFICACION ─────────────────────────────────── */
-#n11 .f-h{justify-content:center}
-/* La ficha pasa de la familia verde a la azul del mazo: el verde quedaba solo
-   en esta lamina y competia con las dos notas de cierre, que si lo usan como
-   semaforo. */
-#n11 .f.valida .f-h{color:var(--azul-os)}
-#n11 .f.valida .f-h .ico{color:var(--azul)}
-#n11 .dato.ok .v{color:var(--azul-os)}
-/* Cuerpo en dos columnas: el texto se apoya a la izquierda y la derecha queda
-   para la foto del producto. Sin foto el texto ocupa el ancho completo, asi que
-   basta con anadir la <img class="foto"> cuando esten las imagenes. */
-#n11 .f-b{flex-direction:row;align-items:center;gap:18px}
-#n11 .f-b .cnt{flex:1;min-width:0;display:flex;flex-direction:column;
-  gap:10px;text-align:left;align-items:flex-start}
-#n11 .f-b .foto{flex-shrink:0;height:130px;width:auto;object-fit:contain}
-/* La dosificacion es el dato de la ficha, pero venia a mayor cuerpo que el
-   titulo que la encabeza: baja al del titulo y se distingue por la mono, no
-   por el tamano. */
-#n11 .dato.ok .v{font-size:var(--t-lead)}
-/* Las dos notas de cierre: el bloque de texto se centra en horizontal, pero el
-   icono se queda arriba, a la altura de la primera linea, como en el resto del
-   mazo; centrado quedaba flotando junto a la linea del medio. */
-body.pres #n11 .f-b .cnt{gap:15px}
-body.pres #n11 .f-b .foto{height:190px}
+/* Las tablas de prueba van sueltas, sin marco ni pie: la imagen ya es un cuadro
+   y enmarcarla dibujaba un cuadro dentro de otro. Toma todo el alto que dejan
+   las dos notas, sin su alto natural —que desbordaria la lamina— y sin recorte,
+   porque son tablas y tienen que leerse enteras. */
+#n11 .bd{min-height:0}
+#n11 .pruebas{flex:1;min-height:0;display:flex}
+#n11 .pruebas img{flex:1;width:100%;height:auto;min-height:0;object-fit:contain}
 
 #n10 .fuente{display:flex;align-items:flex-start;gap:11px;
   font-size:var(--t-body);line-height:1.5;color:var(--tinta-3);max-width:none}
@@ -703,10 +777,16 @@ body.pres #n10 .bd{padding-top:46px;gap:54px}
 body.pres #n06 .ph-banda{height:58px}
 body.pres #n06 .ph-z-b{padding:26px}
 body.pres #n06 .f-b{padding:30px 28px}
+/* El circulo de Sinner encabeza la lamina, centrado sobre la escala: la quimica
+   es uno de sus cuatro factores y la escala de pH la desarrolla debajo. El
+   bloque se apoya arriba para que el circulo tenga alto sin empujar el resto
+   fuera de la lamina. */
+#n06 .bd{justify-content:flex-start;min-height:0}
+#n06 .sinner{display:block;align-self:center;height:220px;width:auto;flex-shrink:0}
+body.pres #n06 .sinner{height:300px}
 
 body.pres #n14 .bar-eje{height:58px}
 body.pres #n14 .f-b{padding:30px 28px}
-body.pres #n11 .f-b{padding:30px 28px}
 body.pres .fig figcaption{padding:13px}
 
 /* ─── PIE ────────────────────────────────────────────────────────────── */
@@ -767,12 +847,13 @@ body.pres #n00 .pt-fp{margin-top:52px;gap:14px;padding-top:0}
 #cA{--foto:url('img_mj/analisis_procesos.jpg')}
 #cI{--foto:url('img_mj/mejora.webp')}
 
-/* Diagnóstico: la foto va espejada, así que se separa en un pseudo-elemento
-   —la veladura no se invierte con ella y sigue densa del lado del texto. */
+/* Diagnóstico: collage de fotos del relevamiento en planta, espejado. Va en un
+   pseudo-elemento propio para que la veladura no se invierta con la foto y
+   siga densa del lado del texto. */
 #cM{background:var(--noche-1)}
 #cM::before{
   content:'';position:absolute;inset:0;
-  background:url('img_mj/diagnostico_de_situacion.jpg') center/cover no-repeat;
+  background:url('img_mj/fondo_diagnostico.jpg') center/cover no-repeat;
   transform:scaleX(-1);
 }
 #cM::after{
@@ -906,6 +987,9 @@ body.pres .cr-lin{width:190px;height:7px;margin-top:36px}
 /* en proyección los bloques se reparten el alto disponible */
 body.pres .ix{gap:30px;flex:1;align-content:stretch;grid-auto-rows:minmax(0,1fr);max-height:660px;align-self:center}
 body.pres .ix-i{padding:40px 38px;gap:30px}
+/* Objetivos especificos: un paso por encima del velo general (5 %), a medio
+   camino del 8,5 % del objetivo general. */
+#n02 .ix-i{background:rgba(10,84,168,.07)}
 
 .fin{position:relative;z-index:1;text-align:center;display:flex;
   flex-direction:column;align-items:center;gap:16px}
@@ -943,8 +1027,8 @@ body.pres .slide.act{display:flex}
 /* Tope de altura de figura: se declara una sola vez por lámina, en medida de
    proyección, y se reescala sola al modo scroll (lienzo 1240 px ÷ 1920 px). */
 .fig img{max-height:calc(var(--fh,900px) * var(--fesc))}
-#n05{--fh:330px} #n07{--fh:520px} #n08{--fh:520px} #n13{--fh:520px}
-#n16{--fh:415px} #n17{--fh:520px} #n18{--fh:410px} #n19{--fh:500px} #n20{--fh:420px}
+#n05{--fh:330px} #n08{--fh:520px} #n13{--fh:520px}
+#n17{--fh:520px} #n18{--fh:410px} #n19{--fh:500px} #n20{--fh:420px}
 
 /* El dashboard es la evidencia de la lámina y con 345 px quedaba ilegible en
    proyección: se recorta el relleno de los dos cuadros y de la nota para
@@ -1247,12 +1331,6 @@ body.pres.quieto{cursor:none}
             optimización de recursos enfocados en la limpieza industrial de las salas de Embutidos
             y Vacío de la empresa ABC.</p></div>
         </div>
-        <div class="datos">
-          <div class="dato fuerte"><span class="k">Turno de sanitización</span>
-            <span class="v chico">21:00 – 05:00</span></div>
-          <div class="dato oro"><span class="k">Salas bajo estudio</span>
-            <span class="v chico">Embutidos y Vacío</span></div>
-        </div>
       </div>
       <div class="figw">
         <figure class="fig">
@@ -1276,15 +1354,15 @@ body.pres.quieto{cursor:none}
       </div>
       <div class="ix-i">
         <div class="ix-top"><span class="ix-n">02</span><svg class="ico"><use href="#i-grafico"/></svg></div>
-        <div><span class="ix-t">Análisis de procesos</span><span class="ix-d">Analizar los aspectos críticos mediante ingeniería de métodos, para establecer la base de la propuesta de mejora.</span></div>
+        <div><span class="ix-t">Análisis de procesos</span><span class="ix-d">Analizar los aspectos críticos de los procesos mediante ingeniería de métodos detectados en el diagnóstico para establecer la base de la propuesta de mejora de procesos.</span></div>
       </div>
       <div class="ix-i">
         <div class="ix-top"><span class="ix-n">03</span><svg class="ico"><use href="#i-llave"/></svg></div>
-        <div><span class="ix-t">Propuesta de mejora</span><span class="ix-d">Proponer mejoras en el proceso actual de limpieza industrial de ambas salas.</span></div>
+        <div><span class="ix-t">Propuesta de mejora</span><span class="ix-d">Proponer mejoras en el proceso actual de limpieza industrial de las salas de Embutidos y vacío.</span></div>
       </div>
       <div class="ix-i">
         <div class="ix-top"><span class="ix-n">04</span><svg class="ico"><use href="#i-balanza"/></svg></div>
-        <div><span class="ix-t">Costo-beneficio</span><span class="ix-d">Realizar un análisis costo-beneficio de la propuesta de mejora.</span></div>
+        <div><span class="ix-t">Costo-beneficio</span><span class="ix-d">Realizar un análisis costo-beneficio de la propuesta de mejora de la limpieza industrial.</span></div>
       </div>
     </div>
   </div>
@@ -1404,9 +1482,6 @@ body.pres.quieto{cursor:none}
       <g style="--d:2.55s" class="fnodo"><rect class="fo" x="1240" y="522" width="200" height="58" rx="29"/><text class="fov" x="1340" y="551">FIN</text></g>
     </svg>
     </div>
-    <div class="nota roja"><svg class="ico"><use href="#i-alerta"/></svg>
-      <p>Los dos puntos de control dependen de una apreciación: el primero se hace
-        <strong>con instrumentos de medición</strong> y el segundo, a simple vista.</p></div>
   </div>
   <div class="pie">08</div>
 </div>
@@ -1415,6 +1490,8 @@ body.pres.quieto{cursor:none}
 <div class="slide" id="n06">
   <div class="hd"><h2>Insumos químicos y clasificación por pH</h2></div>
   <div class="bd">
+    <img class="sinner" src="img_mj/circulo_sinner.webp"
+      alt="Círculo de Sinner: química, temperatura, tiempo y acción mecánica">
     <div class="ph">
       <div class="ph-banda">
         <span style="background:#E8272C"></span><span style="background:#F14624"></span>
@@ -1485,7 +1562,6 @@ body.pres.quieto{cursor:none}
         <div class="mz-b"><ul>
           <li>Personal exclusivo para limpieza industrial</li>
           <li>Limpiezas planificadas y profundas</li>
-          <li>Cumplimiento de ISO y BPM</li>
           <li>Horario nocturno sin interferencia</li>
           <li>Validación mediante indicadores de Calidad</li>
         </ul></div></div>
@@ -1494,12 +1570,13 @@ body.pres.quieto{cursor:none}
           <li>Falta de estandarización entre turnos y operarios</li>
           <li>Movimientos desordenados, sin puestos fijos</li>
           <li>Aumento del costo de los químicos</li>
-          <li>Riesgo sobre las certificaciones</li>
+          <li>Falta de disposición del personal al cambio</li>
         </ul></div></div>
       <div class="mz-c O"><div class="mz-h"><svg class="ico"><use href="#i-sube"/></svg>Oportunidades</div>
         <div class="mz-b"><ul>
           <li>Mayor exigencia del sector en inocuidad</li>
           <li>Tendencia a procesos estandarizados y seguros</li>
+          <li>Cumplimiento total de ISO y BPM</li>
           <li>ISO 9001 e ISO 22000 como diferenciación</li>
         </ul></div></div>
       <div class="mz-c A"><div class="mz-h"><svg class="ico"><use href="#i-rayo"/></svg>Amenazas</div>
@@ -1507,6 +1584,7 @@ body.pres.quieto{cursor:none}
           <li>Falta de indicadores limitan mejoras sostenidas</li>
           <li>Personal sin formación en inocuidad</li>
           <li>Deficiencias en trazabilidad de insumos</li>
+          <li>Riesgo sobre las certificaciones</li>
         </ul></div></div>
     </div>
   </div>
@@ -1568,34 +1646,8 @@ body.pres.quieto{cursor:none}
 <div class="slide" id="n11">
   <div class="hd"><h2>Pruebas de dosificación con Control de Calidad</h2></div>
   <div class="bd">
-    <div class="nota"><svg class="ico"><use href="#i-matraz"/></svg>
-      <p>Se ensayaron distintas concentraciones por actividad para determinar la dosificación mínima
-        que cumple los criterios de aceptación establecidos por Calidad.</p></div>
-    <div class="g g3">
-      <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-espuma"/></svg>Espumeado de equipos</div>
-        <div class="f-b">
-          <div class="cnt">
-            <div class="dato ok plano"><span class="v chico">Neutro 3,00 %</span></div>
-            <p>100 L de agua · 3,00 L de producto</p>
-            <p>Costo por preparación: <strong>18,62 Bs</strong></p>
-          </div>
-          <img class="foto" src="img_mj/neutro.jpg" alt="Bidón de detergente Neutro"></div></div>
-      <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-cepillo"/></svg>Refregado de equipos</div>
-        <div class="f-b">
-          <div class="cnt">
-            <div class="dato ok plano"><span class="v chico">VQ 3500 2,50 %</span></div>
-            <p>20 L de agua · 0,50 L de producto</p>
-            <p>Costo por preparación: <strong>7,50 Bs</strong></p>
-          </div>
-          <img class="foto" src="img_mj/vq3500.jpg" alt="Bidón de VQ-3500"></div></div>
-      <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-almacen"/></svg>Espumado de infraestructura</div>
-        <div class="f-b">
-          <div class="cnt">
-            <div class="dato ok plano"><span class="v chico">Neutro 3,00 %</span></div>
-            <p>45 L de agua · 1,35 L de producto</p>
-            <p>Costo por preparación: <strong>8,38 Bs</strong></p>
-          </div>
-          <img class="foto" src="img_mj/pared_espuma.jpg" alt="Espumado de una pared de la sala"></div></div>
+    <div class="pruebas">
+      <img src="img_mj/pruebasdosificacion.png" alt="Resultados de las pruebas de dosificación por actividad">
     </div>
     <div class="g g2">
       <div class="nota verde"><svg class="ico"><use href="#i-check"/></svg>
@@ -1704,17 +1756,6 @@ body.pres.quieto{cursor:none}
       <figure class="fig"><img src="img_mj/ilu4-3-puesto-de-trabajo-a-segundo-dia.jpeg" alt="Recorrido del puesto A, segundo día">
         <figcaption>Segundo día</figcaption></figure>
     </div>
-    <div class="nota roja"><svg class="ico"><use href="#i-alerta"/></svg>
-      <p>El operador presenta variaciones en su rutina entre un día y otro. La situación se repite
-        en los otros ocho puestos observados.</p></div>
-    <div class="g g3">
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-ruta"/></svg>Desplazamientos</div>
-        <div class="f-b"><p>Recirculación entre el depósito de insumos y la zona de trabajo.</p></div></div>
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-gente"/></svg>Duplicidad</div>
-        <div class="f-b"><p>Tareas cubiertas por más de un operario y otras sin responsable.</p></div></div>
-      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-reloj"/></svg>Variabilidad</div>
-        <div class="f-b"><p>Tiempos distintos entre jornadas para la misma actividad.</p></div></div>
-    </div>
   </div>
   <div class="pie">21</div>
 </div>
@@ -1736,7 +1777,7 @@ body.pres.quieto{cursor:none}
   <div class="hd"><h2>Estandarización de la dosificación</h2></div>
   <div class="bd">
     <div class="f valida"><div class="f-h"><svg class="ico"><use href="#i-doc"/></svg>Documento emitido</div>
-      <div class="f-b"><p>Se emite la especificación <strong style="color:var(--azul-os)">ES-CQ-4 Rev. 52</strong>, que define
+      <div class="f-b"><p>Se actualiza la especificación <strong style="color:var(--azul-os)">ES-CQ-4 Rev. 52</strong>, que define
         las concentraciones permitidas y las preparaciones sugeridas para ocho detergentes
         industriales aplicables a equipos, infraestructura y ambientes.</p></div></div>
     <div class="g g-32">
@@ -1851,6 +1892,7 @@ body.pres.quieto{cursor:none}
   <div class="hd"><h2>Propuesta para la sala de Vacío</h2></div>
   <div class="bd">
     <div class="g g2">
+      <div class="col">
       <div class="f propone"><div class="f-h"><svg class="ico"><use href="#i-doc"/></svg>Instructivos por puesto de trabajo</div>
         <div class="f-b">
           <p>Se elabora un <strong>manual operativo</strong> con instructivos específicos para
@@ -1863,23 +1905,27 @@ body.pres.quieto{cursor:none}
             <li><strong>Materiales:</strong> insumos, herramientas y concentraciones por tarea</li>
           </ul>
         </div></div>
-      <div class="col">
-        <div class="f propone"><div class="f-h"><svg class="ico"><use href="#i-birrete"/></svg>Plan de capacitación</div>
-          <div class="f-b">
-            <p>Metodología mixta de <strong>formación técnica por competencias</strong> y
-              aprendizaje activo, integrada al ciclo de mejora continua.</p>
-            <ul>
-              <li>Correcta aplicación de las nuevas dosificaciones</li>
-              <li>Uso de los instructivos por puesto</li>
-              <li>Servicio externo</li>
-              <li>4 ciclos al año (trimestrales)</li>
-            </ul>
-          </div></div>
         <div class="datos">
           <div class="dato fuerte"><span class="k">Puestos definidos</span><span class="v">9</span></div>
           <div class="dato ok"><span class="k">Operarios requeridos</span><span class="v">9</span></div>
         </div>
       </div>
+      <div class="f propone cap"><div class="f-h"><svg class="ico"><use href="#i-birrete"/></svg>Plan de capacitación</div>
+        <div class="f-b">
+          <p>Metodología mixta de <strong>formación técnica por competencias</strong> y aprendizaje
+            activo, para operarios nuevos y antiguos de ambas salas.</p>
+          <table class="tb">
+            <thead><tr><th class="n">N.º</th><th>Tema</th><th>Capacitador</th></tr></thead>
+            <tbody>
+              <tr><td class="n">1</td><td>Nuevas dosificaciones — Sala de Embutidos</td><td>Externo + Calidad</td></tr>
+              <tr><td class="n">2</td><td>Instructivos actualizados — Sala de Vacío</td><td>Externo</td></tr>
+              <tr><td class="n">3</td><td>Ergonomía y manipulación segura de químicos</td><td>Externo + Seguridad</td></tr>
+              <tr><td class="n">4</td><td>Controles visuales, registros diarios y tableros</td><td>Externo + Calidad</td></tr>
+            </tbody>
+          </table>
+          <p class="pie-n">Cada sesión dura <strong>60 min</strong> y el ciclo de cuatro se repite
+            <strong>trimestralmente (4 ciclos al año)</strong>, en grupos rotativos para no detener la operación.</p>
+        </div></div>
     </div>
     <div class="nota verde"><svg class="ico"><use href="#i-check"/></svg>
       <p>La estandarización por puesto elimina la <strong>duplicidad de funciones</strong> y la
@@ -1946,7 +1992,7 @@ body.pres.quieto{cursor:none}
       <div class="f"><div class="f-h"><svg class="ico"><use href="#i-birrete"/></svg>Capacitaciones</div>
         <div class="f-b">
           <ul>
-            <li>Servicio externo CENACE UPSA</li>
+            <li>Servicio externo</li>
             <li>5.160,00 Bs por ciclo</li>
             <li>4 ciclos al año</li>
           </ul>
@@ -2129,6 +2175,103 @@ body.pres.quieto{cursor:none}
       <p class="in">Ingeniería Industrial y de Sistemas</p>
     </div>
   </div>
+</div>
+
+<!-- ── ANEXO · ZONAS CRÍTICAS ── -->
+<div class="slide" id="n03">
+  <div class="hd"><h2>Zonas críticas de limpieza — Sala de Embutidos</h2></div>
+  <div class="bd">
+    <div class="g g4 zc">
+      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-engranaje"/></svg>Corte y molienda</div>
+        <div class="f-b">
+          <img class="maq" src="img_mj/maq-cutter.jpg" alt="Cutter">
+          <p class="eq">Moledora&nbsp;<b>×4</b> · Cutter&nbsp;<b>×2</b> · Emulsificador&nbsp;<b>×1</b></p>
+          <ul>
+            <li>Cuchillas, discos y placa perforada</li>
+            <li>Tolvas de carga</li>
+            <li>Tazón, sinfín y cámara de emulsión</li>
+          </ul>
+        </div></div>
+      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-llave"/></svg>Embutido</div>
+        <div class="f-b">
+          <img class="maq" src="img_mj/maq-embutidora.jpg" alt="Embutidora doble vacío">
+          <p class="eq">Retorcedora Handtmann&nbsp;<b>×3</b> · Embutidora doble vacío&nbsp;<b>×1</b></p>
+          <ul>
+            <li>Boquilla o tubo de embutición</li>
+            <li>Tolvas de alimentación</li>
+            <li>Sellos, juntas y sistema de vacío</li>
+          </ul>
+        </div></div>
+      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-gota"/></svg>Mezcla e inyección</div>
+        <div class="f-b">
+          <img class="maq" src="img_mj/maq-mezclador.jpg" alt="Mezclador de salmuera">
+          <p class="eq">Bombo&nbsp;<b>×3</b> · Mezclador de salmuera&nbsp;<b>×1</b> · Inyectora&nbsp;<b>×1</b> · Ollas&nbsp;<b>×1</b></p>
+          <ul>
+            <li>Interior de tanques y tambores</li>
+            <li>Válvulas de descarga y tuberías</li>
+            <li>Hélices, palas y agujas de inyección</li>
+          </ul>
+        </div></div>
+      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-carro"/></svg>Transporte y volcado</div>
+        <div class="f-b">
+          <img class="maq" src="img_mj/maq-carro.jpg" alt="Carro de embutidos">
+          <p class="eq">Carro de embutidos&nbsp;<b>×12</b> · Volcador de ollas&nbsp;<b>×5</b></p>
+          <ul>
+            <li>Uniones y soldaduras</li>
+            <li>Bandejas y ganchos de sujeción</li>
+            <li>Superficie de contacto con la olla</li>
+          </ul>
+        </div></div>
+    </div>
+    <div class="nota"><svg class="ico"><use href="#i-matraz"/></svg>
+      <p>Sobre estas zonas se refuerza con <strong>VQ 2000, VQ 30 o VQ 3500</strong> según el equipo,
+        para potenciar el efecto desengrasante y sanitizante.</p></div>
+  </div>
+  <div class="pie">05</div>
+</div>
+
+<!-- ── ANEXO · OPTIMIZACIÓN ── -->
+<div class="slide" id="nOpt">
+  <div class="hd"><h2>Optimización de recorridos, tiempo y costo</h2></div>
+  <div class="bd">
+    <div class="g">
+      <div class="col">
+        <div class="dato fuerte"><span class="k">Distancia recorrida</span>
+          <span class="v">−23,9 %</span>
+          <span class="n">2.144 → 1.632 m por jornada</span></div>
+        <div class="dato fuerte"><span class="k">Tiempo de jornada</span>
+          <span class="v">−10 %</span>
+          <span class="n">4.800 → 4.320 min · 10 → 9 operarios</span></div>
+        <div class="dato fuerte"><span class="k">Costo anual</span>
+          <span class="v">−9,73 %</span>
+          <span class="n">933.529,80 → 842.677,50 Bs</span></div>
+      </div>
+      <div class="f"><div class="f-h"><svg class="ico"><use href="#i-ruta"/></svg>Estimación por puesto: actual vs propuesta</div>
+        <div class="f-b" style="padding:0">
+          <table class="tb">
+            <thead><tr><th>Puesto</th><th class="n">Distancia actual (m)</th><th class="n">Propuesta (m)</th>
+              <th class="n">Reducción</th><th class="n">Químicos actual (min)</th><th class="n">Propuesto (min)</th>
+              <th class="n">Ahorro (min)</th></tr></thead>
+            <tbody>
+              <tr><td>A</td><td class="n">507</td><td class="n">360</td><td class="n">−28,9 %</td><td class="n">37,3</td><td class="n">10,2</td><td class="n">27,1</td></tr>
+              <tr><td>B</td><td class="n">174</td><td class="n">108</td><td class="n">−38,1 %</td><td class="n">18,8</td><td class="n">7,5</td><td class="n">11,3</td></tr>
+              <tr><td>C</td><td class="n">124</td><td class="n">101</td><td class="n">−18,6 %</td><td class="n">7,3</td><td class="n">0,4</td><td class="n">6,9</td></tr>
+              <tr><td>D</td><td class="n">156</td><td class="n">105</td><td class="n">−32,5 %</td><td class="n">17,7</td><td class="n">10,2</td><td class="n">7,5</td></tr>
+              <tr><td>E</td><td class="n">145</td><td class="n">117</td><td class="n">−19,3 %</td><td class="n">3,3</td><td class="n">0,0</td><td class="n">3,3</td></tr>
+              <tr><td>F</td><td class="n">333</td><td class="n">285</td><td class="n">−14,4 %</td><td class="n">6,7</td><td class="n">6,7</td><td class="n">0,0</td></tr>
+              <tr><td>G</td><td class="n">304</td><td class="n">256</td><td class="n">−15,6 %</td><td class="n">18,4</td><td class="n">9,3</td><td class="n">9,1</td></tr>
+              <tr><td>H</td><td class="n">164</td><td class="n">118</td><td class="n">−28,2 %</td><td class="n">6,0</td><td class="n">2,7</td><td class="n">3,3</td></tr>
+              <tr><td>I</td><td class="n">238</td><td class="n">181</td><td class="n">−23,9 %</td>
+                <td class="n">14,4</td><td class="n">5,9</td><td class="n">8,6</td></tr>
+              <tr class="tot"><td>General</td><td class="n">2.144</td><td class="n">1.632</td><td class="n">−23,9 %</td>
+                <td class="n">130,0</td><td class="n">52,8</td><td class="n">77,2</td></tr>
+              <tr class="baja"><td>10.º operario</td><td colspan="6">Sin puesto en la propuesta · 480 min de jornada liberados</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+    </div>
+  </div>
+  <div class="pie">36</div>
 </div>
 
 <!-- ─── NAVEGACIÓN ─── -->
